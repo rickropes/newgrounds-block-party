@@ -4,10 +4,28 @@ extends RigidBody2D
 signal selected(pfp)
 signal hover(pfp)
 
+var collisionArea;
+
 #TODO, make unique shapes that change this variable
 var type := "plain"
 
 func _ready():
+	Intialize();
+	pass;
+
+func Intialize():
+	can_sleep = false;
+
+	#Add area2d with collision shape to detect collisions
+	collisionArea = Area2D.new();
+	collisionArea.name = "CollisionArea";
+	add_child(collisionArea);
+	collisionArea.owner = self;
+
+	var collisionAreaShape = $CollisionShape2D.duplicate();
+	collisionArea.add_child(collisionAreaShape);
+	collisionAreaShape.scale = Vector2(1.5, 1.5);
+	collisionAreaShape.owner = collisionArea;
 	pass;
 
 func _on_NGNode_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

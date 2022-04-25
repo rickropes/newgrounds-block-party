@@ -40,10 +40,14 @@ func drag(pfp:NGNode):
 	var id = pfp.get_instance_id()
 	var touching_other = false
 	
-	var touches = (selected_nodes[len(selected_nodes)-1] as RigidBody2D).get_colliding_bodies()
+	#var touches = (selected_nodes[len(selected_nodes)-1] as RigidBody2D).get_colliding_bodies()
+	var current_chosen = selected_nodes[len(selected_nodes)-1];
+	var touches = (current_chosen.collisionArea as Area2D).get_overlapping_bodies();
+	
 	for j in touches:
 		if j.get_instance_id() == id:
 			touching_other = true
+			
 			break
 	
 	if touching_other:
