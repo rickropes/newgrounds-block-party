@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "InputState",
+"language": "GDScript",
+"path": "res://scripts/InputState.gd"
+}, {
+"base": "RigidBody2D",
+"class": "NGNode",
+"language": "GDScript",
+"path": "res://scripts/NGNode.gd"
+} ]
+_global_script_class_icons={
+"InputState": "",
+"NGNode": ""
+}
+
 [application]
 
 config/name="newgrounds-block-party"
@@ -17,6 +33,11 @@ config/icon="res://art/icon.png"
 [input]
 
 mouseLeft={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+select={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
