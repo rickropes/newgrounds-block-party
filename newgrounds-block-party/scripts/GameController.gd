@@ -38,7 +38,6 @@ func drag(pfp:NGNode):
 	if pfp.type != shape_type: return
 	
 	var id = pfp.get_instance_id()
-	var touching_other = false
 	
 	#var touches = (selected_nodes[len(selected_nodes)-1] as RigidBody2D).get_colliding_bodies()
 	var current_chosen = selected_nodes[len(selected_nodes)-1];
@@ -61,11 +60,6 @@ func drag(pfp:NGNode):
 				selected_nodes.append(pfp)
 			
 			break
-	
-	if touching_other:
-		current_chosen.become_tail()
-		pfp.become_chosen()
-		selected_nodes.append(pfp)
 
 func select_start(child:NGNode):
 	input_state = InputState.DRAGGING
