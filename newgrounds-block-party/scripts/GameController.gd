@@ -46,11 +46,24 @@ func drag(pfp:NGNode):
 	
 	for j in touches:
 		if j.get_instance_id() == id:
-			touching_other = true
+			
+			#Check if node already exists in line
+			if(selected_nodes.has(pfp)):
+				#Check if is last one of line
+				if(len(selected_nodes) > 1 && selected_nodes[len(selected_nodes)-2] == pfp ):
+					current_chosen.unchosen()
+					selected_nodes.erase(current_chosen);
+					pfp.become_chosen()
+			else:
+				#Add new node
+				current_chosen.become_tail()
+				pfp.become_chosen()
+				selected_nodes.append(pfp)
 			
 			break
 	
 	if touching_other:
+		current_chosen.become_tail()
 		pfp.become_chosen()
 		selected_nodes.append(pfp)
 
