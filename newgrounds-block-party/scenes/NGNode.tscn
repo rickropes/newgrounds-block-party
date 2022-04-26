@@ -9,8 +9,6 @@ radius = 31.0161
 [node name="NGNode" type="RigidBody2D" groups=["objects"]]
 input_pickable = true
 mass = 2.00306
-contacts_reported = 6
-contact_monitor = true
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -27,6 +25,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="CollisionArea" type="Area2D" parent="."]
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
 scale = Vector2( 1.5, 1.5 )
