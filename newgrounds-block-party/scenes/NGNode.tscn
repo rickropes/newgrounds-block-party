@@ -9,6 +9,7 @@ radius = 31.0161
 [node name="NGNode" type="RigidBody2D" groups=["objects"]]
 input_pickable = true
 mass = 2.00306
+can_sleep = false
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

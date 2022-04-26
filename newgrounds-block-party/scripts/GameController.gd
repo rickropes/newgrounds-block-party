@@ -2,7 +2,7 @@ extends Node2D
 
 export(PackedScene) var NGNodeScene
 
-var input_state: int = InputState.NOTHING
+var input_state: int = Enums.InputState.NOTHING
 var shape_type
 var selected_nodes := []
 
@@ -62,12 +62,12 @@ func drag(pfp:NGNode):
 			break
 
 func select_start(child:NGNode):
-	input_state = InputState.DRAGGING
+	input_state = Enums.InputState.DRAGGING
 	shape_type = child.type
 	
 	selected_nodes.append(child)
 
 func _on_deselect():
-	input_state = InputState.NOTHING
+	input_state = Enums.InputState.NOTHING
 	shape_type = null
 	selected_nodes = []
