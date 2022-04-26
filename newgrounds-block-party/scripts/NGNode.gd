@@ -7,7 +7,20 @@ signal hover(pfp)
 var collisionArea;
 
 #TODO, make unique shapes that change this variable
-var type := "plain"
+
+# Name - Shape - Description
+# ===========================
+# Default - Circle Shape - No Powers
+# Explode - Triangle - Launch others
+# Stick - Spiky Circle - Clumps together Nodes
+# Unstick - Pentagon - Seperates Nodes (nullifies stick)
+# Freeze - Stop Sign - Freezes shapes in place
+# Unfreeze - Parallelogram - Unfreezes shapes (nullifies freeze)
+# Slow - Hexagon - Slows down node movement
+enum NGNodeType{
+	DEFAULT, EXPLODE, STICK, UNSTICK, FREEZE, UNFREEZE, SLOW
+}
+export(NGNodeType) var type = NGNodeType.DEFAULT;
 
 func _ready():
 	Intialize();
@@ -16,6 +29,8 @@ func _ready():
 func Intialize():
 	can_sleep = false;
 	collisionArea = $CollisionArea
+	
+	$Control/Label.text = str(NGNodeType.keys()[type]);
 	pass;
 
 func _on_NGNode_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

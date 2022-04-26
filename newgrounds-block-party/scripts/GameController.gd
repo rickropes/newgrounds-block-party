@@ -10,9 +10,6 @@ signal deselect()
 
 #TODO, use signal to tell children it's in thje dragging state?
 func _ready():
-	for i in 60:
-		Spawn();
-		
 	var t = get_tree()
 	t.call_group('objects', 'connect', 'selected', self, 'select_start')
 	t.call_group('objects', 'connect', 'hover', self, 'drag')
