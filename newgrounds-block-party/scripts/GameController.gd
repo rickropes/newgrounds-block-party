@@ -5,19 +5,23 @@ export(PackedScene) var NGNodeScene
 var input_state: int = Enums.InputState.NOTHING
 var shape_type
 var selected_nodes := []
+onready var pfp_dict = {
+	Enums.ShapeTypes.PLAIN_CIRCLE : preload("res://scenes/base_shapes/PlainCircle.tscn")
+}
+
 onready var t = get_tree()
 
 func _ready():
 	# get rid of this when we start placing in elements ourselves
 	for i in 60:
 		Spawn();
-		
+	
 	t.call_group('objects', 'connect', 'selected', self, 'select_start')
 	t.call_group('objects', 'connect', 'hover', self, 'drag')
 	
 
 func Spawn():
-	var newNode = NGNodeScene.instance();
+	var newNode = pfp_dict[Enums.ShapeTypes.PLAIN_CIRCLE].instance();
 	#newNode.global_position = global_position;
 	newNode.position.y = newNode.position.y + rand_range(-10,10);
 	newNode.position.x = newNode.position.x + rand_range(-5,5);
