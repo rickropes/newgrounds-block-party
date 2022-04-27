@@ -5,21 +5,16 @@ export(PackedScene) var NGNodeScene
 var input_state: int = Enums.InputState.NOTHING
 var shape_type
 var selected_nodes := []
+onready var t = get_tree()
 
-signal deselect()
-
-#TODO, use signal to tell children it's in thje dragging state?
 func _ready():
+	# get rid of this when we start placing in elements ourselves
 	for i in 60:
 		Spawn();
 		
-	var t = get_tree()
 	t.call_group('objects', 'connect', 'selected', self, 'select_start')
 	t.call_group('objects', 'connect', 'hover', self, 'drag')
 	
-	connect('deselect', self, '_on_deselect')
-	for i in get_children():
-		connect('deselect', i, 'unchosen')
 
 func Spawn():
 	var newNode = NGNodeScene.instance();
@@ -27,24 +22,22 @@ func Spawn():
 	newNode.position.y = newNode.position.y + rand_range(-10,10);
 	newNode.position.x = newNode.position.x + rand_range(-5,5);
 	add_child(newNode);
-	pass;
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and not event.pressed:
-			emit_signal("deselect")
+			deselect()
+#			emit_signal("deselect")
 
 func drag(pfp:NGNode):
 	if pfp.type != shape_type: return
-	
-	var id = pfp.get_instance_id()
 	
 	#var touches = (selected_nodes[len(selected_nodes)-1] as RigidBody2D).get_colliding_bodies()
 	var current_chosen = selected_nodes[len(selected_nodes)-1];
 	var touches = (current_chosen.collisionArea as Area2D).get_overlapping_bodies();
 	
 	for j in touches:
-		if j.get_instance_id() == id:
+		if j == pfp:
 			
 			#Check if node already exists in line
 			if(selected_nodes.has(pfp)):
@@ -67,7 +60,12 @@ func select_start(child:NGNode):
 	
 	selected_nodes.append(child)
 
-func _on_deselect():
+func deselect():
+	
+	t.call_group('objects', 'unchosen')
+	
+	# use the abilities here before they are cleared
+	
 	input_state = Enums.InputState.NOTHING
 	shape_type = null
 	selected_nodes.clear()
