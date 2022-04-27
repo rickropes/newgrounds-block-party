@@ -4,18 +4,12 @@ extends RigidBody2D
 signal selected(pfp)
 signal hover(pfp)
 
-var collisionArea;
+onready var collisionArea = $CollisionArea;
 
 #TODO, make unique shapes that change this variable
-var type := "plain"
+export(Enums.ShapeTypes) var type = Enums.ShapeTypes.PLAIN_CIRCLE
 
 func _ready():
-	Intialize();
-	pass;
-
-func Intialize():
-	can_sleep = false;
-	collisionArea = $CollisionArea
 	pass;
 
 func _on_NGNode_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
