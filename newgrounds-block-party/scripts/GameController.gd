@@ -70,4 +70,4 @@ func select_start(child:NGNode):
 func _on_deselect():
 	input_state = Enums.InputState.NOTHING
 	shape_type = null
-	selected_nodes = []
+	selected_nodes.clear()
