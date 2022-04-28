@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mig_triangle.png-29ab02292856884a206db0ac54f104ea.stex"
+path="res://.import/pentagon.png-309c4bbe42b55db7db8575da42efbe3b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/base_shapes/mig_triangle.png"
-dest_files=[ "res://.import/mig_triangle.png-29ab02292856884a206db0ac54f104ea.stex" ]
+source_file="res://art/base_shapes/pentagon.png"
+dest_files=[ "res://.import/pentagon.png-309c4bbe42b55db7db8575da42efbe3b.stex" ]
 
 [params]
 

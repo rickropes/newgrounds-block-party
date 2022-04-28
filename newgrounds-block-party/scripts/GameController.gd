@@ -9,6 +9,8 @@ const SHAPE_PATH = "res://scenes/base_shapes/"
 var pfp_dict = {
 	Enums.ShapeTypes.TRIANGLE : load(SHAPE_PATH + "Triangle.tscn"),
 	Enums.ShapeTypes.PLAIN_CIRCLE : load(SHAPE_PATH + "PlainCircle.tscn"),
+	Enums.ShapeTypes.SPIKY_CIRCLE : load(SHAPE_PATH + "SpikyCircle.tscn"),
+	Enums.ShapeTypes.PENTAGON : load(SHAPE_PATH + "Pentagon.tscn")
 }
 
 onready var t = get_tree()
@@ -23,7 +25,7 @@ func _ready():
 	
 
 func Spawn():
-	var newNode = pfp_dict[Enums.ShapeTypes.TRIANGLE].instance();
+	var newNode = pfp_dict[Enums.ShapeTypes.PENTAGON].instance();
 	#newNode.global_position = global_position;
 	newNode.position.y = newNode.position.y + rand_range(-10,10);
 	newNode.position.x = newNode.position.x + rand_range(-5,5);
@@ -33,7 +35,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and not event.pressed:
 			deselect()
-#			emit_signal("deselect")
 
 func drag(pfp:NGNode):
 	if pfp.type != shape_type: return
