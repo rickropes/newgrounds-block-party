@@ -5,8 +5,10 @@ export(PackedScene) var NGNodeScene
 var input_state: int = Enums.InputState.NOTHING
 var shape_type
 var selected_nodes := []
-onready var pfp_dict = {
-	Enums.ShapeTypes.PLAIN_CIRCLE : preload("res://scenes/base_shapes/PlainCircle.tscn")
+const SHAPE_PATH = "res://scenes/base_shapes/"
+var pfp_dict = {
+	Enums.ShapeTypes.TRIANGLE : load(SHAPE_PATH + "Triangle.tscn"),
+	Enums.ShapeTypes.PLAIN_CIRCLE : load(SHAPE_PATH + "PlainCircle.tscn"),
 }
 
 onready var t = get_tree()
@@ -21,7 +23,7 @@ func _ready():
 	
 
 func Spawn():
-	var newNode = pfp_dict[Enums.ShapeTypes.PLAIN_CIRCLE].instance();
+	var newNode = pfp_dict[Enums.ShapeTypes.TRIANGLE].instance();
 	#newNode.global_position = global_position;
 	newNode.position.y = newNode.position.y + rand_range(-10,10);
 	newNode.position.x = newNode.position.x + rand_range(-5,5);
