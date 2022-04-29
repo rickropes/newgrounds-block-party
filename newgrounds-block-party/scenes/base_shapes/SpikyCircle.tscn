@@ -10,6 +10,7 @@ radius = 52.0
 radius = 38.0526
 
 [node name="SpikyCircle" instance=ExtResource( 1 )]
+type = 1
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
