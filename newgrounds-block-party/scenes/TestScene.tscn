@@ -5,13 +5,13 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="GameController" parent="." instance=ExtResource( 2 )]
-
 [node name="Overlay" type="Sprite" parent="."]
 position = Vector2( 512, 301 )
 scale = Vector2( 1.671, 1.7 )
 z_index = 376
 texture = ExtResource( 1 )
+
+[node name="GameController" parent="." instance=ExtResource( 2 )]
 
 [node name="Enviroment" type="StaticBody2D" parent="."]
 position = Vector2( 512, 227 )

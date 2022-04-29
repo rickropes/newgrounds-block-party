@@ -77,12 +77,12 @@ func deselect():
 	t.call_group('objects', 'unchosen')
 	
 	# use the abilities here before they are cleared
+	var sel_len: int = len(selected_nodes)
 	match shape_type:
 		Enums.ShapeTypes.TRIANGLE:
-			var sel_len: int = len(selected_nodes)
 			var force = (
 				# get's the direction between the middle node and the mouse
-				get_global_mouse_position() - selected_nodes[(sel_len-1)/2].global_position
+				get_global_mouse_position() - get_centroid_of_selections()
 			).normalized() * (TRI_IMPULSE * sel_len)
 			
 			for tri in selected_nodes: 
@@ -100,3 +100,11 @@ func deselect():
 	shape_type = null
 	selected_nodes.clear()
 	affectees.clear()
+
+func get_centroid_of_selections() -> Vector2:
+	var out = Vector2.ZERO
+	for i in selected_nodes:
+		out += i.global_position
+	out /= len(selected_nodes)
+	
+	return out
