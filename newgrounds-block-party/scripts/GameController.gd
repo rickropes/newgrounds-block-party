@@ -3,7 +3,7 @@ extends Node2D
 var input_state: int = Enums.InputState.NOTHING
 var shape_type
 var selected_nodes := []
-var effectees := []
+var affectees := []
 const SHAPE_PATH = "res://scenes/base_shapes/"
 var pfp_dict = {
 	Enums.ShapeTypes.TRIANGLE : load(SHAPE_PATH + "Triangle.tscn"),
@@ -76,26 +76,27 @@ func select_start(child:NGNode):
 func deselect():
 	t.call_group('objects', 'unchosen')
 	
+	# use the abilities here before they are cleared
 	match shape_type:
 		Enums.ShapeTypes.TRIANGLE:
 			var sel_len: int = len(selected_nodes)
 			var force = (
+				# get's the direction between the middle node and the mouse
 				get_global_mouse_position() - selected_nodes[(sel_len-1)/2].global_position
 			).normalized() * (TRI_IMPULSE * sel_len)
 			
 			for tri in selected_nodes: 
 				for i in tri.collisionArea.get_overlapping_bodies():
 					if (i as NGNode).type != shape_type:
-						effectees.append(i)
+						affectees.append(i)
 				
 				tri.queue_free()
 			
-			for e in effectees:
+			for e in affectees:
 				(e as RigidBody2D).apply_central_impulse(force)
 	
-	# use the abilities here before they are cleared
-	
+	# go back to defaults
 	input_state = Enums.InputState.NOTHING
 	shape_type = null
 	selected_nodes.clear()
-	effectees.clear()
+	affectees.clear()
