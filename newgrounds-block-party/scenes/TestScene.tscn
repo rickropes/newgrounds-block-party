@@ -6,6 +6,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Overlay" type="Sprite" parent="."]
+visible = false
 position = Vector2( 512, 301 )
 scale = Vector2( 1.671, 1.7 )
 z_index = 376
@@ -19,4 +20,4 @@ position = Vector2( 512, 227 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enviroment"]
 position = Vector2( -1.00001, 66 )
 scale = Vector2( 1.32356, 1.32356 )
-polygon = PoolVector2Array( -132.219, -174.529, -138, -122, -175, -59, -187, 11, -170, 88, -125, 145, -62, 184, 11, 195, 86, 176, 158, 111, 186, 37, 182, -47, 141, -119, 135.241, -170.751, 527, -1194, 317, 380, -315, 377, -518, -1190 )
+polygon = PoolVector2Array( -388.347, -220.617, -386.08, 231.95, 387.591, 231.195, 388.347, -222.884, 420.835, -222.128, 414.79, 262.927, -423.857, 268.972, -416.302, -222.884 )

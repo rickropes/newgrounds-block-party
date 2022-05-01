@@ -5,7 +5,7 @@ var shape_type
 var selected_nodes := []
 var affectees := []
 const SHAPE_PATH = "res://scenes/base_shapes/"
-var pfp_dict = {
+onready var pfp_dict = {
 	Enums.ShapeTypes.TRIANGLE : load(SHAPE_PATH + "Triangle.tscn"),
 	Enums.ShapeTypes.PLAIN_CIRCLE : load(SHAPE_PATH + "PlainCircle.tscn"),
 	Enums.ShapeTypes.SPIKY_CIRCLE : load(SHAPE_PATH + "SpikyCircle.tscn"),
@@ -13,9 +13,14 @@ var pfp_dict = {
 }
 
 # gonna delete this later just need to use this for spawning randomly
-var spawn_rand := [Enums.ShapeTypes.TRIANGLE, Enums.ShapeTypes.PLAIN_CIRCLE]
+var spawn_rand := [
+	Enums.ShapeTypes.TRIANGLE, 
+	Enums.ShapeTypes.PLAIN_CIRCLE,
+	Enums.ShapeTypes.SPIKY_CIRCLE
+]
 
-const TRI_IMPULSE = 150
+const TRI_IMPULSE = 200
+const PENTAGON_RADIUS = 350
 
 onready var t = get_tree()
 
@@ -67,27 +72,28 @@ func drag(pfp:NGNode):
 			
 			break
 
-func select_start(child:NGNode):
+func select_start(child:NGNode) -> void:
 	input_state = Enums.InputState.DRAGGING
 	shape_type = child.type
 	
 	selected_nodes.append(child)
 
-func deselect():
+func deselect() -> void:
 	t.call_group('objects', 'unchosen')
 	
 	# use the abilities here before they are cleared
 	var sel_len: int = len(selected_nodes)
 	match shape_type:
 		Enums.ShapeTypes.TRIANGLE:
+			var centroid = get_centroid()
 			var force = (
 				# get's the direction between the middle node and the mouse
-				get_global_mouse_position() - get_centroid_of_selections()
+				get_global_mouse_position() - centroid
 			).normalized() * (TRI_IMPULSE * sel_len)
 			
 			for tri in selected_nodes: 
 				for i in tri.collisionArea.get_overlapping_bodies():
-					if (i as NGNode).type != shape_type:
+					if (i as NGNode).type != shape_type and force.dot(i.global_position - centroid) > 0:
 						affectees.append(i)
 				
 				tri.queue_free()
@@ -101,7 +107,7 @@ func deselect():
 	selected_nodes.clear()
 	affectees.clear()
 
-func get_centroid_of_selections() -> Vector2:
+func get_centroid() -> Vector2:
 	var out = Vector2.ZERO
 	for i in selected_nodes:
 		out += i.global_position
