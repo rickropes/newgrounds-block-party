@@ -6,17 +6,9 @@
 [node name="NGNode" type="RigidBody2D" groups=["objects"]]
 input_pickable = true
 mass = 2.00306
-can_sleep = false
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Sprite"]
-modulate = Color( 0, 0, 0, 0.211765 )
-position = Vector2( 3, 3.49231 )
-scale = Vector2( 1, 1.01538 )
-z_index = -100
 texture = ExtResource( 1 )
 
 [node name="CollisionArea" type="Area2D" parent="."]
