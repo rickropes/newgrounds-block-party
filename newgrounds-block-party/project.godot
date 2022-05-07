@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "NGNode",
 "language": "GDScript",
 "path": "res://scripts/NGNode.gd"
+}, {
+"base": "NGNode",
+"class": "SpikyCircle",
+"language": "GDScript",
+"path": "res://scenes/base_shapes/SpikyCircle.gd"
 } ]
 _global_script_class_icons={
 "Enums": "",
-"NGNode": ""
+"NGNode": "",
+"SpikyCircle": ""
 }
 
 [application]
@@ -29,6 +35,10 @@ _global_script_class_icons={
 config/name="newgrounds-block-party"
 run/main_scene="res://scenes/TestScene.tscn"
 config/icon="res://art/icon.png"
+
+[gui]
+
+theme/use_hidpi=true
 
 [input]
 

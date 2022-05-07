@@ -27,7 +27,7 @@ func _on_NGNode_mouse_entered() -> void:
 
 #TODO: there will be more stuff here
 func become_chosen():
-	$Sprite.modulate = Color.yellow
+	$Sprite.modulate = Color.green
 	
 func become_tail():
 	$Sprite.modulate = Color.red

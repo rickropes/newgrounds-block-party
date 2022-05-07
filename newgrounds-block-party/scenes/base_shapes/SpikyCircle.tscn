@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/NGNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://art/base_shapes/spiky_circle.png" type="Texture" id=2]
+[ext_resource path="res://scenes/base_shapes/SpikyCircle.gd" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 52.0
@@ -9,8 +10,10 @@ radius = 52.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 38.0526
 
-[node name="SpikyCircle" instance=ExtResource( 1 )]
-type = 1
+[node name="SpikyCircle" groups=["spiky circle"] instance=ExtResource( 1 )]
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
@@ -20,3 +23,5 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 shape = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_SpikyCircle_body_entered"]

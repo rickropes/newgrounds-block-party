@@ -31,6 +31,7 @@ func _ready():
 	
 	t.call_group('objects', 'connect', 'selected', self, 'select_start')
 	t.call_group('objects', 'connect', 'hover', self, 'drag')
+	t.call_group('spiky circle', 'connect', 'contact', self, 'spiky_contact')
 	
 
 func Spawn():
@@ -77,6 +78,8 @@ func select_start(child:NGNode) -> void:
 	shape_type = child.type
 	
 	selected_nodes.append(child)
+	
+	#DEBUG
 
 func deselect() -> void:
 	t.call_group('objects', 'unchosen')
@@ -89,7 +92,7 @@ func deselect() -> void:
 			var force = (
 				# get's the direction between the middle node and the mouse
 				get_global_mouse_position() - centroid
-			).normalized() * (TRI_IMPULSE * sel_len)
+			).normalized() * TRI_IMPULSE * sel_len
 			
 			for tri in selected_nodes: 
 				for i in tri.collisionArea.get_overlapping_bodies():
@@ -106,6 +109,22 @@ func deselect() -> void:
 	shape_type = null
 	selected_nodes.clear()
 	affectees.clear()
+
+func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void: 
+	# TODO sprites will have other collision shapes so I need to get all of them
+	reporter.absorbed += other.absorbed
+	other.absorbed = 0
+	other.set_block_signals(true)
+	for i in other.get_children():
+		if i is Sprite or i is CollisionShape2D:
+			var pos = i.global_position
+			other.remove_child(i)
+			reporter.add_child(i)
+			i.global_position = pos
+	
+	reporter.already_contacted = false
+	other.queue_free()
+
 
 func get_centroid() -> Vector2:
 	var out = Vector2.ZERO
