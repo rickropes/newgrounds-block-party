@@ -23,7 +23,7 @@ var spawn_rand := [
 ]
 
 const TRI_IMPULSE = 200
-const PENTAGON_RADIUS = 350
+const PENTAGON_RADIUS = 100
 
 onready var t = get_tree()
 
@@ -118,7 +118,7 @@ func deselect() -> void:
 					for j in i.get_children():
 						var pos = j.global_position - centroid
 						# check if object is within distance of centroid
-						if pos.length() <= effect_radius:
+						if pos.length() <= effect_radius and not col_positions.has(j.global_position):
 							#if the object is either a sprite or a collisionshape (but not the sprite's ogs)
 							#then get rid of it 
 							if j is Sprite and j != i.og_sprite:

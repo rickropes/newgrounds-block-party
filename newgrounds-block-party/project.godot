@@ -19,10 +19,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/NGNode.gd"
 }, {
-"base": "NGNode",
+"base": "Reference",
 "class": "SpikyCircle",
 "language": "GDScript",
-"path": "res://scenes/base_shapes/SpikyCircle.gd"
+"path": "res://scripts/base_shapes/SpikyCircle.gd"
 } ]
 _global_script_class_icons={
 "Enums": "",
