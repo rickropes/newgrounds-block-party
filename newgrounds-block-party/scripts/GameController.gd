@@ -9,14 +9,17 @@ onready var pfp_dict = {
 	Enums.ShapeTypes.TRIANGLE : load(SHAPE_PATH + "Triangle.tscn"),
 	Enums.ShapeTypes.PLAIN_CIRCLE : load(SHAPE_PATH + "PlainCircle.tscn"),
 	Enums.ShapeTypes.SPIKY_CIRCLE : load(SHAPE_PATH + "SpikyCircle.tscn"),
-	Enums.ShapeTypes.PENTAGON : load(SHAPE_PATH + "Pentagon.tscn")
+	Enums.ShapeTypes.PENTAGON : load(SHAPE_PATH + "Pentagon.tscn"),
+	Enums.ShapeTypes.HEXAGON : load(SHAPE_PATH + "Hexagon.tscn"),
 }
 
 # gonna delete this later just need to use this for spawning randomly
 var spawn_rand := [
 	Enums.ShapeTypes.TRIANGLE, 
 	Enums.ShapeTypes.PLAIN_CIRCLE,
-	Enums.ShapeTypes.SPIKY_CIRCLE
+	Enums.ShapeTypes.SPIKY_CIRCLE,
+	Enums.ShapeTypes.PENTAGON,
+	Enums.ShapeTypes.HEXAGON,
 ]
 
 const TRI_IMPULSE = 200
@@ -86,9 +89,10 @@ func deselect() -> void:
 	
 	# use the abilities here before they are cleared
 	var sel_len: int = len(selected_nodes)
+	var centroid = get_centroid()
 	match shape_type:
+		# TRIANGLES
 		Enums.ShapeTypes.TRIANGLE:
-			var centroid = get_centroid()
 			var force = (
 				# get's the direction between the middle node and the mouse
 				get_global_mouse_position() - centroid
@@ -103,6 +107,33 @@ func deselect() -> void:
 			
 			for e in affectees:
 				(e as RigidBody2D).apply_central_impulse(force)
+		Enums.ShapeTypes.PENTAGON:
+			var effect_radius = PENTAGON_RADIUS * sel_len
+			# list of collision shape positions
+			var col_positions := []
+			for pent in selected_nodes:
+				for i in pent.collisionArea.get_overlapping_bodies():
+					if not i is SpikyCircle: continue
+					
+					for j in i.get_children():
+						var pos = j.global_position - centroid
+						# check if object is within distance of centroid
+						if pos.length() <= effect_radius:
+							#if the object is either a sprite or a collisionshape (but not the sprite's ogs)
+							#then get rid of it 
+							if j is Sprite and j != i.og_sprite:
+								j.queue_free()
+							elif j is CollisionShape2D and j != i.og_col:
+								i.absorbed -= 1
+								col_positions.append(j.global_position)
+								j.queue_free()
+				
+				pent.queue_free()
+				
+			for i in col_positions:
+				var spiky = pfp_dict[Enums.ShapeTypes.SPIKY_CIRCLE].instance()
+				add_child(spiky)
+				spiky.global_position = i
 	
 	# go back to defaults
 	input_state = Enums.InputState.NOTHING

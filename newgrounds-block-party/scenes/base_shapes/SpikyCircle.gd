@@ -4,7 +4,8 @@ extends NGNode
 var absorbed := 1
 var already_contacted = false
 signal contact(reporter, other)
-onready var sprite := $Sprite 
+onready var og_sprite := $Sprite 
+onready var og_col := $CollisionShape2D
 
 func _ready() -> void:
 	type = Enums.ShapeTypes.SPIKY_CIRCLE
