@@ -126,7 +126,7 @@ func deselect() -> void:
 					for sp_child in spike_children:
 						var dist_vec = sp_child.global_position - centroid
 						# check if object is within distance of centroid
-						if dist_vec.length() > effect_radius and col_positions.has(sp_child.global_position): continue
+						if dist_vec.length() > effect_radius or col_positions.has(sp_child.global_position): continue
 						
 						var cl = sp_child.get_class()
 						var ch = spike.get_children_of_type(cl)
