@@ -14,7 +14,7 @@ onready var pfp_dict = {
 }
 
 # gonna delete this later just need to use this for spawning randomly
-var spawn_rand := [
+const SPAWN_RAND := [
 	Enums.ShapeTypes.TRIANGLE, 
 	Enums.ShapeTypes.PLAIN_CIRCLE,
 	Enums.ShapeTypes.SPIKY_CIRCLE,
@@ -24,6 +24,7 @@ var spawn_rand := [
 
 const TRI_IMPULSE = 200
 const PENTAGON_RADIUS = 100
+const HEX_RADIUS = 200
 
 onready var t = get_tree()
 
@@ -38,8 +39,8 @@ func _ready():
 	
 
 func Spawn():
-	spawn_rand.shuffle()
-	var newNode = pfp_dict[spawn_rand[0]].instance();
+	SPAWN_RAND.shuffle()
+	var newNode = pfp_dict[SPAWN_RAND[0]].instance();
 	#newNode.global_position = global_position;
 	newNode.position.y = newNode.position.y + rand_range(-10,10);
 	newNode.position.x = newNode.position.x + rand_range(-5,5);
@@ -62,9 +63,9 @@ func drag(pfp:NGNode):
 			
 			#Check if node already exists in line
 			var sel_len = len(selected_nodes)
-			if(selected_nodes.has(pfp)):
+			if (selected_nodes.has(pfp)):
 				#Check if is last one of line
-				if(sel_len > 1 && selected_nodes[sel_len-2] == pfp ):
+				if (sel_len > 1 && selected_nodes[sel_len-2] == pfp ):
 					current_chosen.unchosen()
 					selected_nodes.erase(current_chosen);
 					pfp.become_chosen()
@@ -107,26 +108,47 @@ func deselect() -> void:
 			
 			for e in affectees:
 				(e as RigidBody2D).apply_central_impulse(force)
+		
+		#PENTAGONS
 		Enums.ShapeTypes.PENTAGON:
 			var effect_radius = PENTAGON_RADIUS * sel_len
 			# list of collision shape positions
 			var col_positions := []
 			for pent in selected_nodes:
-				for i in pent.collisionArea.get_overlapping_bodies():
-					if not i is SpikyCircle: continue
+				for spike in pent.collisionArea.get_overlapping_bodies():
+					#FIXME: need a solution for if pentagon hits parent body
+					if spike.type == Enums.ShapeTypes.SPIKY_CIRCLE: 
+						if spike.absorbed == 1:
+							continue
+					else: continue
+					var spike_children = spike.get_children()
 					
-					for j in i.get_children():
-						var pos = j.global_position - centroid
+					for sp_child in spike_children:
+						var dist_vec = sp_child.global_position - centroid
 						# check if object is within distance of centroid
-						if pos.length() <= effect_radius and not col_positions.has(j.global_position):
-							#if the object is either a sprite or a collisionshape (but not the sprite's ogs)
-							#then get rid of it 
-							if j is Sprite and j != i.og_sprite:
-								j.queue_free()
-							elif j is CollisionShape2D and j != i.og_col:
-								i.absorbed -= 1
-								col_positions.append(j.global_position)
-								j.queue_free()
+						if dist_vec.length() > effect_radius and col_positions.has(sp_child.global_position): continue
+						
+						var cl = sp_child.get_class()
+						var ch = spike.get_children_of_type(cl)
+						var ind = ch.find(sp_child)
+						if spike.og_col == sp_child or spike.og_sprite == sp_child:
+							var is_sprite = sp_child is Sprite
+							var next = wrapi(ind + 1, 0, len(ch))
+							var next_child = ch[next]
+							
+							# TODO fix this nightmare
+							if is_sprite:
+								spike.og_sprite = next_child
+							else:
+								spike.og_col = next_child
+							
+#							continue
+							
+						if sp_child is CollisionShape2D:
+							spike.absorbed -= 1
+							col_positions.append(sp_child.global_position)
+							
+						sp_child.queue_free()
 				
 				pent.queue_free()
 				
@@ -134,6 +156,9 @@ func deselect() -> void:
 				var spiky = pfp_dict[Enums.ShapeTypes.SPIKY_CIRCLE].instance()
 				add_child(spiky)
 				spiky.global_position = i
+		Enums.ShapeTypes.HEXAGON:
+			for hex in selected_nodes:
+				hex.mode = RigidBody2D.MODE_STATIC
 	
 	# go back to defaults
 	input_state = Enums.InputState.NOTHING
@@ -145,7 +170,6 @@ func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void:
 	# TODO sprites will have other collision shapes so I need to get all of them
 	reporter.absorbed += other.absorbed
 	other.absorbed = 0
-	other.set_block_signals(true)
 	for i in other.get_children():
 		if i is Sprite or i is CollisionShape2D:
 			var pos = i.global_position

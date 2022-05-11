@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/NGNode.gd"
 }, {
-"base": "Reference",
+"base": "NGNode",
 "class": "SpikyCircle",
 "language": "GDScript",
 "path": "res://scripts/base_shapes/SpikyCircle.gd"
@@ -35,6 +35,10 @@ _global_script_class_icons={
 config/name="newgrounds-block-party"
 run/main_scene="res://scenes/TestScene.tscn"
 config/icon="res://art/icon.png"
+
+[display]
+
+window/dpi/allow_hidpi=true
 
 [gui]
 
