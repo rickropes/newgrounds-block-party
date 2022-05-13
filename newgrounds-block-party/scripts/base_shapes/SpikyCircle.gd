@@ -1,7 +1,7 @@
 class_name SpikyCircle
 extends NGNode
 
-var absorbed := 1
+var absorbed := 1 
 var already_contacted = false
 signal contact(reporter, other)
 func _ready() -> void:
