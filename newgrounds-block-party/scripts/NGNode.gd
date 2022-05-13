@@ -7,7 +7,7 @@ signal hover(pfp)
 onready var collisionArea = $CollisionArea;
 
 #TODO, make unique shapes that change this variable
-var type = Enums.ShapeTypes.PLAIN_CIRCLE
+export(Enums.ShapeTypes) var type = Enums.ShapeTypes.PLAIN_CIRCLE
 
 func _ready():
 	pass;
