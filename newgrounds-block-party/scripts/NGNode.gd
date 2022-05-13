@@ -7,8 +7,8 @@ signal hover(pfp)
 onready var collisionArea = $CollisionArea;
 
 #TODO, make unique shapes that change this variable
-onready var og_sprite := get_node("Sprite") as Sprite
-onready var og_col := get_node("CollisionShape2D") as CollisionShape2D
+onready var og_sprite := get_node("Sprite")
+onready var og_col := get_node("Body")
 export(Enums.ShapeTypes) var shape
 
 func _on_NGNode_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

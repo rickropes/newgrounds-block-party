@@ -36,6 +36,10 @@ config/name="newgrounds-block-party"
 run/main_scene="res://scenes/TestScene.tscn"
 config/icon="res://art/icon.png"
 
+[autoload]
+
+Manager="*res://scripts/Manager.gd"
+
 [display]
 
 window/dpi/allow_hidpi=true

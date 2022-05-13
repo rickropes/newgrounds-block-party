@@ -20,7 +20,6 @@ func check_contact(body:SpikyCircle):
 			already_contacted = false
 			return
 		else:
-#			body.set_block_signals(true)
+			body.set_block_signals(true)
 			emit_signal('contact', self, body)
 		
-
