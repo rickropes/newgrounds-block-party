@@ -143,17 +143,16 @@ func deselect() -> void:
 				
 				if spike.absorbed <= 0:
 					spike.queue_free()
-				
+			
 			for pent in selected_nodes:
 				pent.queue_free()
 				
 			for i in col_positions:
 				var spiky = pfp_dict[Enums.ShapeTypes.PLAIN_CIRCLE].instance()
-				# spiky.connect('contact', self, 'spiky_contact')
 				add_child(spiky)
 				spiky.global_position = i
 
-		#SQUARES (TODO)
+		#SQUARES
 		Enums.ShapeTypes.SQUARE:
 			var effect_radius = PENTAGON_RADIUS * sel_len
 			var col_positions := []
