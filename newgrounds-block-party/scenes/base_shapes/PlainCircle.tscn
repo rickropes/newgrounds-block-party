@@ -10,11 +10,9 @@ radius = 41.0122
 radius = 62.0322
 
 [node name="PlainCircle" instance=ExtResource( 2 )]
+shape = 3
 
 [node name="Sprite" parent="." index="0"]
-texture = ExtResource( 1 )
-
-[node name="Sprite" parent="Sprite" index="0"]
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]

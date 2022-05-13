@@ -9,7 +9,7 @@ onready var collisionArea = $CollisionArea;
 #TODO, make unique shapes that change this variable
 onready var og_sprite := get_node("Sprite") as Sprite
 onready var og_col := get_node("CollisionShape2D") as CollisionShape2D
-export(Enums.ShapeTypes) var type
+export(Enums.ShapeTypes) var shape
 
 func _on_NGNode_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	var mouse_cond = (event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed)
@@ -24,7 +24,7 @@ func _on_NGNode_input_event(_viewport: Node, event: InputEvent, _shape_idx: int)
 func _on_NGNode_mouse_entered() -> void:
 	emit_signal('hover', self)
 
-func get_children_of_type(t:String):
+func get_children_of_type(t:String) -> Array:
 	var out := []
 	for i in get_children():
 		if i.is_class(t):

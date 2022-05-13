@@ -52,34 +52,34 @@ func _unhandled_input(event: InputEvent) -> void:
 			deselect()
 
 func drag(pfp:NGNode):
-	if pfp.type != shape_type: return
+	if pfp.shape != shape_type: return
 	
 	#var touches = (selected_nodes[len(selected_nodes)-1] as RigidBody2D).get_colliding_bodies()
 	var current_chosen = selected_nodes[len(selected_nodes)-1];
 	var touches = (current_chosen.collisionArea as Area2D).get_overlapping_bodies();
 	
 	for j in touches:
-		if j == pfp:
+		if j != pfp: continue
 			
-			#Check if node already exists in line
-			var sel_len = len(selected_nodes)
-			if (selected_nodes.has(pfp)):
-				#Check if is last one of line
-				if (sel_len > 1 && selected_nodes[sel_len-2] == pfp ):
-					current_chosen.unchosen()
-					selected_nodes.erase(current_chosen);
-					pfp.become_chosen()
-			else:
-				#Add new node
-				current_chosen.become_tail()
+		#Check if node already exists in line
+		var sel_len = len(selected_nodes)
+		if (selected_nodes.has(pfp)):
+			#Check if is last one of line
+			if (sel_len > 1 && selected_nodes[sel_len-2] == pfp ):
+				current_chosen.unchosen()
+				selected_nodes.erase(current_chosen);
 				pfp.become_chosen()
-				selected_nodes.append(pfp)
-			
-			break
+		else:
+			#Add new node
+			current_chosen.become_tail()
+			pfp.become_chosen()
+			selected_nodes.append(pfp)
+		
+		break
 
 func select_start(child:NGNode) -> void:
 	input_state = Enums.InputState.DRAGGING
-	shape_type = child.type
+	shape_type = child.shape
 	
 	selected_nodes.append(child)
 	
@@ -101,7 +101,7 @@ func deselect() -> void:
 			
 			for tri in selected_nodes: 
 				for i in tri.collisionArea.get_overlapping_bodies():
-					if (i as NGNode).type != shape_type and force.dot(i.global_position - centroid) > 0:
+					if (i as NGNode).shape != shape_type and force.dot(i.global_position - centroid) > 0:
 						affectees.append(i)
 				
 				tri.queue_free()
@@ -117,7 +117,7 @@ func deselect() -> void:
 			for pent in selected_nodes:
 				for spike in pent.collisionArea.get_overlapping_bodies():
 					#FIXME: need a solution for if pentagon hits parent body
-					if spike.type == Enums.ShapeTypes.SPIKY_CIRCLE: 
+					if spike.shape == Enums.ShapeTypes.SPIKY_CIRCLE: 
 						if spike.absorbed == 1:
 							continue
 					else: continue
@@ -136,14 +136,8 @@ func deselect() -> void:
 							var next = wrapi(ind + 1, 0, len(ch))
 							var next_child = ch[next]
 							
-							# TODO fix this nightmare
-							if is_sprite:
-								spike.og_sprite = next_child
-							else:
-								spike.og_col = next_child
-							
-#							continue
-							
+							spike.call('set', 'og_sprite' if is_sprite else 'og_col', next_child)
+						
 						if sp_child is CollisionShape2D:
 							spike.absorbed -= 1
 							col_positions.append(sp_child.global_position)
@@ -154,6 +148,7 @@ func deselect() -> void:
 				
 			for i in col_positions:
 				var spiky = pfp_dict[Enums.ShapeTypes.SPIKY_CIRCLE].instance()
+				spiky.connect('contact', self, 'spiky_contact')
 				add_child(spiky)
 				spiky.global_position = i
 		Enums.ShapeTypes.HEXAGON:

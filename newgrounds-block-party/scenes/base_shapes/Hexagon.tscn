@@ -10,7 +10,7 @@ radius = 59.3043
 radius = 47.0956
 
 [node name="Hexagon" instance=ExtResource( 2 )]
-type = 6
+shape = 6
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )

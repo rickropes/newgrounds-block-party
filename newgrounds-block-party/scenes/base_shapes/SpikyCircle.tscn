@@ -15,6 +15,7 @@ input_pickable = false
 contacts_reported = 3
 contact_monitor = true
 script = ExtResource( 3 )
+shape = 1
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
