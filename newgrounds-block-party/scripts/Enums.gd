@@ -8,7 +8,7 @@ enum ShapeTypes {
 	TRIANGLE,
 	#touches others of the same kind and clumps together
 	SPIKY_CIRCLE,
-	#separates spiky circles when activated
+	#turns spiky circles to plain circles
 	PENTAGON,
 	#what spiky circles become after using a pentagon
 	PLAIN_CIRCLE,
@@ -18,6 +18,8 @@ enum ShapeTypes {
 	PARALLELOGRAM,
 	#slows down other shapes in a circular field
 	HEXAGON,
+	#Turns circles into spiky circles
+	SQUARE,
 	
 	#points shapes
 	STAR, # 20 pts

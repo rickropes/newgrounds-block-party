@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/NGNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://art/base_shapes/mig_square.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 62, 60 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 44.5, 46 )
+
+[node name="Square" instance=ExtResource( 1 )]
+shape = 7
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea" index="0"]
+shape = SubResource( 2 )
+
+[node name="Body" type="CollisionShape2D" parent="." index="2"]
+position = Vector2( 0.5, 0 )
+shape = SubResource( 1 )

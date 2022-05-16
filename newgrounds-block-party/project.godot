@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "NGNode",
 "language": "GDScript",
 "path": "res://scripts/NGNode.gd"
+}, {
+"base": "NGNode",
+"class": "SpikyCircle",
+"language": "GDScript",
+"path": "res://scripts/base_shapes/SpikyCircle.gd"
 } ]
 _global_script_class_icons={
 "Enums": "",
-"NGNode": ""
+"NGNode": "",
+"SpikyCircle": ""
 }
 
 [application]
@@ -29,6 +35,42 @@ _global_script_class_icons={
 config/name="newgrounds-block-party"
 run/main_scene="res://scenes/TestScene.tscn"
 config/icon="res://art/icon.png"
+
+[autoload]
+
+Manager="*res://scripts/Manager.gd"
+
+[display]
+
+window/dpi/allow_hidpi=true
+
+[gui]
+
+theme/use_hidpi=true
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
 
 [input]
 
