@@ -4,6 +4,9 @@ var input_state: int = Enums.InputState.NOTHING
 var shape_type
 var selected_nodes := []
 var affectees := []
+
+onready var container = $BodiesContainer
+
 const SHAPE_PATH = "res://scenes/base_shapes/"
 onready var pfp_dict = {
 	Enums.ShapeTypes.TRIANGLE : load(SHAPE_PATH + "Triangle.tscn"),
@@ -46,7 +49,7 @@ func Spawn():
 	#newNode.global_position = global_position;
 	newNode.position.y = newNode.position.y + rand_range(-10,10);
 	newNode.position.x = newNode.position.x + rand_range(-5,5);
-	add_child(newNode);
+	container.add_child(newNode);
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -149,7 +152,7 @@ func deselect() -> void:
 				
 			for i in col_positions:
 				var spiky = pfp_dict[Enums.ShapeTypes.PLAIN_CIRCLE].instance()
-				add_child(spiky)
+				container.add_child(spiky)
 				spiky.global_position = i
 
 		#SQUARES
@@ -163,7 +166,7 @@ func deselect() -> void:
 			for i in col_positions:
 				var spiky = pfp_dict[Enums.ShapeTypes.SPIKY_CIRCLE].instance()
 				spiky.connect('contact', self, 'spiky_contact')
-				add_child(spiky)
+				container.add_child(spiky)
 				spiky.global_position = i
 				
 			for sq in selected_nodes:
@@ -173,6 +176,7 @@ func deselect() -> void:
 		Enums.ShapeTypes.HEXAGON:
 			for hex in selected_nodes:
 				hex.mode = RigidBody2D.MODE_STATIC
+				hex.get_node("Body").disabled = true
 	
 	# go back to defaults
 	input_state = Enums.InputState.NOTHING
@@ -204,11 +208,19 @@ func get_centroid() -> Vector2:
 	return out
 
 func get_shapes_in_circle(radius:float, point:Vector2, type = null) -> Array:
-	var children = get_children()
+	var children = container.get_children()
 	var out := []
 	
 	for i in children:
 		if type != null and i.shape != type: continue
+		
+		if type == Enums.ShapeTypes.SPIKY_CIRCLE:
+			var cols = i.get_children_of_type("CollisionShape2D")
+			for k in len(cols):
+				if (cols[k].global_position - point).length() <= radius:
+					out.append(i)
+					break
+			continue
 		
 		var vec = i.global_position - point
 		if vec.length() <= radius:
@@ -216,3 +228,7 @@ func get_shapes_in_circle(radius:float, point:Vector2, type = null) -> Array:
 	
 	return out
 
+func _draw() -> void:
+	if shape_type == null: return
+	
+	# do the drawing here

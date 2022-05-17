@@ -5,3 +5,5 @@
 [node name="GameController" type="Node2D"]
 position = Vector2( 509, -393 )
 script = ExtResource( 2 )
+
+[node name="BodiesContainer" type="Node2D" parent="."]
