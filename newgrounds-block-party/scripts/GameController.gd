@@ -6,6 +6,8 @@ var selected_nodes := []
 var affectees := []
 
 onready var container = $BodiesContainer
+onready var other_ents = $OtherEntsContainer
+onready var tracker = $CentroidTracker
 
 const SHAPE_PATH = "res://scenes/base_shapes/"
 onready var pfp_dict = {
@@ -16,6 +18,8 @@ onready var pfp_dict = {
 	Enums.ShapeTypes.HEXAGON : load(SHAPE_PATH + "Hexagon.tscn"),
 	Enums.ShapeTypes.SQUARE : load(SHAPE_PATH + "Square.tscn"),
 }
+
+const HEX_FIELD = preload("res://scenes/entities/HexField.tscn")
 
 # gonna delete this later just need to use this for spawning randomly
 const SPAWN_RAND := [
@@ -50,6 +54,10 @@ func Spawn():
 	newNode.position.y = newNode.position.y + rand_range(-10,10);
 	newNode.position.x = newNode.position.x + rand_range(-5,5);
 	container.add_child(newNode);
+
+func _process(delta: float) -> void:
+	var c = get_centroid(container.get_children())
+	tracker.global_position = c
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -95,7 +103,7 @@ func deselect() -> void:
 	
 	# use the abilities here before they are cleared
 	var sel_len: int = len(selected_nodes)
-	var centroid = get_centroid()
+	var centroid = get_centroid(selected_nodes)
 	match shape_type:
 		# TRIANGLES
 		Enums.ShapeTypes.TRIANGLE:
@@ -174,9 +182,16 @@ func deselect() -> void:
 				
 		#HEXAGONS (TODO)
 		Enums.ShapeTypes.HEXAGON:
+			var field = HEX_FIELD.instance()
+			
 			for hex in selected_nodes:
 				hex.mode = RigidBody2D.MODE_STATIC
 				hex.get_node("Body").disabled = true
+				container.remove_child(hex)
+				field.add_child(hex)
+			
+			other_ents.add_child(field)
+			field.setup(centroid, HEX_RADIUS * sel_len, 1.5 * sel_len)
 	
 	# go back to defaults
 	input_state = Enums.InputState.NOTHING
@@ -191,19 +206,21 @@ func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void:
 	for i in other.get_children():
 		if i is Sprite or i is CollisionShape2D:
 			var pos = i.global_position
+			i.call_deferred('set', 'disabled', true)
 			other.remove_child(i)
 			reporter.add_child(i)
+			i.call_deferred('set', 'disabled', false)
 			i.global_position = pos
 	
 	reporter.already_contacted = false
 	other.queue_free()
 
 
-func get_centroid() -> Vector2:
+func get_centroid(arr) -> Vector2:
 	var out = Vector2.ZERO
-	for i in selected_nodes:
+	for i in arr:
 		out += i.global_position
-	out /= len(selected_nodes)
+	out /= len(arr)
 	
 	return out
 

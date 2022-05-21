@@ -7,3 +7,9 @@ position = Vector2( 509, -393 )
 script = ExtResource( 2 )
 
 [node name="BodiesContainer" type="Node2D" parent="."]
+
+[node name="OtherEntsContainer" type="Node2D" parent="."]
+
+[node name="CentroidTracker" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="CentroidTracker"]
