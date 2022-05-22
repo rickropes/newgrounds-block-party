@@ -16,7 +16,13 @@ onready var pfp_dict = {
 	Enums.ShapeTypes.SPIKY_CIRCLE : load(SHAPE_PATH + "SpikyCircle.tscn"),
 	Enums.ShapeTypes.PENTAGON : load(SHAPE_PATH + "Pentagon.tscn"),
 	Enums.ShapeTypes.HEXAGON : load(SHAPE_PATH + "Hexagon.tscn"),
+	Enums.ShapeTypes.OCTAGON : load(SHAPE_PATH + "Octagon.tscn"),
+	Enums.ShapeTypes.PARALLELOGRAM : load(SHAPE_PATH + "Parallelogram.tscn"),
 	Enums.ShapeTypes.SQUARE : load(SHAPE_PATH + "Square.tscn"),
+	Enums.ShapeTypes.HEART : load(SHAPE_PATH + "Heart.tscn"),
+	Enums.ShapeTypes.STAR : load(SHAPE_PATH + "Star.tscn"),
+	Enums.ShapeTypes.ROUND_SQUARE : load(SHAPE_PATH + "RoundSquare.tscn"),
+	
 }
 
 const HEX_FIELD = preload("res://scenes/entities/HexField.tscn")
@@ -28,12 +34,19 @@ const SPAWN_RAND := [
 	Enums.ShapeTypes.SPIKY_CIRCLE,
 	Enums.ShapeTypes.PENTAGON,
 	Enums.ShapeTypes.HEXAGON,
+	Enums.ShapeTypes.OCTAGON,
+	Enums.ShapeTypes.PARALLELOGRAM,
 	Enums.ShapeTypes.SQUARE,
+	Enums.ShapeTypes.HEART,
+	Enums.ShapeTypes.STAR,
+	Enums.ShapeTypes.ROUND_SQUARE,
 ]
 
 const TRI_IMPULSE = 200
-const PENTAGON_RADIUS = 175
-const HEX_RADIUS = 200
+const PENTAGON_RADIUS = 150
+const HEX_RADIUS = 100
+const OCTAGON_RADIUS = 100
+const PARALLELOGRAM_RADIUS = 100
 
 onready var t = get_tree()
 
@@ -180,7 +193,7 @@ func deselect() -> void:
 			for sq in selected_nodes:
 				sq.queue_free()
 				
-		#HEXAGONS (TODO)
+		#HEXAGONS
 		Enums.ShapeTypes.HEXAGON:
 			var field = HEX_FIELD.instance()
 			
@@ -192,6 +205,20 @@ func deselect() -> void:
 			
 			other_ents.add_child(field)
 			field.setup(centroid, HEX_RADIUS * sel_len, 1.5 * sel_len)
+			
+		#OCTAGONS
+		Enums.ShapeTypes.OCTAGON:
+			var effect_radius = OCTAGON_RADIUS * sel_len
+			for oct in selected_nodes: oct.queue_free()
+			
+			for obj in get_shapes_in_circle(effect_radius, centroid):
+				obj.mode = RigidBody2D.MODE_STATIC
+		
+		Enums.ShapeTypes.PARALLELOGRAM:
+			var effect_radius = PARALLELOGRAM_RADIUS * sel_len
+			for par in selected_nodes: par.queue_free()
+			for obj in get_shapes_in_circle(effect_radius, centroid):
+				obj.mode = RigidBody2D.MODE_RIGID
 	
 	# go back to defaults
 	input_state = Enums.InputState.NOTHING
@@ -214,7 +241,6 @@ func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void:
 	
 	reporter.already_contacted = false
 	other.queue_free()
-
 
 func get_centroid(arr) -> Vector2:
 	var out = Vector2.ZERO

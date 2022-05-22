@@ -17,6 +17,9 @@ texture = ExtResource( 1 )
 collision_layer = 0
 collision_mask = 2
 monitorable = false
+__meta__ = {
+"_editor_description_": "Detects overlaps with other shapes for selection or other entities from the environment"
+}
 
 [connection signal="input_event" from="." to="." method="_on_NGNode_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_NGNode_mouse_entered"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://overlay.png" type="Texture" id=1]
 [ext_resource path="res://scenes/GameController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/entities/PointsArea.tscn" type="PackedScene" id=3]
 
 [node name="Node2D" type="Node2D"]
 
@@ -21,3 +22,7 @@ position = Vector2( 512, 227 )
 position = Vector2( -1.00001, 66 )
 scale = Vector2( 1.32356, 1.32356 )
 polygon = PoolVector2Array( -388.347, -220.617, -386.08, 231.95, 387.591, 231.195, 388.347, -222.884, 420.835, -222.128, 414.79, 262.927, -423.857, 268.972, -416.302, -222.884 )
+
+[node name="PointsArea" parent="." instance=ExtResource( 3 )]
+position = Vector2( 264, 298 )
+radius = 100

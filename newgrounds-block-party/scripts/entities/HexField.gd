@@ -3,7 +3,7 @@ extends Area2D
 onready var col = $Body
 onready var timer = $Timer
 
-const MULT = 3
+const MULT = 5
 
 func setup(pos:Vector2, radius: float, time: float):
 	global_position = pos
@@ -16,8 +16,9 @@ func _on_Timer_timeout() -> void:
 
 
 func _on_HexField_body_entered(body: Node) -> void:
-	body.linear_velocity /= MULT
-
+#	body.linear_velocity /= MULT
+	pass
 
 func _on_HexField_body_exited(body: Node) -> void:
-	body.linear_velocity *= MULT
+#	body.linear_velocity *= MULT
+	pass
