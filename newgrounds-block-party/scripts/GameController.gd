@@ -202,23 +202,18 @@ func deselect() -> void:
 				hex.get_node("Body").disabled = true
 				container.remove_child(hex)
 				field.add_child(hex)
+				hex.position = Vector2.ZERO
 			
 			other_ents.add_child(field)
 			field.setup(centroid, HEX_RADIUS * sel_len, 1.5 * sel_len)
 			
-		#OCTAGONS
-		Enums.ShapeTypes.OCTAGON:
+		#OCTAGONS & PARALLELOGRAM
+		Enums.ShapeTypes.OCTAGON, Enums.ShapeTypes.PARALLELOGRAM:
 			var effect_radius = OCTAGON_RADIUS * sel_len
 			for oct in selected_nodes: oct.queue_free()
 			
 			for obj in get_shapes_in_circle(effect_radius, centroid):
-				obj.mode = RigidBody2D.MODE_STATIC
-		
-		Enums.ShapeTypes.PARALLELOGRAM:
-			var effect_radius = PARALLELOGRAM_RADIUS * sel_len
-			for par in selected_nodes: par.queue_free()
-			for obj in get_shapes_in_circle(effect_radius, centroid):
-				obj.mode = RigidBody2D.MODE_RIGID
+				obj.mode = RigidBody2D.MODE_STATIC if shape_type == Enums.ShapeTypes.OCTAGON else RigidBody2D.MODE_RIGID
 	
 	# go back to defaults
 	input_state = Enums.InputState.NOTHING

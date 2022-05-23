@@ -15,10 +15,3 @@ func _on_Timer_timeout() -> void:
 	queue_free()
 
 
-func _on_HexField_body_entered(body: Node) -> void:
-#	body.linear_velocity /= MULT
-	pass
-
-func _on_HexField_body_exited(body: Node) -> void:
-#	body.linear_velocity *= MULT
-	pass
