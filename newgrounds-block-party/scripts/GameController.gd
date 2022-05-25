@@ -10,21 +10,6 @@ onready var container = $BodiesContainer
 onready var other_ents = $OtherEntsContainer
 onready var tracker = $CentroidTracker
 
-#const SHAPE_PATH = "res://scenes/base_shapes/"
-#onready var pfp_dict = {
-#	Enums.ShapeTypes.TRIANGLE : load(SHAPE_PATH + "Triangle.tscn"),
-#	Enums.ShapeTypes.PLAIN_CIRCLE : load(SHAPE_PATH + "PlainCircle.tscn"),
-#	Enums.ShapeTypes.SPIKY_CIRCLE : load(SHAPE_PATH + "SpikyCircle.tscn"),
-#	Enums.ShapeTypes.PENTAGON : load(SHAPE_PATH + "Pentagon.tscn"),
-#	Enums.ShapeTypes.HEXAGON : load(SHAPE_PATH + "Hexagon.tscn"),
-#	Enums.ShapeTypes.OCTAGON : load(SHAPE_PATH + "Octagon.tscn"),
-#	Enums.ShapeTypes.PARALLELOGRAM : load(SHAPE_PATH + "Parallelogram.tscn"),
-#	Enums.ShapeTypes.SQUARE : load(SHAPE_PATH + "Square.tscn"),
-#	Enums.ShapeTypes.HEART : load(SHAPE_PATH + "Heart.tscn"),
-#	Enums.ShapeTypes.STAR : load(SHAPE_PATH + "Star.tscn"),
-#	Enums.ShapeTypes.ROUND_SQUARE : load(SHAPE_PATH + "RoundSquare.tscn"),
-#}
-
 const HEX_FIELD = preload("res://scenes/entities/HexField.tscn")
 
 # gonna delete this later just need to use this for spawning randomly
@@ -48,17 +33,13 @@ const HEX_RADIUS = 100
 const OCTAGON_RADIUS = 100
 const PARALLELOGRAM_RADIUS = 100
 
-onready var t = get_tree()
-
 func _ready():
 	# get rid of this when we start placing in elements ourselves
 #	for i in 60:
 #		Spawn();
 	
-	t.call_group('objects', 'connect', 'selected', self, 'select_start')
-	t.call_group('objects', 'connect', 'hover', self, 'drag')
-	t.call_group('spiky circle', 'connect', 'contact', self, 'spiky_contact')
-	
+	for obj in container.get_children():
+		spawned(obj)
 
 func Spawn():
 	SPAWN_RAND.shuffle()
@@ -112,7 +93,7 @@ func select_start(child:NGNode) -> void:
 	#DEBUG
 
 func deselect() -> void:
-	t.call_group('objects', 'unchosen')
+	for i in container.get_children(): i.unchosen()
 	
 	# use the abilities here before they are cleared
 	var sel_len: int = len(selected_nodes)
@@ -228,9 +209,10 @@ func deselect() -> void:
 	affectees.clear()
 
 func spawned(obj:NGNode):
-	container.add_child(obj)
+	if not container.is_a_parent_of(obj):
+		container.add_child(obj)
 	
-	obj.connect('selected', self, 'select_drag')
+	obj.connect('selected', self, 'select_start')
 	obj.connect('hover', self, 'drag')
 	
 	if obj.is_in_group('spiky circle'):
@@ -252,6 +234,19 @@ func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void:
 	reporter.already_contacted = false
 	other.queue_free()
 
+func _draw() -> void:
+	if shape_type == null: return
+	
+	# do the drawing here
+
+func get_centroid(arr) -> Vector2:
+	var out = Vector2.ZERO
+	for i in arr:
+		out += i.global_position
+	out /= len(arr)
+	
+	return out
+
 func get_shapes_in_circle(radius:float, point:Vector2, type = null) -> Array:
 	var children = container.get_children()
 	var out := []
@@ -270,18 +265,5 @@ func get_shapes_in_circle(radius:float, point:Vector2, type = null) -> Array:
 		var vec = i.global_position - point
 		if vec.length() <= radius:
 			out.append(i)
-	
-	return out
-
-func _draw() -> void:
-	if shape_type == null: return
-	
-	# do the drawing here
-
-func get_centroid(arr) -> Vector2:
-	var out = Vector2.ZERO
-	for i in arr:
-		out += i.global_position
-	out /= len(arr)
 	
 	return out

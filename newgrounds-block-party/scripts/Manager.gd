@@ -12,6 +12,7 @@ func _ready() -> void:
 	
 	controller = t.get_nodes_in_group('controller')[0]
 	t.call_group('spawner', 'connect', 'spawned', controller, 'spawned')
+#	
 
 func add_points(p:int):
 	score += p 
