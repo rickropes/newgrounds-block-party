@@ -18,4 +18,4 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Body" type="CollisionPolygon2D" parent="." index="2"]
-polygon = PoolVector2Array( 1, -47, 19, -22, 48, -12, 30, 13, 31, 45, 0, 34, -29, 45, -28, 13, -47, -12, -18, -22 )
+polygon = PoolVector2Array( 1, -47, 19, -22, 48, -12, 31, 12, 31, 45, 1, 35, -29, 45, -29, 13, -47, -12, -18, -22 )

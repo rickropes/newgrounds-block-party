@@ -1,3 +1,4 @@
+class_name GameController
 extends Node2D
 
 var input_state: int = Enums.InputState.NOTHING
@@ -9,21 +10,20 @@ onready var container = $BodiesContainer
 onready var other_ents = $OtherEntsContainer
 onready var tracker = $CentroidTracker
 
-const SHAPE_PATH = "res://scenes/base_shapes/"
-onready var pfp_dict = {
-	Enums.ShapeTypes.TRIANGLE : load(SHAPE_PATH + "Triangle.tscn"),
-	Enums.ShapeTypes.PLAIN_CIRCLE : load(SHAPE_PATH + "PlainCircle.tscn"),
-	Enums.ShapeTypes.SPIKY_CIRCLE : load(SHAPE_PATH + "SpikyCircle.tscn"),
-	Enums.ShapeTypes.PENTAGON : load(SHAPE_PATH + "Pentagon.tscn"),
-	Enums.ShapeTypes.HEXAGON : load(SHAPE_PATH + "Hexagon.tscn"),
-	Enums.ShapeTypes.OCTAGON : load(SHAPE_PATH + "Octagon.tscn"),
-	Enums.ShapeTypes.PARALLELOGRAM : load(SHAPE_PATH + "Parallelogram.tscn"),
-	Enums.ShapeTypes.SQUARE : load(SHAPE_PATH + "Square.tscn"),
-	Enums.ShapeTypes.HEART : load(SHAPE_PATH + "Heart.tscn"),
-	Enums.ShapeTypes.STAR : load(SHAPE_PATH + "Star.tscn"),
-	Enums.ShapeTypes.ROUND_SQUARE : load(SHAPE_PATH + "RoundSquare.tscn"),
-	
-}
+#const SHAPE_PATH = "res://scenes/base_shapes/"
+#onready var pfp_dict = {
+#	Enums.ShapeTypes.TRIANGLE : load(SHAPE_PATH + "Triangle.tscn"),
+#	Enums.ShapeTypes.PLAIN_CIRCLE : load(SHAPE_PATH + "PlainCircle.tscn"),
+#	Enums.ShapeTypes.SPIKY_CIRCLE : load(SHAPE_PATH + "SpikyCircle.tscn"),
+#	Enums.ShapeTypes.PENTAGON : load(SHAPE_PATH + "Pentagon.tscn"),
+#	Enums.ShapeTypes.HEXAGON : load(SHAPE_PATH + "Hexagon.tscn"),
+#	Enums.ShapeTypes.OCTAGON : load(SHAPE_PATH + "Octagon.tscn"),
+#	Enums.ShapeTypes.PARALLELOGRAM : load(SHAPE_PATH + "Parallelogram.tscn"),
+#	Enums.ShapeTypes.SQUARE : load(SHAPE_PATH + "Square.tscn"),
+#	Enums.ShapeTypes.HEART : load(SHAPE_PATH + "Heart.tscn"),
+#	Enums.ShapeTypes.STAR : load(SHAPE_PATH + "Star.tscn"),
+#	Enums.ShapeTypes.ROUND_SQUARE : load(SHAPE_PATH + "RoundSquare.tscn"),
+#}
 
 const HEX_FIELD = preload("res://scenes/entities/HexField.tscn")
 
@@ -42,7 +42,7 @@ const SPAWN_RAND := [
 	Enums.ShapeTypes.ROUND_SQUARE,
 ]
 
-const TRI_IMPULSE = 200
+const TRI_IMPULSE = 250
 const PENTAGON_RADIUS = 150
 const HEX_RADIUS = 100
 const OCTAGON_RADIUS = 100
@@ -52,8 +52,8 @@ onready var t = get_tree()
 
 func _ready():
 	# get rid of this when we start placing in elements ourselves
-	for i in 60:
-		Spawn();
+#	for i in 60:
+#		Spawn();
 	
 	t.call_group('objects', 'connect', 'selected', self, 'select_start')
 	t.call_group('objects', 'connect', 'hover', self, 'drag')
@@ -62,13 +62,13 @@ func _ready():
 
 func Spawn():
 	SPAWN_RAND.shuffle()
-	var newNode = pfp_dict[SPAWN_RAND[0]].instance();
+	var newNode = Manager.get_shape_scene(SPAWN_RAND[0]).instance();
 	#newNode.global_position = global_position;
 	newNode.position.y = newNode.position.y + rand_range(-10,10);
 	newNode.position.x = newNode.position.x + rand_range(-5,5);
 	container.add_child(newNode);
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var c = get_centroid(container.get_children())
 	tracker.global_position = c
 
@@ -172,7 +172,7 @@ func deselect() -> void:
 				pent.queue_free()
 				
 			for i in col_positions:
-				var spiky = pfp_dict[Enums.ShapeTypes.PLAIN_CIRCLE].instance()
+				var spiky = Manager.get_shape_scene(Enums.ShapeTypes.PLAIN_CIRCLE).instance()
 				container.add_child(spiky)
 				spiky.global_position = i
 
@@ -185,7 +185,7 @@ func deselect() -> void:
 				circ.queue_free()
 			
 			for i in col_positions:
-				var spiky = pfp_dict[Enums.ShapeTypes.SPIKY_CIRCLE].instance()
+				var spiky = Manager.get_shape_scene(Enums.ShapeTypes.SPIKY_CIRCLE).instance()
 				spiky.connect('contact', self, 'spiky_contact')
 				container.add_child(spiky)
 				spiky.global_position = i
@@ -213,13 +213,28 @@ func deselect() -> void:
 			for oct in selected_nodes: oct.queue_free()
 			
 			for obj in get_shapes_in_circle(effect_radius, centroid):
-				obj.mode = RigidBody2D.MODE_STATIC if shape_type == Enums.ShapeTypes.OCTAGON else RigidBody2D.MODE_RIGID
+				obj.mode = (
+					RigidBody2D.MODE_STATIC 
+					if shape_type == Enums.ShapeTypes.OCTAGON 
+					and obj.shape != Enums.ShapeTypes.PARALLELOGRAM
+					else 
+					RigidBody2D.MODE_RIGID
+				)
 	
 	# go back to defaults
 	input_state = Enums.InputState.NOTHING
 	shape_type = null
 	selected_nodes.clear()
 	affectees.clear()
+
+func spawned(obj:NGNode):
+	container.add_child(obj)
+	
+	obj.connect('selected', self, 'select_drag')
+	obj.connect('hover', self, 'drag')
+	
+	if obj.is_in_group('spiky circle'):
+		obj.connect('contact', self, 'spiky_contact')
 
 func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void: 
 	# TODO sprites will have other collision shapes so I need to get all of them
@@ -236,14 +251,6 @@ func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void:
 	
 	reporter.already_contacted = false
 	other.queue_free()
-
-func get_centroid(arr) -> Vector2:
-	var out = Vector2.ZERO
-	for i in arr:
-		out += i.global_position
-	out /= len(arr)
-	
-	return out
 
 func get_shapes_in_circle(radius:float, point:Vector2, type = null) -> Array:
 	var children = container.get_children()
@@ -270,3 +277,11 @@ func _draw() -> void:
 	if shape_type == null: return
 	
 	# do the drawing here
+
+func get_centroid(arr) -> Vector2:
+	var out = Vector2.ZERO
+	for i in arr:
+		out += i.global_position
+	out /= len(arr)
+	
+	return out
