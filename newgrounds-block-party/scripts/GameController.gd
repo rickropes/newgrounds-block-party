@@ -6,26 +6,9 @@ var shape_type
 var selected_nodes := []
 var affectees := []
 
-onready var container = $BodiesContainer
-onready var other_ents = $OtherEntsContainer
-onready var tracker = $CentroidTracker
+onready var container := $BodiesContainer
 
 const HEX_FIELD = preload("res://scenes/entities/HexField.tscn")
-
-# gonna delete this later just need to use this for spawning randomly
-const SPAWN_RAND := [
-	Enums.ShapeTypes.TRIANGLE, 
-	Enums.ShapeTypes.PLAIN_CIRCLE,
-	Enums.ShapeTypes.SPIKY_CIRCLE,
-	Enums.ShapeTypes.PENTAGON,
-	Enums.ShapeTypes.HEXAGON,
-	Enums.ShapeTypes.OCTAGON,
-	Enums.ShapeTypes.PARALLELOGRAM,
-	Enums.ShapeTypes.SQUARE,
-	Enums.ShapeTypes.HEART,
-	Enums.ShapeTypes.STAR,
-	Enums.ShapeTypes.ROUND_SQUARE,
-]
 
 const TRI_IMPULSE = 250
 const PENTAGON_RADIUS = 150
@@ -33,25 +16,14 @@ const HEX_RADIUS = 100
 const OCTAGON_RADIUS = 100
 const PARALLELOGRAM_RADIUS = 100
 
+signal entity_spawn(ent)
+signal collect_prespawns(controller)
+
 func _ready():
-	# get rid of this when we start placing in elements ourselves
-#	for i in 60:
-#		Spawn();
-	
 	for obj in container.get_children():
 		spawned(obj)
-
-func Spawn():
-	SPAWN_RAND.shuffle()
-	var newNode = Manager.get_shape_scene(SPAWN_RAND[0]).instance();
-	#newNode.global_position = global_position;
-	newNode.position.y = newNode.position.y + rand_range(-10,10);
-	newNode.position.x = newNode.position.x + rand_range(-5,5);
-	container.add_child(newNode);
-
-func _process(_delta: float) -> void:
-	var c = get_centroid(container.get_children())
-	tracker.global_position = c
+		
+	emit_signal("collect_prespawns", self)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -185,7 +157,7 @@ func deselect() -> void:
 				field.add_child(hex)
 				hex.position = Vector2.ZERO
 			
-			other_ents.add_child(field)
+			emit_signal("entity_spawn", field)
 			field.setup(centroid, HEX_RADIUS * sel_len, 1.5 * sel_len)
 			
 		#OCTAGONS & PARALLELOGRAM
@@ -209,6 +181,8 @@ func deselect() -> void:
 	affectees.clear()
 
 func spawned(obj:NGNode):
+	var gp = obj.global_position
+	
 	if not container.is_a_parent_of(obj):
 		container.add_child(obj)
 	
@@ -217,6 +191,7 @@ func spawned(obj:NGNode):
 	
 	if obj.is_in_group('spiky circle'):
 		obj.connect('contact', self, 'spiky_contact')
+		
 
 func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void: 
 	# TODO sprites will have other collision shapes so I need to get all of them

@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="newgrounds-block-party"
-run/main_scene="res://scenes/TestScene.tscn"
+run/main_scene="res://scenes/levels/factory/Factory01.tscn"
 config/icon="res://art/icon.png"
 
 [autoload]
@@ -102,6 +102,7 @@ select={
 2d_physics/layer_1="world"
 2d_physics/layer_2="objects"
 2d_physics/layer_3="goal"
+2d_physics/layer_4="spawners"
 
 [physics]
 

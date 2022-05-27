@@ -1,10 +1,12 @@
 extends StaticBody2D
 
 export(Enums.ShapeTypes) var shape = Enums.ShapeTypes.TRIANGLE
-export(Vector2) var direction := Vector2.ZERO
 export(float) var impulse := 0.0
-export(bool) var auto := false
+export(bool) var auto := true
 export(int) var amount := -1
+export(float) var time := 2.0
+export(float, -359, 359) var angle := 0
+var direction := Vector2.RIGHT
 
 var spawn_scene: PackedScene
 
@@ -12,18 +14,25 @@ signal spawned(object)
 
 func _ready() -> void:
 	$Icon.frame = shape
+	$SpawnTimer.wait_time = time
 	if auto:
 		$SpawnTimer.start()
 	
 	# Get scene for spawn_scene TODO
 	spawn_scene = Manager.get_shape_scene(shape)
+	
+	direction = direction.rotated(deg2rad(angle))
 
 
 func _on_SpawnTimer_timeout() -> void:
-	var obj = spawn_scene.instance()
+	var obj:NGNode = spawn_scene.instance()
 	
 	emit_signal("spawned", obj)
-	obj.global_position = global_position + (direction * ($CollisionShape2D.shape.extents.x/2))
+	obj.global_position = global_position + (direction * 
+		($CollisionShape2D.shape.extents.x * 0.5 
+		+ obj.og_sprite.texture.get_width() * 0.5)
+	)
+	
 	obj.apply_central_impulse(direction * impulse)
 	
 	if amount == -1: return
