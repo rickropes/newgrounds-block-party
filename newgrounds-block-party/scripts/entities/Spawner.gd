@@ -29,8 +29,7 @@ func _on_SpawnTimer_timeout() -> void:
 	
 	emit_signal("spawned", obj)
 	obj.global_position = global_position + (direction * 
-		($CollisionShape2D.shape.extents.x * 0.5 
-		+ obj.og_sprite.texture.get_width() * 0.5)
+		($CollisionShape2D.shape.extents.x * 0.5 + 32)
 	)
 	
 	obj.apply_central_impulse(direction * impulse)

@@ -10,7 +10,7 @@ onready var container := $BodiesContainer
 
 const HEX_FIELD = preload("res://scenes/entities/HexField.tscn")
 
-const TRI_IMPULSE = 250
+const TRI_IMPULSE = 450
 const PENTAGON_RADIUS = 150
 const HEX_RADIUS = 100
 const OCTAGON_RADIUS = 100
@@ -44,7 +44,7 @@ func drag(pfp:NGNode):
 		var sel_len = len(selected_nodes)
 		if (selected_nodes.has(pfp)):
 			#Check if is last one of line
-			if (sel_len > 1 && selected_nodes[sel_len-2] == pfp ):
+			if (sel_len > 1 and selected_nodes[sel_len-2] == pfp ):
 				current_chosen.unchosen()
 				selected_nodes.erase(current_chosen);
 				pfp.become_chosen()
@@ -61,8 +61,6 @@ func select_start(child:NGNode) -> void:
 	shape_type = child.shape
 	
 	selected_nodes.append(child)
-	
-	#DEBUG
 
 func deselect() -> void:
 	for i in container.get_children(): i.unchosen()
@@ -181,8 +179,6 @@ func deselect() -> void:
 	affectees.clear()
 
 func spawned(obj:NGNode):
-	var gp = obj.global_position
-	
 	if not container.is_a_parent_of(obj):
 		container.add_child(obj)
 	
@@ -191,7 +187,6 @@ func spawned(obj:NGNode):
 	
 	if obj.is_in_group('spiky circle'):
 		obj.connect('contact', self, 'spiky_contact')
-		
 
 func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void: 
 	# TODO sprites will have other collision shapes so I need to get all of them

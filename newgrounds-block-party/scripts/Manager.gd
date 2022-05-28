@@ -10,6 +10,7 @@ const SHAPE_PATH = "res://scenes/base_shapes/"
 
 func _ready() -> void:
 	t.call_group('points', 'connect', 'reached_goal', self, "add_points")
+	t.call_group('goal', 'connect', 'points_all_gone', self, '_on_points_all_gone')
 	
 	controller = t.get_nodes_in_group('controller')[0]
 	controller.connect("entity_spawn", self, "_on_entity_spawned")
@@ -17,6 +18,9 @@ func _ready() -> void:
 	t.call_group('spawner', 'connect', 'spawned', controller, 'spawned')
 	
 	pre_spawn_cont = t.get_nodes_in_group('prespawn')[0]
+
+func _on_points_all_gone():
+	print_debug("It's over")
 
 func _on_controller_collect(ctrl:GameController):
 	var children = pre_spawn_cont.get_children()

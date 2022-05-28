@@ -4,5 +4,9 @@
 
 [node name="GameController" type="Node2D" groups=["controller"]]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="BodiesContainer" type="Node2D" parent="."]

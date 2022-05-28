@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/GameController.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/entities/PointsArea.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/entities/PreSpawnedContainer.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/tilemaps/Factory.tscn" type="PackedScene" id=4]
 
 [node name="BaseLevel" type="Node2D"]
 
@@ -16,10 +15,12 @@ __meta__ = {
 
 [node name="PointsArea" parent="." instance=ExtResource( 2 )]
 
-[node name="Spawners" type="Node2D" parent="."]
+[node name="Spawners" type="Node" parent="."]
 
 [node name="PreSpawnedContainer" parent="." instance=ExtResource( 3 )]
 
 [node name="TileMap" type="Node2D" parent="."]
-
-[node name="Factory" parent="TileMap" instance=ExtResource( 4 )]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}

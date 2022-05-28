@@ -8,6 +8,9 @@
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "The area where points shapes need to go, has a count of how many points shapes it needs to go to the next level "
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
