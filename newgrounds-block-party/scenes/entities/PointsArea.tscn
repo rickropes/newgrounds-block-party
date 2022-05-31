@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/entities/PointsArea.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="PointsArea" type="Area2D" groups=["goal"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "The area where points shapes need to go, has a count of how many points shapes it needs to go to the next level "
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

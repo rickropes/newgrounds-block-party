@@ -14,10 +14,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Enums.gd"
 }, {
+"base": "Node2D",
+"class": "GameController",
+"language": "GDScript",
+"path": "res://scripts/GameController.gd"
+}, {
 "base": "RigidBody2D",
 "class": "NGNode",
 "language": "GDScript",
 "path": "res://scripts/NGNode.gd"
+}, {
+"base": "Area2D",
+"class": "PointsArea",
+"language": "GDScript",
+"path": "res://scripts/entities/PointsArea.gd"
+}, {
+"base": "Resource",
+"class": "ShapeTypes",
+"language": "GDScript",
+"path": "res://scripts/ShapeTypes.gd"
 }, {
 "base": "NGNode",
 "class": "SpikyCircle",
@@ -26,14 +41,17 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Enums": "",
+"GameController": "",
 "NGNode": "",
+"PointsArea": "",
+"ShapeTypes": "",
 "SpikyCircle": ""
 }
 
 [application]
 
 config/name="newgrounds-block-party"
-run/main_scene="res://scenes/TestScene.tscn"
+run/main_scene="res://scenes/levels/factory/Factory01.tscn"
 config/icon="res://art/icon.png"
 
 [autoload]
@@ -84,6 +102,13 @@ select={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="objects"
+2d_physics/layer_3="goal"
+2d_physics/layer_4="spawners"
 
 [physics]
 

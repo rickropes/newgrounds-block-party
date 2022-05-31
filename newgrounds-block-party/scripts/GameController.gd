@@ -1,52 +1,29 @@
+class_name GameController
 extends Node2D
 
 var input_state: int = Enums.InputState.NOTHING
 var shape_type
 var selected_nodes := []
 var affectees := []
-const SHAPE_PATH = "res://scenes/base_shapes/"
-onready var pfp_dict = {
-	Enums.ShapeTypes.TRIANGLE : load(SHAPE_PATH + "Triangle.tscn"),
-	Enums.ShapeTypes.PLAIN_CIRCLE : load(SHAPE_PATH + "PlainCircle.tscn"),
-	Enums.ShapeTypes.SPIKY_CIRCLE : load(SHAPE_PATH + "SpikyCircle.tscn"),
-	Enums.ShapeTypes.PENTAGON : load(SHAPE_PATH + "Pentagon.tscn"),
-	Enums.ShapeTypes.HEXAGON : load(SHAPE_PATH + "Hexagon.tscn"),
-	Enums.ShapeTypes.SQUARE : load(SHAPE_PATH + "Square.tscn"),
-}
 
-# gonna delete this later just need to use this for spawning randomly
-const SPAWN_RAND := [
-	Enums.ShapeTypes.TRIANGLE, 
-	Enums.ShapeTypes.PLAIN_CIRCLE,
-	Enums.ShapeTypes.SPIKY_CIRCLE,
-	Enums.ShapeTypes.PENTAGON,
-	Enums.ShapeTypes.HEXAGON,
-	Enums.ShapeTypes.SQUARE,
-]
+onready var container := $BodiesContainer
 
-const TRI_IMPULSE = 200
-const PENTAGON_RADIUS = 175
-const HEX_RADIUS = 200
+const HEX_FIELD = preload("res://scenes/entities/HexField.tscn")
 
-onready var t = get_tree()
+const TRI_IMPULSE = 450
+const PENTAGON_RADIUS = 150
+const HEX_RADIUS = 100
+const OCTAGON_RADIUS = 100
+const PARALLELOGRAM_RADIUS = 100
+
+signal entity_spawn(ent)
+signal collect_prespawns(controller)
 
 func _ready():
-	# get rid of this when we start placing in elements ourselves
-	for i in 60:
-		Spawn();
-	
-	t.call_group('objects', 'connect', 'selected', self, 'select_start')
-	t.call_group('objects', 'connect', 'hover', self, 'drag')
-	t.call_group('spiky circle', 'connect', 'contact', self, 'spiky_contact')
-	
-
-func Spawn():
-	SPAWN_RAND.shuffle()
-	var newNode = pfp_dict[SPAWN_RAND[0]].instance();
-	#newNode.global_position = global_position;
-	newNode.position.y = newNode.position.y + rand_range(-10,10);
-	newNode.position.x = newNode.position.x + rand_range(-5,5);
-	add_child(newNode);
+	for obj in container.get_children():
+		spawned(obj)
+		
+	emit_signal("collect_prespawns", self)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -67,7 +44,7 @@ func drag(pfp:NGNode):
 		var sel_len = len(selected_nodes)
 		if (selected_nodes.has(pfp)):
 			#Check if is last one of line
-			if (sel_len > 1 && selected_nodes[sel_len-2] == pfp ):
+			if (sel_len > 1 and selected_nodes[sel_len-2] == pfp ):
 				current_chosen.unchosen()
 				selected_nodes.erase(current_chosen);
 				pfp.become_chosen()
@@ -84,15 +61,13 @@ func select_start(child:NGNode) -> void:
 	shape_type = child.shape
 	
 	selected_nodes.append(child)
-	
-	#DEBUG
 
 func deselect() -> void:
-	t.call_group('objects', 'unchosen')
+	for i in container.get_children(): i.unchosen()
 	
 	# use the abilities here before they are cleared
 	var sel_len: int = len(selected_nodes)
-	var centroid = get_centroid()
+	var centroid = get_centroid(selected_nodes)
 	match shape_type:
 		# TRIANGLES
 		Enums.ShapeTypes.TRIANGLE:
@@ -148,8 +123,8 @@ func deselect() -> void:
 				pent.queue_free()
 				
 			for i in col_positions:
-				var spiky = pfp_dict[Enums.ShapeTypes.PLAIN_CIRCLE].instance()
-				add_child(spiky)
+				var spiky = Manager.get_shape_scene(Enums.ShapeTypes.PLAIN_CIRCLE).instance()
+				container.add_child(spiky)
 				spiky.global_position = i
 
 		#SQUARES
@@ -161,24 +136,57 @@ func deselect() -> void:
 				circ.queue_free()
 			
 			for i in col_positions:
-				var spiky = pfp_dict[Enums.ShapeTypes.SPIKY_CIRCLE].instance()
+				var spiky = Manager.get_shape_scene(Enums.ShapeTypes.SPIKY_CIRCLE).instance()
 				spiky.connect('contact', self, 'spiky_contact')
-				add_child(spiky)
+				container.add_child(spiky)
 				spiky.global_position = i
 				
 			for sq in selected_nodes:
 				sq.queue_free()
 				
-		#HEXAGONS (TODO)
+		#HEXAGONS
 		Enums.ShapeTypes.HEXAGON:
+			var field = HEX_FIELD.instance()
+			
 			for hex in selected_nodes:
 				hex.mode = RigidBody2D.MODE_STATIC
+				hex.get_node("Body").disabled = true
+				container.remove_child(hex)
+				field.add_child(hex)
+				hex.position = Vector2.ZERO
+			
+			emit_signal("entity_spawn", field)
+			field.setup(centroid, HEX_RADIUS * sel_len, 1.5 * sel_len)
+			
+		#OCTAGONS & PARALLELOGRAM
+		Enums.ShapeTypes.OCTAGON, Enums.ShapeTypes.PARALLELOGRAM:
+			var effect_radius = OCTAGON_RADIUS * sel_len
+			for oct in selected_nodes: oct.queue_free()
+			
+			for obj in get_shapes_in_circle(effect_radius, centroid):
+				obj.mode = (
+					RigidBody2D.MODE_STATIC 
+					if shape_type == Enums.ShapeTypes.OCTAGON 
+					and obj.shape != Enums.ShapeTypes.PARALLELOGRAM
+					else 
+					RigidBody2D.MODE_RIGID
+				)
 	
 	# go back to defaults
 	input_state = Enums.InputState.NOTHING
 	shape_type = null
 	selected_nodes.clear()
 	affectees.clear()
+
+func spawned(obj:NGNode):
+	if not container.is_a_parent_of(obj):
+		container.add_child(obj)
+	
+	obj.connect('selected', self, 'select_start')
+	obj.connect('hover', self, 'drag')
+	
+	if obj.is_in_group('spiky circle'):
+		obj.connect('contact', self, 'spiky_contact')
 
 func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void: 
 	# TODO sprites will have other collision shapes so I need to get all of them
@@ -187,32 +195,45 @@ func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void:
 	for i in other.get_children():
 		if i is Sprite or i is CollisionShape2D:
 			var pos = i.global_position
+			i.call_deferred('set', 'disabled', true)
 			other.remove_child(i)
 			reporter.add_child(i)
+			i.call_deferred('set', 'disabled', false)
 			i.global_position = pos
 	
 	reporter.already_contacted = false
 	other.queue_free()
 
+func _draw() -> void:
+	if shape_type == null: return
+	
+	# do the drawing here
 
-func get_centroid() -> Vector2:
+func get_centroid(arr) -> Vector2:
 	var out = Vector2.ZERO
-	for i in selected_nodes:
+	for i in arr:
 		out += i.global_position
-	out /= len(selected_nodes)
+	out /= len(arr)
 	
 	return out
 
 func get_shapes_in_circle(radius:float, point:Vector2, type = null) -> Array:
-	var children = get_children()
+	var children = container.get_children()
 	var out := []
 	
 	for i in children:
 		if type != null and i.shape != type: continue
+		
+		if type == Enums.ShapeTypes.SPIKY_CIRCLE:
+			var cols = i.get_children_of_type("CollisionShape2D")
+			for k in len(cols):
+				if (cols[k].global_position - point).length() <= radius:
+					out.append(i)
+					break
+			continue
 		
 		var vec = i.global_position - point
 		if vec.length() <= radius:
 			out.append(i)
 	
 	return out
-
