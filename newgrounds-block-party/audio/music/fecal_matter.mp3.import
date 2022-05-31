@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fecal_matter.mp3-be2a1339619d47a0b3bace5fe1e9bfe5.mp3str"
+
+[deps]
+
+source_file="res://audio/music/fecal_matter.mp3"
+dest_files=[ "res://.import/fecal_matter.mp3-be2a1339619d47a0b3bace5fe1e9bfe5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

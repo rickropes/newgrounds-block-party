@@ -6,10 +6,12 @@
 [node name="Triangle" instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="." index="0"]
+position = Vector2( -1.90735e-06, 7 )
+scale = Vector2( 0.673913, 0.673913 )
 texture = ExtResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionArea" index="0"]
-polygon = PoolVector2Array( 0, -56, -54, 53, 58, 53 )
+polygon = PoolVector2Array( 0, -32, -38, 42, 42, 42 )
 
 [node name="Body" type="CollisionPolygon2D" parent="." index="2"]
-polygon = PoolVector2Array( 0, -34, -37, 41, 39, 41 )
+polygon = PoolVector2Array( 0, -22, -28, 37, 29, 37 )

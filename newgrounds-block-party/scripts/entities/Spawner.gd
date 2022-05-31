@@ -25,17 +25,20 @@ func _ready() -> void:
 
 
 func _on_SpawnTimer_timeout() -> void:
-	var obj:NGNode = spawn_scene.instance()
-	
-	emit_signal("spawned", obj)
-	obj.global_position = global_position + (direction * 
-		($CollisionShape2D.shape.extents.x * 0.5 + 32)
-	)
-	
-	obj.apply_central_impulse(direction * impulse)
-	
+	var _obj = spawn_shape()
 	if amount == -1: return
 	
 	amount -= 1
 	if amount == 0:
 		$SpawnTimer.stop()
+
+func spawn_shape() -> NGNode:
+	var obj:NGNode = spawn_scene.instance()
+	
+	emit_signal("spawned", obj)
+	obj.global_position = global_position + (direction * 
+		($CollisionShape2D.shape.extents.x + 32)
+	)
+	
+	obj.apply_central_impulse(direction * impulse)
+	return obj

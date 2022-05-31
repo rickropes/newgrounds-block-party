@@ -5,7 +5,7 @@
 [ext_resource path="res://scripts/base_shapes/SpikyCircle.gd" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 32.0
+radius = 23.0
 
 [node name="SpikyCircle" groups=["spiky circle"] instance=ExtResource( 1 )]
 input_pickable = false
