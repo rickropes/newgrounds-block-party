@@ -7,22 +7,38 @@ var audioMutedIcon = preload("res://art/gui/volume-off.png");
 var streamVolume = 1;
 var fxVolume = 1;
 
+var isPaused = false;
+
 func _ready():
 	#streamVolume = AudioServer.get_stream_global_volume_scale();
 	#fxVolume = AudioServer.get_fx_global_volume_scale();
 	pass
 
+func _process(delta):
+	if(Input.is_action_just_pressed("ui_cancel")):
+		if(isPaused):
+			_on_ContinueButton_pressed();
+		else:
+			_on_PauseButton_pressed();
+			
+	pass
+
 func _on_PauseButton_pressed():
-	$PauseMenu.visible = true;
-	$UI.visible = false;
-	get_tree().paused = true;
+	isPaused = true;
+	
+	$PauseMenu.visible = isPaused;
+	$UI.visible = !isPaused;
+	get_tree().paused = isPaused;
 	pass
 
 
 func _on_ContinueButton_pressed():
-	$PauseMenu.visible = false;
-	$UI.visible = true;
-	get_tree().paused = false;
+	isPaused = false;
+	
+	$PauseMenu.visible = isPaused;
+	$UI.visible = !isPaused;
+	get_tree().paused = isPaused;
+	
 	pass # Replace with function body.
 
 
