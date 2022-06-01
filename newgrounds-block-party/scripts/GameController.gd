@@ -30,6 +30,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.button_index == BUTTON_LEFT and not event.pressed:
 			deselect()
 
+func _process(delta):
+	if(selected_nodes.size() > 0):
+		Engine.time_scale = 0.1;
+	else:
+		Engine.time_scale = 1
+	
+	update();
+	pass
+
 func drag(pfp:NGNode):
 	if pfp.shape != shape_type: return
 	
@@ -57,10 +66,12 @@ func drag(pfp:NGNode):
 		break
 
 func select_start(child:NGNode) -> void:
+	print("SHIT");
 	input_state = Enums.InputState.DRAGGING
 	shape_type = child.shape
 	
 	selected_nodes.append(child)
+	print(selected_nodes.size());
 
 func deselect() -> void:
 	for i in container.get_children(): i.unchosen()
@@ -204,10 +215,21 @@ func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void:
 	reporter.already_contacted = false
 	other.queue_free()
 
-func _draw() -> void:
+func _draw():
 	if shape_type == null: return
 	
 	# do the drawing here
+	var current_chosen = selected_nodes[len(selected_nodes)-1];
+	draw_line(current_chosen.position, get_global_mouse_position(), Color(0.75, 0.13, 0.1, 0.6), 10);
+	
+	for tri in selected_nodes:
+		if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
+			draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
+			
+		pass
+	
+	
+	pass
 
 func get_centroid(arr) -> Vector2:
 	var out = Vector2.ZERO
