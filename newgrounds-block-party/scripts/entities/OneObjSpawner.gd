@@ -11,7 +11,8 @@ func spawn_shape():
 	.spawn_shape().connect("gone", self, "_on_shape_gone")
 	
 func _on_shape_gone():
-	if amount <= 0: return
+	if amount == 0: return
+	amount -= 1
 	
 	$SpawnTimer.start()
 	$Icon.modulate.a = 1
