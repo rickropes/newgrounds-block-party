@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/NGNode.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 50.04
+radius = 35.0571
 
 [node name="Pentagon" instance=ExtResource( 2 )]
 shape = 2
@@ -17,5 +17,4 @@ position = Vector2( 1, 3 )
 shape = SubResource( 1 )
 
 [node name="Body" type="CollisionPolygon2D" parent="." index="2"]
-visible = false
-polygon = PoolVector2Array( 0, -42, -44, -11, -27, 41, 29, 42, 46, -10 )
+polygon = PoolVector2Array( 1, -28, -30, -6, -18, 28, 20, 29, 32, -6 )
