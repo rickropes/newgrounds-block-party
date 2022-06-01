@@ -31,6 +31,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			deselect()
 
 func _process(delta):
+	
+	# Slow Motion
 	if(selected_nodes.size() > 0):
 		Engine.time_scale = 0.1;
 	else:
@@ -219,9 +221,12 @@ func _draw():
 	if shape_type == null: return
 	
 	# do the drawing here
+	
+	# draw line between mouse and current chosen node
 	var current_chosen = selected_nodes[len(selected_nodes)-1];
 	draw_line(current_chosen.position, get_global_mouse_position(), Color(0.75, 0.13, 0.1, 0.6), 10);
 	
+	# draw explosion radius for triangles
 	for tri in selected_nodes:
 		if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
 			draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
