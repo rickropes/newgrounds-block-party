@@ -4,10 +4,10 @@
 [ext_resource path="res://scenes/NGNode.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 41.0122
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 62.0322
+radius = 37.2156
 
 [node name="PlainCircle" instance=ExtResource( 2 )]
 shape = 3
@@ -20,8 +20,8 @@ position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
 [node name="CollisionArea" parent="." index="2"]
-visible = false
 position = Vector2( 1, 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea" index="0"]
+position = Vector2( -1, -1 )
 shape = SubResource( 2 )

@@ -7,8 +7,11 @@ var controller: GameController
 var pre_spawn_cont
 
 const SHAPE_PATH = "res://scenes/base_shapes/"
+const LEVEL_PATH = "res://scenes/levels/"
 
 func _ready() -> void:
+	if not t.current_scene.is_in_group('level'): return 
+	
 	t.call_group('points', 'connect', 'reached_goal', self, "add_points")
 	t.call_group('goal', 'connect', 'points_all_gone', self, '_on_points_all_gone')
 	
@@ -20,6 +23,7 @@ func _ready() -> void:
 	pre_spawn_cont = t.get_nodes_in_group('prespawn')[0]
 
 func _on_points_all_gone():
+	t.change_scene_to(levels[wrapi(levels.find(t.current_scene)+1, 0, len(levels))])
 	print_debug("It's over")
 
 func _on_controller_collect(ctrl:GameController):
@@ -40,7 +44,7 @@ func add_points(p:int):
 	score += p 
 
 static func get_shape_scene(shape_type) -> PackedScene:
-	var pfp_dict = {
+	return {
 		Enums.ShapeTypes.TRIANGLE : load(SHAPE_PATH + "Triangle.tscn"),
 		Enums.ShapeTypes.PLAIN_CIRCLE : load(SHAPE_PATH + "PlainCircle.tscn"),
 		Enums.ShapeTypes.SPIKY_CIRCLE : load(SHAPE_PATH + "SpikyCircle.tscn"),
@@ -52,6 +56,9 @@ static func get_shape_scene(shape_type) -> PackedScene:
 		Enums.ShapeTypes.HEART : load(SHAPE_PATH + "Heart.tscn"),
 		Enums.ShapeTypes.STAR : load(SHAPE_PATH + "Star.tscn"),
 		Enums.ShapeTypes.ROUND_SQUARE : load(SHAPE_PATH + "RoundSquare.tscn"),
-	}
-	
-	return pfp_dict[shape_type]
+	}[shape_type]
+
+onready var levels := [
+	load(LEVEL_PATH + "factory/Factory01.tscn"),
+	load(LEVEL_PATH + "factory/Factory02.tscn"),
+]

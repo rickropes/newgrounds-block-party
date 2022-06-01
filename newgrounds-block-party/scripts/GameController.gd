@@ -10,7 +10,7 @@ onready var container := $BodiesContainer
 
 const HEX_FIELD = preload("res://scenes/entities/HexField.tscn")
 
-const TRI_IMPULSE = 450
+const TRI_IMPULSE = 300
 const PENTAGON_RADIUS = 150
 const HEX_RADIUS = 100
 const OCTAGON_RADIUS = 100
@@ -42,7 +42,7 @@ func drag(pfp:NGNode):
 			
 		#Check if node already exists in line
 		var sel_len = len(selected_nodes)
-		if (selected_nodes.has(pfp)):
+		if (pfp in selected_nodes):
 			#Check if is last one of line
 			if (sel_len > 1 and selected_nodes[sel_len-2] == pfp ):
 				current_chosen.unchosen()
@@ -77,11 +77,11 @@ func deselect() -> void:
 			).normalized() * TRI_IMPULSE * sel_len
 			
 			for tri in selected_nodes: 
-				for i in tri.collisionArea.get_overlapping_bodies():
-					if (i as NGNode).shape != shape_type and force.dot(i.global_position - centroid) > 0:
+				for i in get_shapes_in_circle(PENTAGON_RADIUS * sel_len, tri.global_position):
+					if (i as NGNode).shape != Enums.ShapeTypes.TRIANGLE and force.dot(i.global_position - centroid) > 0:
 						affectees.append(i)
 				
-				tri.queue_free()
+				tri.destroy()
 			
 			for e in affectees:
 				(e as RigidBody2D).apply_central_impulse(force)
@@ -101,7 +101,7 @@ func deselect() -> void:
 				var cols = spike.get_children_of_type("CollisionShape2D")
 				var sprites = spike.get_children_of_type("Sprite")
 				for i in len(cols):
-					if col_positions.has(cols[i].global_position): continue
+					if cols[i].global_position in col_positions: continue
 					
 					spike.absorbed -= 1
 					col_positions.append(cols[i].global_position)
@@ -117,10 +117,10 @@ func deselect() -> void:
 					sprites[i].queue_free()
 				
 				if spike.absorbed <= 0:
-					spike.queue_free()
+					spike.destroy()
 			
 			for pent in selected_nodes:
-				pent.queue_free()
+				pent.destroy()
 				
 			for i in col_positions:
 				var spiky = Manager.get_shape_scene(Enums.ShapeTypes.PLAIN_CIRCLE).instance()
@@ -133,7 +133,7 @@ func deselect() -> void:
 			var col_positions := []
 			for circ in get_shapes_in_circle(effect_radius, centroid, Enums.ShapeTypes.PLAIN_CIRCLE):
 				col_positions.append(circ.global_position)
-				circ.queue_free()
+				circ.destroy()
 			
 			for i in col_positions:
 				var spiky = Manager.get_shape_scene(Enums.ShapeTypes.SPIKY_CIRCLE).instance()
@@ -142,7 +142,7 @@ func deselect() -> void:
 				spiky.global_position = i
 				
 			for sq in selected_nodes:
-				sq.queue_free()
+				sq.destroy()
 				
 		#HEXAGONS
 		Enums.ShapeTypes.HEXAGON:
@@ -161,7 +161,7 @@ func deselect() -> void:
 		#OCTAGONS & PARALLELOGRAM
 		Enums.ShapeTypes.OCTAGON, Enums.ShapeTypes.PARALLELOGRAM:
 			var effect_radius = OCTAGON_RADIUS * sel_len
-			for oct in selected_nodes: oct.queue_free()
+			for oct in selected_nodes: oct.destroy()
 			
 			for obj in get_shapes_in_circle(effect_radius, centroid):
 				obj.mode = (
@@ -195,10 +195,10 @@ func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void:
 	for i in other.get_children():
 		if i is Sprite or i is CollisionShape2D:
 			var pos = i.global_position
-			i.call_deferred('set', 'disabled', true)
+			i.set_deferred('disabled', true)
 			other.remove_child(i)
 			reporter.add_child(i)
-			i.call_deferred('set', 'disabled', false)
+			i.set_deferred('disabled', false)
 			i.global_position = pos
 	
 	reporter.already_contacted = false
