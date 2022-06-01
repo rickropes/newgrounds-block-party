@@ -1,9 +1,7 @@
-class_name Enums
-enum InputState {
-	NOTHING, DRAGGING
-}
+class_name ShapeTypes 
+extends Resource
 
-enum ShapeTypes {
+enum {
 	#explodes to launch others
 	TRIANGLE,
 	#touches others of the same kind and clumps together

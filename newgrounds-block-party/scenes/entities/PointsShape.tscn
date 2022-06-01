@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/NGNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/base_shapes/PointsShape.gd" type="Script" id=2]
+
+[node name="PointsShape" groups=["points"] instance=ExtResource( 1 )]
+collision_mask = 7
+input_pickable = false
+script = ExtResource( 2 )
+
+[node name="CollisionArea" parent="." index="1"]
+collision_mask = 4
+
+[connection signal="area_entered" from="CollisionArea" to="." method="_on_CollisionArea_area_entered"]

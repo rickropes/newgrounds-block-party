@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="PreSpawnedContainer" type="Node" groups=["prespawn"]]
+__meta__ = {
+"_editor_description_": "Put any icons you want to be already in the scene into this node, the Manager will transfer it to GameController"
+}

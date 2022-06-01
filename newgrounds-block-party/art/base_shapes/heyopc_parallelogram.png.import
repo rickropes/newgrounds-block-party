@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mig_plain_circle.png-585dc41a3e4254b723913248706367d3.stex"
+path="res://.import/heyopc_parallelogram.png-aac1d9c9ac5f9c2b3202676ea46730c8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/base_shapes/mig_plain_circle.png"
-dest_files=[ "res://.import/mig_plain_circle.png-585dc41a3e4254b723913248706367d3.stex" ]
+source_file="res://art/base_shapes/heyopc_parallelogram.png"
+dest_files=[ "res://.import/heyopc_parallelogram.png-aac1d9c9ac5f9c2b3202676ea46730c8.stex" ]
 
 [params]
 

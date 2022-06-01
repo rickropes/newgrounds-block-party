@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mig_plain_circle.png-585dc41a3e4254b723913248706367d3.stex"
+path="res://.import/stepford_heart.png-8909da6edd942d6742b061d30d1bd53e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/base_shapes/mig_plain_circle.png"
-dest_files=[ "res://.import/mig_plain_circle.png-585dc41a3e4254b723913248706367d3.stex" ]
+source_file="res://art/base_shapes/stepford_heart.png"
+dest_files=[ "res://.import/stepford_heart.png-8909da6edd942d6742b061d30d1bd53e.stex" ]
 
 [params]
 

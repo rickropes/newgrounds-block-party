@@ -7,12 +7,11 @@ signal hover(pfp)
 onready var collisionArea = $CollisionArea;
 
 #TODO, make unique shapes that change this variable
-export(Enums.ShapeTypes) var type = Enums.ShapeTypes.PLAIN_CIRCLE
+onready var og_sprite := get_node("Sprite")
+onready var og_col := get_node("Body")
+export(Enums.ShapeTypes) var shape
 
-func _ready():
-	pass;
-
-func _on_NGNode_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_NGNode_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	var mouse_cond = (event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed)
 	var touch_cond = (event is InputEventScreenTouch and event.pressed)
 	
@@ -25,12 +24,20 @@ func _on_NGNode_input_event(viewport: Node, event: InputEvent, shape_idx: int) -
 func _on_NGNode_mouse_entered() -> void:
 	emit_signal('hover', self)
 
+func get_children_of_type(t:String) -> Array:
+	var out := []
+	for i in get_children():
+		if i.is_class(t):
+			out.append(i)
+			
+	return out
+
 #TODO: there will be more stuff here
 func become_chosen():
-	$Sprite.modulate = Color.yellow
+	og_sprite.modulate = Color.green
 	
 func become_tail():
-	$Sprite.modulate = Color.red
+	og_sprite.modulate = Color.red
 
 func unchosen():
-	$Sprite.modulate = Color.white
+	og_sprite.modulate = Color.white

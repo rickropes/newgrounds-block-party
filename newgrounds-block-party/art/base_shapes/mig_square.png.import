@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mig_plain_circle.png-585dc41a3e4254b723913248706367d3.stex"
+path="res://.import/mig_square.png-55db04e3c5d45e2160da0b8d35005c13.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/base_shapes/mig_plain_circle.png"
-dest_files=[ "res://.import/mig_plain_circle.png-585dc41a3e4254b723913248706367d3.stex" ]
+source_file="res://art/base_shapes/mig_square.png"
+dest_files=[ "res://.import/mig_square.png-55db04e3c5d45e2160da0b8d35005c13.stex" ]
 
 [params]
 
