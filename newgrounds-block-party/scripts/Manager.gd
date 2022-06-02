@@ -9,9 +9,12 @@ var pre_spawn_cont
 const SHAPE_PATH = "res://scenes/base_shapes/"
 const LEVEL_PATH = "res://scenes/levels/"
 
+var currentLevelNumber;
+var currentLevelName;
+
 func _ready() -> void:
 	if not t.current_scene.is_in_group('level'): return 
-	
+
 	t.call_group('points', 'connect', 'reached_goal', self, "add_points")
 	t.call_group('goal', 'connect', 'points_all_gone', self, '_on_points_all_gone')
 	

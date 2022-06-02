@@ -12,6 +12,12 @@ var isPaused = false;
 func _ready():
 	#streamVolume = AudioServer.get_stream_global_volume_scale();
 	#fxVolume = AudioServer.get_fx_global_volume_scale();
+	
+	if(Manager.currentLevelNumber != null):
+		$UI/LevelName.text = Manager.currentLevelNumber + ":  " + Manager.currentLevelName;
+	else:
+		$UI/LevelName.text = "";
+	
 	pass
 
 func _process(delta):
@@ -43,7 +49,8 @@ func _on_ContinueButton_pressed():
 
 
 func _on_QuitButton_pressed():
-	print("NOOOOOOOOOOOOOOOOOOOOOOO");
+	get_tree().paused = false;
+	get_tree().change_scene("res://scenes/LevelSelector.tscn");
 	pass # Replace with function body.
 
 

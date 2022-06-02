@@ -20,6 +20,8 @@ signal entity_spawn(ent)
 signal collect_prespawns(controller)
 
 func _ready():
+	Manager._ready();
+	
 	for obj in container.get_children():
 		spawned(obj)
 		
@@ -68,12 +70,10 @@ func drag(pfp:NGNode):
 		break
 
 func select_start(child:NGNode) -> void:
-	print("SHIT");
 	input_state = Enums.InputState.DRAGGING
 	shape_type = child.shape
 	
 	selected_nodes.append(child)
-	print(selected_nodes.size());
 
 func deselect() -> void:
 	for i in container.get_children(): i.unchosen()
