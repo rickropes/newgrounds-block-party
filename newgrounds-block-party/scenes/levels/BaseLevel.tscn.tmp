@@ -7,9 +7,6 @@
 
 [node name="BaseLevel" type="Node2D" groups=["level"]]
 
-[node name="Manager" type="Node" parent="."]
-script = ExtResource( 4 )
-
 [node name="TileMap" type="Node2D" parent="."]
 __meta__ = {
 "_edit_group_": true,
@@ -27,3 +24,6 @@ __meta__ = {
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
+
+[node name="Manager" type="Node" parent="."]
+script = ExtResource( 4 )

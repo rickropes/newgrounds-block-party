@@ -17,13 +17,11 @@ const OCTAGON_RADIUS = 100
 const PARALLELOGRAM_RADIUS = 100
 
 signal entity_spawn(ent)
-signal collect_prespawns(controller)
 
 func _ready():
 	for obj in container.get_children():
 		spawned(obj)
 		
-	emit_signal("collect_prespawns", self)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

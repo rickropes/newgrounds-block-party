@@ -9,7 +9,10 @@ export(int) var point_shapes = 1 setget set_point_shapes
 
 signal points_all_gone()
 func _ready() -> void:
-	$CollisionShape2D.shape.radius = (radius + 1) * 50
+	$CollisionShape2D.shape.radius *= (radius + 1)
+	
+	var scl = 1/(radius + 1)
+	$AnimatedSprite.scale = Vector2(scl, scl)
 
 func set_point_shapes(v:int):
 	point_shapes = v

@@ -1,9 +1,10 @@
-extends Node2D
+class_name Manager
+extends Node
 
 var score := 0
 
 onready var t := get_tree()
-var controller: GameController
+var controller
 var pre_spawn_cont
 
 const SHAPE_PATH = "res://scenes/base_shapes/"
@@ -16,26 +17,24 @@ func _ready() -> void:
 	t.call_group('goal', 'connect', 'points_all_gone', self, '_on_points_all_gone')
 	
 	controller = t.get_nodes_in_group('controller')[0]
-	controller.connect("entity_spawn", self, "_on_entity_spawned")
-	controller.connect("collect_prespawns", self, "_on_controller_collect")
-	t.call_group('spawner', 'connect', 'spawned', controller, 'spawned')
 	
+	controller.connect("entity_spawn", self, "_on_entity_spawned")
 	pre_spawn_cont = t.get_nodes_in_group('prespawn')[0]
-
-func _on_points_all_gone():
-	t.change_scene_to(levels[wrapi(levels.find(t.current_scene)+1, 0, len(levels))])
-	print_debug("It's over")
-
-func _on_controller_collect(ctrl:GameController):
 	var children = pre_spawn_cont.get_children()
 	
 	for obj in children:
 		var gp = obj.global_position
 		pre_spawn_cont.remove_child(obj)
-		ctrl.spawned(obj)
+		controller.spawned(obj)
 		obj.global_position = gp
 	
 	pre_spawn_cont.queue_free()
+	t.call_group('spawner', 'connect', 'spawned', controller, 'spawned')
+	
+
+func _on_points_all_gone():
+	t.change_scene_to(levels[wrapi(levels.find(t.current_scene)+1, 0, len(levels))])
+	print_debug("It's over")
 
 func _on_entity_spawned(field):
 	t.current_scene.add_child(field)
