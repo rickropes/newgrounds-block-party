@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scripts/UIController.gd" type="Script" id=1]
+[ext_resource path="res://scripts/gui/UIController.gd" type="Script" id=1]
 [ext_resource path="res://scripts/gui/UIHover.gd" type="Script" id=2]
 [ext_resource path="res://art/gui/pause.png" type="Texture" id=3]
 [ext_resource path="res://art/gui/volume-high.png" type="Texture" id=4]

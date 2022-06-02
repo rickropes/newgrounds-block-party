@@ -50,7 +50,7 @@ func _on_ContinueButton_pressed():
 
 func _on_QuitButton_pressed():
 	get_tree().paused = false;
-	get_tree().change_scene("res://scenes/LevelSelector.tscn");
+	get_tree().change_scene("res://scenes/MainMenu.tscn");
 	pass # Replace with function body.
 
 
