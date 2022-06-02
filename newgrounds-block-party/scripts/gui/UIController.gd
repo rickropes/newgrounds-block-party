@@ -14,9 +14,9 @@ func _ready():
 	#fxVolume = AudioServer.get_fx_global_volume_scale();
 	
 	if(Manager.currentLevelNumber != null):
-		$UI/LevelName.text = Manager.currentLevelNumber + ":  " + Manager.currentLevelName;
+		$UI/TopPart/LevelName.text = Manager.currentLevelNumber + ":  " + Manager.currentLevelName;
 	else:
-		$UI/LevelName.text = "";
+		$UI/TopPart/LevelName.text = "";
 	
 	pass
 
@@ -50,7 +50,7 @@ func _on_ContinueButton_pressed():
 
 func _on_QuitButton_pressed():
 	get_tree().paused = false;
-	get_tree().change_scene("res://scenes/LevelSelector.tscn");
+	get_tree().change_scene("res://scenes/MainMenu.tscn");
 	pass # Replace with function body.
 
 
@@ -58,9 +58,9 @@ func _on_SoundButton_pressed():
 	audioMuted = !audioMuted;
 	if(audioMuted):
 		# Mute audio
-		$UI/HBoxContainer/SoundButton.icon = audioMutedIcon;
+		$UI/TopPart/HBoxContainer/SoundButton.icon = audioMutedIcon;
 	else:
 		# Un-Mute audio
-		$UI/HBoxContainer/SoundButton.icon = audioSoundIcon;
+		$UI/TopPart/HBoxContainer/SoundButton.icon = audioSoundIcon;
 	
 	pass # Replace with function body.

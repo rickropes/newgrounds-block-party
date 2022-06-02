@@ -26,8 +26,6 @@ func _ready() -> void:
 
 func _on_SpawnTimer_timeout() -> void:
 	var _obj = spawn_shape()
-	if amount == -1: return
-	
 	amount -= 1
 	if amount == 0:
 		$SpawnTimer.stop()

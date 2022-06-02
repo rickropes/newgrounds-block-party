@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/levels/BaseLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/tilemaps/Factory.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/entities/OneObjSpawner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://art/waveShader.tres" type="Shader" id=4]
+[ext_resource path="res://art/shaders/waveShader.tres" type="Shader" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -28,24 +28,22 @@ tile_data = PoolIntArray( 786432, 14, 0, 786433, 14, 0, 786434, 14, 0, 786435, 1
 [node name="PointsArea" parent="." index="2"]
 position = Vector2( 1228, 279 )
 
-[node name="OneObjSpawner" parent="Spawners" index="0" instance=ExtResource( 3 )]
-position = Vector2( 419, 460 )
-amount = 2
-time = 0.1
-angle = 90.0
-
-[node name="OneObjSpawner3" parent="Spawners" index="1" instance=ExtResource( 3 )]
-position = Vector2( 863, 463 )
-amount = 2
-time = 0.1
-angle = 90.0
-
-[node name="OneObjSpawner2" parent="Spawners" index="2" instance=ExtResource( 3 )]
+[node name="Heart" parent="Spawners" index="0" instance=ExtResource( 3 )]
 position = Vector2( 133, 280 )
 collision_layer = 1
 shape = 9
 impulse = 150.0
 time = 0.5
+
+[node name="OneObjSpawner" parent="Spawners" index="1" instance=ExtResource( 3 )]
+position = Vector2( 419, 460 )
+time = 0.1
+angle = 90.0
+
+[node name="OneObjSpawner3" parent="Spawners" index="2" instance=ExtResource( 3 )]
+position = Vector2( 863, 463 )
+time = 0.1
+angle = 90.0
 
 [node name="Camera2D" parent="." index="5"]
 zoom = Vector2( 1.375, 1.385 )
