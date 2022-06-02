@@ -12,7 +12,7 @@ const LEVEL_PATH = "res://scenes/levels/"
 var currentLevelNumber;
 var currentLevelName;
 
-func _ready() -> void:
+func setup() -> void:
 	if not t.current_scene.is_in_group('level'): return 
 
 	t.call_group('points', 'connect', 'reached_goal', self, "add_points")

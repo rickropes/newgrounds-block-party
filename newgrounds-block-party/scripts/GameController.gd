@@ -19,11 +19,10 @@ const PARALLELOGRAM_RADIUS = 100
 signal entity_spawn(ent)
 
 func _ready():
-	Manager._ready();
+	Manager.setup();
 	
 	for obj in container.get_children():
 		spawned(obj)
-		
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -37,6 +36,9 @@ func _process(delta):
 #		Engine.time_scale = 0.1;
 #	else:
 #		Engine.time_scale = 1
+	
+	if(Input.is_action_just_pressed("restartButton")):
+		get_tree().reload_current_scene();
 	
 	update();
 	pass
@@ -190,8 +192,9 @@ func deselect() -> void:
 	affectees.clear()
 
 func spawned(obj:NGNode):
-	if not container.is_a_parent_of(obj):
-		container.add_child(obj)
+	if container.is_a_parent_of(obj): return;
+	
+	container.add_child(obj)
 	
 	obj.connect('selected', self, 'select_start')
 	obj.connect('hover', self, 'drag')
@@ -233,9 +236,6 @@ func _draw():
 			for tri in selected_nodes:
 				if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
 					draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
-					
-			
-	
 
 func get_centroid(arr) -> Vector2:
 	var out = Vector2.ZERO
