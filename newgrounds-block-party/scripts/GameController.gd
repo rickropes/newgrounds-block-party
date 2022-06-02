@@ -36,10 +36,7 @@ func _process(delta):
 #		Engine.time_scale = 0.1;
 #	else:
 #		Engine.time_scale = 1
-	
-	if(Input.is_action_just_pressed("restartButton")):
-		get_tree().reload_current_scene();
-	
+
 	update();
 	pass
 

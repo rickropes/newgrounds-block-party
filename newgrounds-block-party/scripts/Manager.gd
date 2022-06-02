@@ -12,6 +12,8 @@ const LEVEL_PATH = "res://scenes/levels/"
 var currentLevelNumber;
 var currentLevelName;
 
+#onready var nodeArea = t.get_nodes_in_group("goal")[0];
+
 func setup() -> void:
 	if not t.current_scene.is_in_group('level'): return 
 
@@ -34,8 +36,17 @@ func setup() -> void:
 	t.call_group('spawner', 'connect', 'spawned', controller, 'spawned')
 	
 
+func _process(delta):
+	if(Input.is_action_just_pressed("restartButton")):
+		
+		
+		t.get_nodes_in_group("goal")[0].point_shapes = t.get_nodes_in_group("goal")[0].ogPointsShapes;
+		t.reload_current_scene();
+	
+	pass;
+
 func _on_points_all_gone():
-	t.change_scene_to(levels[wrapi(levels.find(t.current_scene)+1, 0, len(levels))])
+	#t.change_scene_to(levels[wrapi(levels.find(t.current_scene)+1, 0, len(levels))])
 	print_debug("It's over")
 
 func _on_entity_spawned(field):
