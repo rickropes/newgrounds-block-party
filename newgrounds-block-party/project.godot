@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/GameController.gd"
 }, {
-"base": "Node",
-"class": "Manager",
-"language": "GDScript",
-"path": "res://scripts/Manager.gd"
-}, {
 "base": "RigidBody2D",
 "class": "NGNode",
 "language": "GDScript",
@@ -47,7 +42,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Enums": "",
 "GameController": "",
-"Manager": "",
 "NGNode": "",
 "PointsArea": "",
 "ShapeTypes": "",
@@ -59,6 +53,10 @@ _global_script_class_icons={
 config/name="newgrounds-block-party"
 run/main_scene="res://scenes/levels/factory/Factory01.tscn"
 config/icon="res://art/icon.png"
+
+[autoload]
+
+Manager="*res://scripts/Manager.gd"
 
 [display]
 
