@@ -1,9 +1,6 @@
 extends "res://scripts/entities/Spawner.gd"
 
-func _ready() -> void:
-	$SpawnTimer.start()
-
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$Icon.modulate.a = ($SpawnTimer.wait_time - $SpawnTimer.time_left)/$SpawnTimer.wait_time
 
 func spawn_shape():

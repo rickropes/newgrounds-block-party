@@ -17,7 +17,6 @@ const OCTAGON_RADIUS = 100
 const PARALLELOGRAM_RADIUS = 100
 
 signal entity_spawn(ent)
-signal collect_prespawns(controller)
 
 func _ready():
 	Manager._ready();
@@ -25,7 +24,6 @@ func _ready():
 	for obj in container.get_children():
 		spawned(obj)
 		
-	emit_signal("collect_prespawns", self)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -222,19 +220,22 @@ func _draw():
 	
 	# do the drawing here
 	
-	# draw line between mouse and current chosen node
 	var current_chosen = selected_nodes[len(selected_nodes)-1];
-	draw_line(current_chosen.position, get_global_mouse_position(), Color(0.75, 0.13, 0.1, 0.6), 10);
 	
-	# draw explosion radius for triangles
-	for tri in selected_nodes:
-		if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
-			draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
+	var centroid = get_centroid(selected_nodes)
+	match shape_type:
+		Enums.ShapeTypes.TRIANGLE:
+			var mouse_pos = get_global_mouse_position()
+			var to_mouse = (mouse_pos - centroid).clamped(PENTAGON_RADIUS)
+			draw_line(centroid, centroid + to_mouse, Color(0.75, 0.13, 0.1, 0.6), 10);
 			
-		pass
+			# draw explosion radius for triangles
+			for tri in selected_nodes:
+				if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
+					draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
+					
+			
 	
-	
-	pass
 
 func get_centroid(arr) -> Vector2:
 	var out = Vector2.ZERO
