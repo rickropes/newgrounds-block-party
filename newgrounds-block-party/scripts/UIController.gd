@@ -4,33 +4,63 @@ var audioMuted = false;
 var audioSoundIcon = preload("res://art/gui/volume-high.png");
 var audioMutedIcon = preload("res://art/gui/volume-off.png");
 
+var streamVolume = 1;
+var fxVolume = 1;
+
+var isPaused = false;
+
 func _ready():
+	#streamVolume = AudioServer.get_stream_global_volume_scale();
+	#fxVolume = AudioServer.get_fx_global_volume_scale();
+	
+	if(Manager.currentLevelNumber != null):
+		$UI/LevelName.text = Manager.currentLevelNumber + ":  " + Manager.currentLevelName;
+	else:
+		$UI/LevelName.text = "";
+	
+	pass
+
+func _process(delta):
+	if(Input.is_action_just_pressed("ui_cancel")):
+		if(isPaused):
+			_on_ContinueButton_pressed();
+		else:
+			_on_PauseButton_pressed();
+			
 	pass
 
 func _on_PauseButton_pressed():
-	$PauseMenu.visible = true;
-	$UI.visible = false;
-	get_tree().paused = true;
+	isPaused = true;
+	
+	$PauseMenu.visible = isPaused;
+	$UI.visible = !isPaused;
+	get_tree().paused = isPaused;
 	pass
 
 
 func _on_ContinueButton_pressed():
-	$PauseMenu.visible = false;
-	$UI.visible = true;
-	get_tree().paused = false;
+	isPaused = false;
+	
+	$PauseMenu.visible = isPaused;
+	$UI.visible = !isPaused;
+	get_tree().paused = isPaused;
+	
 	pass # Replace with function body.
 
 
 func _on_QuitButton_pressed():
-	print("NOOOOOOOOOOOOOOOOOOOOOOO");
+	get_tree().paused = false;
+	get_tree().change_scene("res://scenes/LevelSelector.tscn");
 	pass # Replace with function body.
 
 
 func _on_SoundButton_pressed():
 	audioMuted = !audioMuted;
 	if(audioMuted):
+		# Mute audio
 		$UI/HBoxContainer/SoundButton.icon = audioMutedIcon;
 	else:
+		# Un-Mute audio
 		$UI/HBoxContainer/SoundButton.icon = audioSoundIcon;
 	
 	pass # Replace with function body.

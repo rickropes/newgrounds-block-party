@@ -20,6 +20,8 @@ signal entity_spawn(ent)
 signal collect_prespawns(controller)
 
 func _ready():
+	Manager._ready();
+	
 	for obj in container.get_children():
 		spawned(obj)
 		
@@ -29,6 +31,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and not event.pressed:
 			deselect()
+
+func _process(delta):
+	
+	# Slow Motion
+#	if(selected_nodes.size() > 0):
+#		Engine.time_scale = 0.1;
+#	else:
+#		Engine.time_scale = 1
+	
+	update();
+	pass
 
 func drag(pfp:NGNode):
 	if pfp.shape != shape_type: return
@@ -204,10 +217,24 @@ func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void:
 	reporter.already_contacted = false
 	other.queue_free()
 
-func _draw() -> void:
+func _draw():
 	if shape_type == null: return
 	
 	# do the drawing here
+	
+	# draw line between mouse and current chosen node
+	var current_chosen = selected_nodes[len(selected_nodes)-1];
+	draw_line(current_chosen.position, get_global_mouse_position(), Color(0.75, 0.13, 0.1, 0.6), 10);
+	
+	# draw explosion radius for triangles
+	for tri in selected_nodes:
+		if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
+			draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
+			
+		pass
+	
+	
+	pass
 
 func get_centroid(arr) -> Vector2:
 	var out = Vector2.ZERO

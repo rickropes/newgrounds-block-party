@@ -6,5 +6,8 @@
 [node name="OneObjSpawner" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="Icon" parent="." index="0"]
+z_index = -10
+
 [node name="SpawnTimer" parent="." index="2"]
 one_shot = true
