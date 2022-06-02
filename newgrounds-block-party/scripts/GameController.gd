@@ -35,10 +35,10 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta):
 	
 	# Slow Motion
-	if(selected_nodes.size() > 0):
-		Engine.time_scale = 0.1;
-	else:
-		Engine.time_scale = 1
+#	if(selected_nodes.size() > 0):
+#		Engine.time_scale = 0.1;
+#	else:
+#		Engine.time_scale = 1
 	
 	update();
 	pass
