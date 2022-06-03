@@ -64,3 +64,9 @@ func _on_SoundButton_pressed():
 		$UI/TopPart/HBoxContainer/SoundButton.icon = audioSoundIcon;
 	
 	pass # Replace with function body.
+
+
+func _on_RestartButton_pressed():
+	get_tree().get_nodes_in_group("goal")[0].point_shapes = get_tree().get_nodes_in_group("goal")[0].ogPointsShapes;
+	get_tree().reload_current_scene();
+	pass

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/gui/UIController.gd" type="Script" id=1]
 [ext_resource path="res://scripts/gui/UIHover.gd" type="Script" id=2]
 [ext_resource path="res://art/gui/pause.png" type="Texture" id=3]
 [ext_resource path="res://art/gui/volume-high.png" type="Texture" id=4]
 [ext_resource path="res://art/gui/dynamicFontMain.tres" type="DynamicFont" id=5]
+[ext_resource path="res://art/gui/restart.png" type="Texture" id=6]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 5 )
@@ -43,6 +44,18 @@ margin_bottom = 31.55
 rect_scale = Vector2( 0.95, 0.95 )
 rect_pivot_offset = Vector2( 513, 31 )
 alignment = 2
+
+[node name="RestartButton" type="Button" parent="UI/TopPart/HBoxContainer"]
+margin_left = 792.0
+margin_right = 864.0
+margin_bottom = 63.0
+rect_pivot_offset = Vector2( 35.9615, 31.9561 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 6 )
+flat = true
+align = 2
+script = ExtResource( 2 )
 
 [node name="SoundButton" type="Button" parent="UI/TopPart/HBoxContainer"]
 margin_left = 872.0
@@ -140,6 +153,10 @@ text = "Quit"
 flat = true
 script = ExtResource( 2 )
 
+[connection signal="mouse_entered" from="UI/TopPart/HBoxContainer/RestartButton" to="UI/TopPart/HBoxContainer/RestartButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/TopPart/HBoxContainer/RestartButton" to="UI/TopPart/HBoxContainer/RestartButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="UI/TopPart/HBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="visibility_changed" from="UI/TopPart/HBoxContainer/RestartButton" to="UI/TopPart/HBoxContainer/RestartButton" method="_on_visibility_changed"]
 [connection signal="mouse_entered" from="UI/TopPart/HBoxContainer/SoundButton" to="UI/TopPart/HBoxContainer/SoundButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="UI/TopPart/HBoxContainer/SoundButton" to="UI/TopPart/HBoxContainer/SoundButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="UI/TopPart/HBoxContainer/SoundButton" to="." method="_on_SoundButton_pressed"]
