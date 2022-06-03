@@ -1,6 +1,5 @@
 extends Node2D
 
-
 onready var controller = $GameController
 onready var pre_spawn_cont = $PreSpawnedContainer
 

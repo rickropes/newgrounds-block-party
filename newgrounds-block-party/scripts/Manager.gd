@@ -13,6 +13,7 @@ var currentLevelNumber;
 var currentLevelName;
 
 func add_points(p:int):
+	print_debug("ADDED DA POINTS")
 	score += p 
 
 static func get_shape_scene(shape_type) -> PackedScene:

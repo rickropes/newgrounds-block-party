@@ -91,7 +91,7 @@ func deselect() -> void:
 			
 			for tri in selected_nodes: 
 				for i in get_shapes_in_circle(PENTAGON_RADIUS * sel_len, tri.global_position):
-					if (i as NGNode).shape != Enums.ShapeTypes.TRIANGLE and force.dot(i.global_position - centroid) > 0:
+					if (i as NGNode).shape != Enums.ShapeTypes.TRIANGLE:
 						affectees.append(i)
 				
 				tri.destroy()
@@ -230,14 +230,11 @@ func _draw():
 	match shape_type:
 		Enums.ShapeTypes.TRIANGLE:
 			var mouse_pos = get_global_mouse_position()
-			var to_mouse = (mouse_pos - centroid).clamped(PENTAGON_RADIUS)
+			var to_mouse = (mouse_pos - centroid).clamped(PENTAGON_RADIUS * sel_len)
 			draw_line(centroid, centroid + to_mouse, Color(0.75, 0.13, 0.1, 0.6), 10);
 			
 			# draw explosion radius for triangles
 			draw_circle(centroid, PENTAGON_RADIUS * sel_len, Color(0.75, 0.13, 0.1, 0.2))
-#			for tri in selected_nodes:
-#				if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
-#					draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
 
 func get_centroid(arr) -> Vector2:
 	var out = Vector2.ZERO

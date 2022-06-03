@@ -9,8 +9,6 @@ radius = 23.0
 
 [node name="SpikyCircle" groups=["spiky circle"] instance=ExtResource( 1 )]
 input_pickable = false
-contacts_reported = 3
-contact_monitor = true
 script = ExtResource( 3 )
 shape = 1
 

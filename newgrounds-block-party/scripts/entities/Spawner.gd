@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends RigidBody2D
 
 export(Enums.ShapeTypes) var shape = Enums.ShapeTypes.TRIANGLE
 export(float) var impulse := 0.0
