@@ -19,7 +19,7 @@ const PARALLELOGRAM_RADIUS = 100
 signal entity_spawn(ent)
 
 func _ready():
-	Manager.setup();
+#	Manager.setup();
 	
 	for obj in container.get_children():
 		spawned(obj)
@@ -226,6 +226,7 @@ func _draw():
 	var current_chosen = selected_nodes[len(selected_nodes)-1];
 	
 	var centroid = get_centroid(selected_nodes)
+	var sel_len = len(selected_nodes)
 	match shape_type:
 		Enums.ShapeTypes.TRIANGLE:
 			var mouse_pos = get_global_mouse_position()
@@ -233,9 +234,10 @@ func _draw():
 			draw_line(centroid, centroid + to_mouse, Color(0.75, 0.13, 0.1, 0.6), 10);
 			
 			# draw explosion radius for triangles
-			for tri in selected_nodes:
-				if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
-					draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
+			draw_circle(centroid, PENTAGON_RADIUS * sel_len, Color(0.75, 0.13, 0.1, 0.2))
+#			for tri in selected_nodes:
+#				if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
+#					draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
 
 func get_centroid(arr) -> Vector2:
 	var out = Vector2.ZERO
