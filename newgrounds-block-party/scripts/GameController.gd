@@ -81,6 +81,8 @@ func deselect() -> void:
 	match shape_type:
 		# TRIANGLES
 		Enums.ShapeTypes.TRIANGLE:
+			$Sfx/Triangle.play()
+			
 			var force = (
 				# get's the direction between the middle node and the mouse
 				get_global_mouse_position() - centroid

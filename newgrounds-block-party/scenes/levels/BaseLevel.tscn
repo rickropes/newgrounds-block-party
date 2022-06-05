@@ -28,3 +28,6 @@ current = true
 script = ExtResource( 4 )
 
 [node name="GUI" parent="." instance=ExtResource( 5 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+autoplay = true

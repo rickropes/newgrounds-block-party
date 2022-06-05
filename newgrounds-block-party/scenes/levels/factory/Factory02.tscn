@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/levels/BaseLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/tilemaps/Factory.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/base_shapes/SpikyCircle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/base_shapes/Heart.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/base_shapes/Triangle.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scripts/CameraController.gd" type="Script" id=6]
 
 [node name="Factory02" instance=ExtResource( 1 )]
 
@@ -70,7 +69,6 @@ position = Vector2( 201, 123 )
 
 [node name="Camera2D" parent="." index="5"]
 zoom = Vector2( 1.2, 1.5 )
-script = ExtResource( 6 )
 nodeToFollow = NodePath("../PreSpawnedContainer/Heart")
 followVertical = true
 verticalFollowLimits = Vector2( 0, 315 )

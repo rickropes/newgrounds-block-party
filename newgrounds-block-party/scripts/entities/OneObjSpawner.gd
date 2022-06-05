@@ -6,7 +6,7 @@ func _process(_delta: float) -> void:
 
 func spawn_shape():
 	$Icon.modulate.a = 0.5
-	.spawn_shape().connect("gone", self, "_on_shape_gone")
+	.spawn_shape().connect("tree_exited", self, "_on_shape_gone")
 	
 func _on_shape_gone():
 	if amount == 0: return
