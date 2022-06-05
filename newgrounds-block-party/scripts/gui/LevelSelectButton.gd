@@ -12,6 +12,11 @@ const levelDic = {
 		'levelNumber': '1-2',
 		'levelName': 'To HELL',
 		'levelPath': 'res://scenes/levels/factory/Factory02.tscn'
+	},
+	2: {
+		'levelNumber': '1-3',
+		'levelName': 'To HELL',
+		'levelPath': 'res://scenes/levels/factory/Factory03.tscn'
 	}
 }
 
@@ -29,5 +34,5 @@ func _on_pressed():
 	Manager.currentLevelNumber = levelDic[levelId].levelNumber;
 	Manager.currentLevelName = levelDic[levelId].levelName;
 	
-	get_tree().change_scene_to(Manager.levels[levelId]);
+	get_tree().change_scene(levelDic[levelId].levelPath);
 	pass # Replace with function body.

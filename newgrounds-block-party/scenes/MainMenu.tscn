@@ -124,7 +124,7 @@ margin_left = 20.0
 margin_top = 104.0
 margin_right = -20.0
 margin_bottom = -20.0
-columns = 2
+columns = 10
 
 [node name="Button" type="Button" parent="Holder/LevelSelect/GridContainer"]
 margin_right = 37.0
@@ -141,6 +141,15 @@ rect_pivot_offset = Vector2( 19, 18 )
 text = "2"
 script = ExtResource( 2 )
 levelId = 1
+
+[node name="Button3" type="Button" parent="Holder/LevelSelect/GridContainer"]
+margin_left = 90.0
+margin_right = 127.0
+margin_bottom = 37.0
+rect_pivot_offset = Vector2( 19, 18 )
+text = "3"
+script = ExtResource( 2 )
+levelId = 2
 
 [node name="back2" type="Button" parent="Holder/LevelSelect"]
 margin_left = 22.0
@@ -173,6 +182,9 @@ script = ExtResource( 3 )
 [connection signal="mouse_entered" from="Holder/LevelSelect/GridContainer/Button2" to="Holder/LevelSelect/GridContainer/Button2" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Holder/LevelSelect/GridContainer/Button2" to="Holder/LevelSelect/GridContainer/Button2" method="_on_mouse_exited"]
 [connection signal="pressed" from="Holder/LevelSelect/GridContainer/Button2" to="Holder/LevelSelect/GridContainer/Button2" method="_on_pressed"]
+[connection signal="mouse_entered" from="Holder/LevelSelect/GridContainer/Button3" to="Holder/LevelSelect/GridContainer/Button3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Holder/LevelSelect/GridContainer/Button3" to="Holder/LevelSelect/GridContainer/Button3" method="_on_mouse_exited"]
+[connection signal="pressed" from="Holder/LevelSelect/GridContainer/Button3" to="Holder/LevelSelect/GridContainer/Button3" method="_on_pressed"]
 [connection signal="mouse_entered" from="Holder/LevelSelect/back2" to="Holder/LevelSelect/back2" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Holder/LevelSelect/back2" to="Holder/LevelSelect/back2" method="_on_mouse_exited"]
 [connection signal="pressed" from="Holder/LevelSelect/back2" to="." method="_on_back_level_pressed"]
