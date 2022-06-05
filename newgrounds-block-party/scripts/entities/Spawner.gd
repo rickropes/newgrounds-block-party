@@ -7,9 +7,17 @@ export(int) var amount := -1
 export(float) var time := 2.0
 export(float, -359, 359) var angle := 0
 export(bool) var inside := false
+export(float) var changeWeigth = -1;
+export(bool) var collisionDisabled = false;
+
+onready var collisionShape = $CollisionShape2D;
+
+
 var direction := Vector2.RIGHT
 
 var spawn_scene: PackedScene
+var currentShape;
+
 
 signal spawned(object)
 
@@ -21,6 +29,8 @@ func _ready() -> void:
 	
 	# Get scene for spawn_scene TODO
 	spawn_scene = Manager.get_shape_scene(shape)
+	
+	collisionShape.disabled = collisionDisabled;
 	
 	direction = direction.rotated(deg2rad(angle))
 
@@ -45,4 +55,9 @@ func spawn_shape() -> NGNode:
 	obj.global_position = setPosition;
 	
 	obj.apply_central_impulse(direction * impulse)
+	
+	if(changeWeigth != -1):
+		obj.weight = changeWeigth
+	
+	currentShape = obj;
 	return obj
