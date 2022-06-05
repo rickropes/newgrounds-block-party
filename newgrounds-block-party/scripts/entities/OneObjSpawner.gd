@@ -1,5 +1,6 @@
 extends "res://scripts/entities/Spawner.gd"
 
+
 func _process(_delta: float) -> void:
 	$Icon.modulate.a = ($SpawnTimer.wait_time - $SpawnTimer.time_left)/$SpawnTimer.wait_time
 
