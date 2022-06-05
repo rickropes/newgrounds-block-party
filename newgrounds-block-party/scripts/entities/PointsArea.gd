@@ -19,7 +19,6 @@ func _ready() -> void:
 	$AnimatedSprite.scale = Vector2(scl, scl)
 
 func set_point_shapes(v:int):
-	print(v);
 	point_shapes = v
 	
 	if point_shapes <= 0:
