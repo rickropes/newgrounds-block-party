@@ -13,6 +13,15 @@ onready var og_sprite := get_node("Sprite")
 onready var og_col := get_node("Body")
 export(Enums.ShapeTypes) var shape
 
+func _ready() -> void:
+	og_sprite.frame = randi() % (og_sprite.hframes)
+	
+	match shape:
+		Enums.ShapeTypes.PARALLELOGRAM:
+			if og_sprite.frame >= 9:
+				for i in og_col.polygon:
+					i.x *= -1
+
 func _on_NGNode_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	var mouse_cond = (event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed)
 	var touch_cond = (event is InputEventScreenTouch and event.pressed)
@@ -36,10 +45,8 @@ func get_children_of_type(t:String) -> Array:
 
 # plays when shapes need to be queue_freed
 func destroy():
+	$AnimationPlayer.play("die")
 	
-	emit_signal("gone")
-	queue_free()
-
 #TODO: there will be more stuff here
 func become_chosen():
 	og_sprite.modulate = Color.green
@@ -64,3 +71,9 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 		match tile_id:
 			13, 14, 15, 16, 17, 18, 19, 20, 21:
 				destroy()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if anim_name == 'die':
+		emit_signal("gone")
+		queue_free()

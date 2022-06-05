@@ -22,5 +22,6 @@ func set_point_shapes(v:int):
 	print(v);
 	point_shapes = v
 	
-	#if point_shapes <= 0:
-		#emit_signal("points_all_gone")
+	if point_shapes <= 0:
+		$GoalJingle.play()
+		emit_signal("points_all_gone")

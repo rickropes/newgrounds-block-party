@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/triangle_explosion.mp3-17707b4e930e75bbd07cf74ddfd2fd1a.mp3str"
+
+[deps]
+
+source_file="res://audio/triangle_explosion.mp3"
+dest_files=[ "res://.import/triangle_explosion.mp3-17707b4e930e75bbd07cf74ddfd2fd1a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

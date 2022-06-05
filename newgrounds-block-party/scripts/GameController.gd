@@ -16,6 +16,8 @@ const HEX_RADIUS = 100
 const OCTAGON_RADIUS = 100
 const PARALLELOGRAM_RADIUS = 100
 
+const FIELD_DURATION = 1.5
+
 signal entity_spawn(ent)
 
 func _ready():
@@ -95,6 +97,7 @@ func deselect() -> void:
 			
 			for e in affectees:
 				(e as RigidBody2D).apply_central_impulse(force)
+			$Sfx/Triangle.play()
 		
 		#PENTAGONS
 		Enums.ShapeTypes.PENTAGON:
@@ -166,7 +169,7 @@ func deselect() -> void:
 				hex.position = Vector2.ZERO
 			
 			emit_signal("entity_spawn", field)
-			field.setup(centroid, HEX_RADIUS * sel_len, 1.5 * sel_len)
+			field.setup(centroid, HEX_RADIUS * sel_len, FIELD_DURATION * sel_len)
 			
 		#OCTAGONS & PARALLELOGRAM
 		Enums.ShapeTypes.OCTAGON, Enums.ShapeTypes.PARALLELOGRAM:
@@ -261,3 +264,4 @@ func get_shapes_in_circle(radius:float, point:Vector2, type = null) -> Array:
 			out.append(i)
 	
 	return out
+	

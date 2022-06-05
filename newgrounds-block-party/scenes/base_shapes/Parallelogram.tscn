@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/NGNode.tscn" type="PackedScene" id=1]
-[ext_resource path="res://art/base_shapes/heyopc_parallelogram.png" type="Texture" id=2]
+[ext_resource path="res://art/base_shapes/parallelogram 1-sheet.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 40.3113
@@ -11,9 +11,10 @@ shape = 5
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
+hframes = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea" index="0"]
 shape = SubResource( 1 )
 
 [node name="Body" type="CollisionPolygon2D" parent="." index="2"]
-polygon = PoolVector2Array( -27, -31, 31, -20, 28, 32, -31, 22 )
+polygon = PoolVector2Array( 26, -31, 31, 21, -27, 31, -30, -21 )

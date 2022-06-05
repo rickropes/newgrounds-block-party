@@ -1,13 +1,14 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/NGNode.tscn" type="PackedScene" id=1]
-[ext_resource path="res://art/base_shapes/mdgt_saus_octagon.png" type="Texture" id=2]
+[ext_resource path="res://art/base_shapes/octagon 1-sheet.png" type="Texture" id=2]
 
 [node name="Octagon" instance=ExtResource( 1 )]
 shape = 4
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
+hframes = 5
 
 [node name="Body" type="CollisionPolygon2D" parent="CollisionArea" index="0"]
 modulate = Color( 0.172549, 0.988235, 0.0666667, 1 )

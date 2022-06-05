@@ -23,8 +23,11 @@ __meta__ = {
 
 [node name="PreSpawnedContainer" parent="." instance=ExtResource( 3 )]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-current = true
-
 [node name="GUI" parent="." instance=ExtResource( 5 )]
+
+[node name="Tracker" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Tracker"]
+current = true
+limit_left = 0
+limit_top = 0
