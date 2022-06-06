@@ -16,11 +16,9 @@ func _process(delta):
 			rand_range(-1.0, 1.0) * currentShake \
 		))
 		currentShake = lerp(currentShake, 0, 0.1);
-		print(currentShake)
 	pass
 
 func addShake(ammount):
-	print("Add shake");
 	currentShake += ammount;
 	currentShake = clamp(currentShake, 0, 30);
 	pass;
