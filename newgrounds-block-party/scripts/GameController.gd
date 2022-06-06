@@ -27,7 +27,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.button_index == BUTTON_LEFT and not event.pressed:
 			deselect()
 
-func _process(delta):
+func _process(_delta):
 	
 	# Slow Motion
 #	if(selected_nodes.size() > 0):
@@ -220,12 +220,13 @@ func _draw():
 	
 	# do the drawing here
 	
-	var current_chosen = selected_nodes[len(selected_nodes)-1];
+	var sel_len = len(selected_nodes)
+	var current_chosen = selected_nodes[sel_len-1];
 	
 	var centroid = get_centroid(selected_nodes)
+	var mouse_pos = get_global_mouse_position()
 	match shape_type:
 		Enums.ShapeTypes.TRIANGLE:
-			var mouse_pos = get_global_mouse_position()
 			var to_mouse = (mouse_pos - centroid).clamped(PENTAGON_RADIUS)
 			draw_line(centroid, centroid + to_mouse, Color(0.75, 0.13, 0.1, 0.6), 10);
 			
@@ -233,6 +234,10 @@ func _draw():
 			for tri in selected_nodes:
 				if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
 					draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
+		Enums.ShapeTypes.HEXAGON:
+			var to_mouse = (mouse_pos - centroid).clamped(HEX_RADIUS * sel_len)
+			draw_line(centroid, centroid + to_mouse, Color(1, 1, 0, 0.45))
+			draw_circle(centroid, HEX_RADIUS * sel_len, Color(1, 1, 0, 0.45))
 
 func get_centroid(arr) -> Vector2:
 	var out = Vector2.ZERO

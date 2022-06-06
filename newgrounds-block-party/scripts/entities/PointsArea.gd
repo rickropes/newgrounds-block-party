@@ -15,7 +15,7 @@ signal points_all_gone()
 func _ready() -> void:
 	$CollisionShape2D.shape.radius = size * (radius + 1)
 	
-	var scl = 1/(radius + 1)
+	var scl = 1*(radius + 1)
 	$AnimatedSprite.scale = Vector2(scl, scl)
 
 func set_point_shapes(v:int):

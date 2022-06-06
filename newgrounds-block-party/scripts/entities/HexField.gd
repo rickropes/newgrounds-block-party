@@ -14,4 +14,5 @@ func setup(pos:Vector2, radius: float, time: float):
 func _on_Timer_timeout() -> void:
 	queue_free()
 
-
+func _draw() -> void:
+	draw_circle(global_position, col.shape.radius, Color(1,1,0,0.45))

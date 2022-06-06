@@ -61,3 +61,4 @@ limit_left = 0
 limit_top = 0
 limit_right = 1464
 limit_bottom = 750
+smoothing_enabled = true
