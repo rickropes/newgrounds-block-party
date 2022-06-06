@@ -19,8 +19,6 @@ const PARALLELOGRAM_RADIUS = 100
 signal entity_spawn(ent)
 
 func _ready():
-	Manager.setup();
-	
 	for obj in container.get_children():
 		spawned(obj)
 
@@ -81,6 +79,8 @@ func deselect() -> void:
 	match shape_type:
 		# TRIANGLES
 		Enums.ShapeTypes.TRIANGLE:
+			$Sfx/Triangle.play()
+			
 			var force = (
 				# get's the direction between the middle node and the mouse
 				get_global_mouse_position() - centroid

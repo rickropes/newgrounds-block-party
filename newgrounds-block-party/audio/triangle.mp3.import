@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/triangle.mp3-b6a31f59e64790ce8674cd6979b86dc3.mp3str"
+
+[deps]
+
+source_file="res://audio/triangle.mp3"
+dest_files=[ "res://.import/triangle.mp3-b6a31f59e64790ce8674cd6979b86dc3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

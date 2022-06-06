@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/entities/OneObjSpawner.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://scripts/entities/OneObjSpawner.gd\"
+
+func spawn_shape():
+	mode = RigidBody2D.MODE_RIGID
+	.spawn_shape()
+"
+
+[node name="MobileSpawner" instance=ExtResource( 1 )]
+collision_mask = 3
+mode = 0
+script = SubResource( 1 )
+
+[node name="Icon" parent="." index="0"]
+scale = Vector2( 0.5, 0.5 )

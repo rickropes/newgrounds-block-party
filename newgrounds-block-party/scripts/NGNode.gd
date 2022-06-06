@@ -4,8 +4,6 @@ extends RigidBody2D
 signal selected(pfp)
 signal hover(pfp)
 
-signal gone()
-
 onready var collisionArea = $CollisionArea;
 
 #TODO, make unique shapes that change this variable
@@ -36,9 +34,7 @@ func get_children_of_type(t:String) -> Array:
 
 # plays when shapes need to be queue_freed
 func destroy():
-	
-	emit_signal("gone")
-	queue_free()
+	$AnimationPlayer.play("die")
 
 #TODO: there will be more stuff here
 func become_chosen():
@@ -51,7 +47,6 @@ func unchosen():
 	og_sprite.modulate = Color.white
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
-	#FIXME this
 	for i in state.get_contact_count():
 		var collider = state.get_contact_collider_object(i)
 		if not collider is TileMap: continue 
@@ -64,3 +59,8 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 		match tile_id:
 			13, 14, 15, 16, 17, 18, 19, 20, 21:
 				destroy()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if anim_name == 'die':
+		queue_free()
