@@ -19,7 +19,9 @@ func _ready() -> void:
 	$AnimatedSprite.scale = Vector2(scl, scl)
 
 func set_point_shapes(v:int):
+	if point_shapes != ogPointsShapes:
+		$GoalJingle.play()
 	point_shapes = v
 	
-	#if point_shapes <= 0:
-		#emit_signal("points_all_gone")
+	if point_shapes <= 0:
+		emit_signal("points_all_gone")
