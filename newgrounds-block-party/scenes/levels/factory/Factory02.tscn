@@ -65,8 +65,3 @@ position = Vector2( 206, 232 )
 
 [node name="Heart" parent="PreSpawnedContainer" index="14" instance=ExtResource( 4 )]
 position = Vector2( 223, 127 )
-
-[node name="Camera2D" parent="." index="5"]
-nodeToFollow = NodePath("../PreSpawnedContainer/Heart")
-followVertical = true
-verticalFollowLimits = Vector2( 0, 315 )

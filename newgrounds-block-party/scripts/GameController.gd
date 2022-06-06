@@ -19,8 +19,6 @@ const PARALLELOGRAM_RADIUS = 100
 signal entity_spawn(ent)
 
 func _ready():
-	Manager.setup();
-	
 	for obj in container.get_children():
 		spawned(obj)
 

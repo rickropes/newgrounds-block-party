@@ -12,7 +12,6 @@ func _process(_delta: float) -> void:
 	$Icon.modulate.a = ($SpawnTimer.wait_time - $SpawnTimer.time_left)/$SpawnTimer.wait_time
 
 func spawn_shape():
-	mode = RigidBody2D.MODE_RIGID
 	$Icon.modulate.a = 0.5
 	for i in spawns:
 		direction = direction.rotated(deg2rad(360/spawns_amount))

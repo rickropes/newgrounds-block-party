@@ -62,4 +62,5 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
-	queue_free()
+	if anim_name == 'die':
+		queue_free()
