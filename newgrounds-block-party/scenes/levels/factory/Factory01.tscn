@@ -33,17 +33,20 @@ point_shapes = 3
 [node name="Heart" parent="Spawners" index="0" instance=ExtResource( 3 )]
 position = Vector2( 133, 280 )
 collision_layer = 1
+collision_mask = 0
 shape = 9
 impulse = 150.0
 time = 0.5
 
 [node name="OneObjSpawner" parent="Spawners" index="1" instance=ExtResource( 3 )]
 position = Vector2( 419, 460 )
+collision_mask = 0
 time = 0.1
 angle = 90.0
 
 [node name="OneObjSpawner3" parent="Spawners" index="2" instance=ExtResource( 3 )]
 position = Vector2( 863, 463 )
+collision_mask = 0
 time = 0.1
 angle = 90.0
 

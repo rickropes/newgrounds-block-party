@@ -88,7 +88,7 @@ func deselect() -> void:
 			
 			for tri in selected_nodes: 
 				for i in get_shapes_in_circle(PENTAGON_RADIUS * sel_len, tri.global_position):
-					if (i as NGNode).shape != Enums.ShapeTypes.TRIANGLE and force.dot(i.global_position - centroid) > 0:
+					if (i as NGNode).shape != Enums.ShapeTypes.TRIANGLE: # and force.dot(i.global_position - centroid) > 0:
 						affectees.append(i)
 				
 				tri.destroy()
