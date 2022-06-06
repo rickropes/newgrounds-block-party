@@ -1,47 +1,26 @@
 extends Camera2D
 
-
-export(NodePath) var nodeToFollow
-var node = null;
-var spawnerNode = null;
-var followNode = null;
-
-
-export var followVertical = false;
-export var verticalFollowLimits = Vector2(0, 0);
-export var followHorizontal = false;
-export var horizontalFollowLimits = Vector2(0, 0);
-var projectResolution = Vector2.ZERO;
-
-var spawnerClass = preload("res://scripts/entities/Spawner.gd");
-
+var currentShake = 0.0;
+var shake_amount = 1.0
 
 func _ready():
-	projectResolution=get_viewport().size
-	
-	# Change ../PreSpawnedContainer/NAME -> ../GameController/BodiesContainer/NAME
-	var nodePath = str(nodeToFollow);
-	nodePath = nodePath.replace("PreSpawnedContainer", "GameController/BodiesContainer")
-	node = get_node(nodePath);
-	
-	if(node is spawnerClass):
-		spawnerNode = node;
-	else:
-		followNode = node;
-	
+
 	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
-	if(spawnerNode != null):
-		followNode = spawnerNode.currentShape
-	
-	
-	if(followNode != null && is_instance_valid(followNode)):
-		if(followVertical):
-			position.y = clamp(followNode.position.y-projectResolution.y/2, verticalFollowLimits.x, verticalFollowLimits.y);
-		if(followHorizontal):
-			position.x = clamp(followNode.position.x-projectResolution.x/2, horizontalFollowLimits.x, horizontalFollowLimits.y);
+	if(currentShake > 0):
+		set_offset(Vector2( \
+			rand_range(-1.0, 1.0) * currentShake, \
+			rand_range(-1.0, 1.0) * currentShake \
+		))
+		currentShake = lerp(currentShake, 0, 0.1);
+		print(currentShake)
 	pass
+
+func addShake(ammount):
+	print("Add shake");
+	currentShake += ammount;
+	currentShake = clamp(currentShake, 0, 30);
+	pass;

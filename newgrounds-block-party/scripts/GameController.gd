@@ -9,6 +9,7 @@ var affectees := []
 onready var container := $BodiesContainer
 
 const HEX_FIELD = preload("res://scenes/entities/HexField.tscn")
+onready var camera = get_node("../Tracker/Camera2D");
 
 const TRI_IMPULSE = 300
 const PENTAGON_RADIUS = 150
@@ -80,6 +81,8 @@ func deselect() -> void:
 		# TRIANGLES
 		Enums.ShapeTypes.TRIANGLE:
 			$Sfx/Triangle.play()
+			
+			camera.addShake(10);
 			
 			var force = (
 				# get's the direction between the middle node and the mouse
