@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://art/tilesets/factory.png" type="Texture" id=1]
 [ext_resource path="res://art/tilesets/lava/lava.tres" type="Texture" id=2]
@@ -18,6 +18,9 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=14]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=15]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [sub_resource type="ConvexPolygonShape2D" id=16]
@@ -351,6 +354,27 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 12/z_index = 0
+13/name = "lava.tres 13"
+13/texture = ExtResource( 2 )
+13/tex_offset = Vector2( 0, 0 )
+13/modulate = Color( 1, 1, 1, 1 )
+13/region = Rect2( 0, 0, 64, 64 )
+13/tile_mode = 0
+13/occluder_offset = Vector2( 0, 0 )
+13/navigation_offset = Vector2( 0, 0 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape = SubResource( 15 )
+13/shape_one_way = false
+13/shape_one_way_margin = 1.0
+13/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 15 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+13/z_index = 0
 14/name = "lava.tres 14"
 14/texture = ExtResource( 2 )
 14/tex_offset = Vector2( 0, 0 )
@@ -638,190 +662,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 28/z_index = 0
-29/name = "lava.tres 29"
-29/texture = ExtResource( 2 )
-29/tex_offset = Vector2( 0, 0 )
-29/modulate = Color( 1, 1, 1, 1 )
-29/region = Rect2( 0, 0, 64, 64 )
-29/tile_mode = 1
-29/autotile/bitmask_mode = 0
-29/autotile/bitmask_flags = [  ]
-29/autotile/icon_coordinate = Vector2( 0, 0 )
-29/autotile/tile_size = Vector2( 64, 64 )
-29/autotile/spacing = 0
-29/autotile/occluder_map = [  ]
-29/autotile/navpoly_map = [  ]
-29/autotile/priority_map = [  ]
-29/autotile/z_index_map = [  ]
-29/occluder_offset = Vector2( 0, 0 )
-29/navigation_offset = Vector2( 0, 0 )
-29/shape_offset = Vector2( 0, 0 )
-29/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-29/shape_one_way = false
-29/shape_one_way_margin = 0.0
-29/shapes = [  ]
-29/z_index = 0
-30/name = "lava.tres 30"
-30/texture = ExtResource( 2 )
-30/tex_offset = Vector2( 0, 0 )
-30/modulate = Color( 1, 1, 1, 1 )
-30/region = Rect2( 64, 0, 64, 64 )
-30/tile_mode = 1
-30/autotile/bitmask_mode = 0
-30/autotile/bitmask_flags = [  ]
-30/autotile/icon_coordinate = Vector2( 0, 0 )
-30/autotile/tile_size = Vector2( 64, 64 )
-30/autotile/spacing = 0
-30/autotile/occluder_map = [  ]
-30/autotile/navpoly_map = [  ]
-30/autotile/priority_map = [  ]
-30/autotile/z_index_map = [  ]
-30/occluder_offset = Vector2( 0, 0 )
-30/navigation_offset = Vector2( 0, 0 )
-30/shape_offset = Vector2( 0, 0 )
-30/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-30/shape_one_way = false
-30/shape_one_way_margin = 0.0
-30/shapes = [  ]
-30/z_index = 0
-31/name = "lava.tres 31"
-31/texture = ExtResource( 2 )
-31/tex_offset = Vector2( 0, 0 )
-31/modulate = Color( 1, 1, 1, 1 )
-31/region = Rect2( 128, 0, 64, 64 )
-31/tile_mode = 1
-31/autotile/bitmask_mode = 0
-31/autotile/bitmask_flags = [  ]
-31/autotile/icon_coordinate = Vector2( 0, 0 )
-31/autotile/tile_size = Vector2( 64, 64 )
-31/autotile/spacing = 0
-31/autotile/occluder_map = [  ]
-31/autotile/navpoly_map = [  ]
-31/autotile/priority_map = [  ]
-31/autotile/z_index_map = [  ]
-31/occluder_offset = Vector2( 0, 0 )
-31/navigation_offset = Vector2( 0, 0 )
-31/shape_offset = Vector2( 0, 0 )
-31/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-31/shape_one_way = false
-31/shape_one_way_margin = 0.0
-31/shapes = [  ]
-31/z_index = 0
-32/name = "lava.tres 32"
-32/texture = ExtResource( 2 )
-32/tex_offset = Vector2( 0, 0 )
-32/modulate = Color( 1, 1, 1, 1 )
-32/region = Rect2( 128, 64, 64, 64 )
-32/tile_mode = 1
-32/autotile/bitmask_mode = 0
-32/autotile/bitmask_flags = [  ]
-32/autotile/icon_coordinate = Vector2( 0, 0 )
-32/autotile/tile_size = Vector2( 64, 64 )
-32/autotile/spacing = 0
-32/autotile/occluder_map = [  ]
-32/autotile/navpoly_map = [  ]
-32/autotile/priority_map = [  ]
-32/autotile/z_index_map = [  ]
-32/occluder_offset = Vector2( 0, 0 )
-32/navigation_offset = Vector2( 0, 0 )
-32/shape_offset = Vector2( 0, 0 )
-32/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-32/shape_one_way = false
-32/shape_one_way_margin = 0.0
-32/shapes = [  ]
-32/z_index = 0
-33/name = "lava.tres 33"
-33/texture = ExtResource( 2 )
-33/tex_offset = Vector2( 0, 0 )
-33/modulate = Color( 1, 1, 1, 1 )
-33/region = Rect2( 128, 128, 64, 64 )
-33/tile_mode = 1
-33/autotile/bitmask_mode = 0
-33/autotile/bitmask_flags = [  ]
-33/autotile/icon_coordinate = Vector2( 0, 0 )
-33/autotile/tile_size = Vector2( 64, 64 )
-33/autotile/spacing = 0
-33/autotile/occluder_map = [  ]
-33/autotile/navpoly_map = [  ]
-33/autotile/priority_map = [  ]
-33/autotile/z_index_map = [  ]
-33/occluder_offset = Vector2( 0, 0 )
-33/navigation_offset = Vector2( 0, 0 )
-33/shape_offset = Vector2( 0, 0 )
-33/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-33/shape_one_way = false
-33/shape_one_way_margin = 0.0
-33/shapes = [  ]
-33/z_index = 0
-34/name = "lava.tres 34"
-34/texture = ExtResource( 2 )
-34/tex_offset = Vector2( 0, 0 )
-34/modulate = Color( 1, 1, 1, 1 )
-34/region = Rect2( 64, 128, 64, 64 )
-34/tile_mode = 1
-34/autotile/bitmask_mode = 0
-34/autotile/bitmask_flags = [  ]
-34/autotile/icon_coordinate = Vector2( 0, 0 )
-34/autotile/tile_size = Vector2( 64, 64 )
-34/autotile/spacing = 0
-34/autotile/occluder_map = [  ]
-34/autotile/navpoly_map = [  ]
-34/autotile/priority_map = [  ]
-34/autotile/z_index_map = [  ]
-34/occluder_offset = Vector2( 0, 0 )
-34/navigation_offset = Vector2( 0, 0 )
-34/shape_offset = Vector2( 0, 0 )
-34/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-34/shape_one_way = false
-34/shape_one_way_margin = 0.0
-34/shapes = [  ]
-34/z_index = 0
-35/name = "lava.tres 35"
-35/texture = ExtResource( 2 )
-35/tex_offset = Vector2( 0, 0 )
-35/modulate = Color( 1, 1, 1, 1 )
-35/region = Rect2( 0, 128, 64, 64 )
-35/tile_mode = 1
-35/autotile/bitmask_mode = 0
-35/autotile/bitmask_flags = [  ]
-35/autotile/icon_coordinate = Vector2( 0, 0 )
-35/autotile/tile_size = Vector2( 64, 64 )
-35/autotile/spacing = 0
-35/autotile/occluder_map = [  ]
-35/autotile/navpoly_map = [  ]
-35/autotile/priority_map = [  ]
-35/autotile/z_index_map = [  ]
-35/occluder_offset = Vector2( 0, 0 )
-35/navigation_offset = Vector2( 0, 0 )
-35/shape_offset = Vector2( 0, 0 )
-35/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-35/shape_one_way = false
-35/shape_one_way_margin = 0.0
-35/shapes = [  ]
-35/z_index = 0
-36/name = "lava.tres 36"
-36/texture = ExtResource( 2 )
-36/tex_offset = Vector2( 0, 0 )
-36/modulate = Color( 1, 1, 1, 1 )
-36/region = Rect2( 0, 64, 64, 64 )
-36/tile_mode = 1
-36/autotile/bitmask_mode = 0
-36/autotile/bitmask_flags = [  ]
-36/autotile/icon_coordinate = Vector2( 0, 0 )
-36/autotile/tile_size = Vector2( 64, 64 )
-36/autotile/spacing = 0
-36/autotile/occluder_map = [  ]
-36/autotile/navpoly_map = [  ]
-36/autotile/priority_map = [  ]
-36/autotile/z_index_map = [  ]
-36/occluder_offset = Vector2( 0, 0 )
-36/navigation_offset = Vector2( 0, 0 )
-36/shape_offset = Vector2( 0, 0 )
-36/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-36/shape_one_way = false
-36/shape_one_way_margin = 0.0
-36/shapes = [  ]
-36/z_index = 0
 
 [node name="Factory" type="TileMap"]
 tile_set = SubResource( 1 )

@@ -6,6 +6,8 @@ onready var tracker := $Tracker
 
 onready var t := get_tree()
 
+export(PackedScene) var next_scene
+
 func _ready() -> void:
 	randomize()
 	
@@ -27,11 +29,10 @@ func _process(delta: float) -> void:
 	
 	if len(points_shapes) > 0:
 		tracker.global_position = tracker.global_position.linear_interpolate(centroid, 0.05)
-		print(tracker.global_position)
 
 func _on_points_all_gone():
 	#TODO: change scene here 
-#	t.change_scene_to(levels[wrapi(levels.find(t.current_scene)+1, 0, len(levels))])
+	t.change_scene_to(next_scene)
 	print_debug("It's over")
 
 func _on_entity_spawned(field):

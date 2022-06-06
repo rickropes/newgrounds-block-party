@@ -3,16 +3,12 @@ extends Node
 var score := 0
 
 onready var t := get_tree()
-var controller
-var pre_spawn_cont
 
 const SHAPE_PATH = "res://scenes/base_shapes/"
 const LEVEL_PATH = "res://scenes/levels/"
 
 var currentLevelNumber;
 var currentLevelName;
-
-#onready var nodeArea = t.get_nodes_in_group("goal")[0];
 
 static func get_shape_scene(shape_type) -> PackedScene:
 	return {
