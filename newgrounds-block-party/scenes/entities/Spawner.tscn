@@ -56,11 +56,12 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+extents = Vector2( 16, 16 )
 
-[node name="Spawner" type="StaticBody2D" groups=["spawner"]]
+[node name="Spawner" type="RigidBody2D" groups=["spawner"]]
 collision_layer = 0
 collision_mask = 0
+mode = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": "Creates icons, has property to control and such

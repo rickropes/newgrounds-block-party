@@ -16,3 +16,4 @@ __meta__ = {
 
 [node name="Triangle" type="AudioStreamPlayer" parent="Sfx"]
 stream = ExtResource( 1 )
+bus = "Shape Sfx"
