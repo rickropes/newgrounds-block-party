@@ -13,6 +13,9 @@ func _ready():
 	#streamVolume = AudioServer.get_stream_global_volume_scale();
 	#fxVolume = AudioServer.get_fx_global_volume_scale();
 	
+	if(AudioServer.is_bus_mute(AudioServer.get_bus_index("Master"))):
+		_on_SoundButton_pressed();
+	
 	if(Manager.currentLevelNumber != null):
 		$UI/TopPart/LevelName.text = Manager.currentLevelNumber + ":  " + Manager.currentLevelName;
 	else:
@@ -59,9 +62,15 @@ func _on_SoundButton_pressed():
 	if(audioMuted):
 		# Mute audio
 		$UI/TopPart/HBoxContainer/SoundButton.icon = audioMutedIcon;
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true);
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), true);
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Shape Sfx"), true);
 	else:
 		# Un-Mute audio
 		$UI/TopPart/HBoxContainer/SoundButton.icon = audioSoundIcon;
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false);
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false);
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Shape Sfx"), false);
 	
 	pass # Replace with function body.
 
