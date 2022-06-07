@@ -90,11 +90,12 @@ func deselect() -> void:
 			).normalized() * TRI_IMPULSE * sel_len
 			
 			for tri in selected_nodes: 
-				for i in get_shapes_in_circle(PENTAGON_RADIUS * sel_len, tri.global_position):
-					if (i as NGNode).shape != Enums.ShapeTypes.TRIANGLE and i.shape != Enums.ShapeTypes.STAR: # and force.dot(i.global_position - centroid) > 0:
-						affectees.append(i)
-				
-				tri.destroy()
+				if(is_instance_valid(tri)):
+					for i in get_shapes_in_circle(PENTAGON_RADIUS * sel_len, tri.global_position):
+						if (i as NGNode).shape != Enums.ShapeTypes.TRIANGLE and i.shape != Enums.ShapeTypes.STAR: # and force.dot(i.global_position - centroid) > 0:
+							affectees.append(i)
+					
+					tri.destroy()
 			
 			for e in affectees:
 				(e as RigidBody2D).apply_central_impulse(force)
@@ -235,8 +236,9 @@ func _draw():
 			
 			# draw explosion radius for triangles
 			for tri in selected_nodes:
-				if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
-					draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
+				if(is_instance_valid(tri)):
+					if(((tri as NGNode).shape) == Enums.ShapeTypes.TRIANGLE):
+						draw_circle(tri.position, PENTAGON_RADIUS, Color(0.75, 0.13, 0.1, 0.2))
 		Enums.ShapeTypes.HEXAGON:
 			var to_mouse = (mouse_pos - centroid).clamped(HEX_RADIUS * sel_len)
 			draw_line(centroid, centroid + to_mouse, Color(1, 1, 0, 0.45))
@@ -245,7 +247,8 @@ func _draw():
 func get_centroid(arr) -> Vector2:
 	var out = Vector2.ZERO
 	for i in arr:
-		out += i.global_position
+		if(is_instance_valid(i)):
+			out += i.global_position
 	out /= len(arr)
 	
 	return out
