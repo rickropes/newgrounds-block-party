@@ -22,4 +22,5 @@ func check_contact(body:SpikyCircle):
 		else:
 			body.set_block_signals(true)
 			emit_signal('contact', self, body)
+			
 		
