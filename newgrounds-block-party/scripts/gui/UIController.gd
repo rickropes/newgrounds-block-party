@@ -23,7 +23,7 @@ func _ready():
 	
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if(Input.is_action_just_pressed("ui_cancel")):
 		if(isPaused):
 			_on_ContinueButton_pressed();

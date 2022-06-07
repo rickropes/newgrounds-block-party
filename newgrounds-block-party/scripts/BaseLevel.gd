@@ -14,6 +14,8 @@ func _ready() -> void:
 	t.call_group('points', 'connect', 'reached_goal', Manager, "add_points")
 	t.call_group('goal', 'connect', 'points_all_gone', self, '_on_points_all_gone')
 	
+	controller.connect("entity_spawn", self, "_on_entity_spawned")
+	
 	for obj in pre_spawn_cont.get_children():
 		var gp = obj.global_position
 		pre_spawn_cont.remove_child(obj)

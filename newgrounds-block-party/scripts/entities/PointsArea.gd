@@ -9,13 +9,13 @@ export(int) var point_shapes = 1 setget set_point_shapes
 
 var ogPointsShapes = point_shapes;
 
-const size = 75;
+const SIZE = 75;
 
 signal points_all_gone()
 func _ready() -> void:
-	$CollisionShape2D.shape.radius = size * (radius + 1)
+	$CollisionShape2D.shape.radius = SIZE * (radius + 1)
 	
-	var scl = 1/(radius + 1)
+	var scl = 1*(radius + 1)
 	$AnimatedSprite.scale = Vector2(scl, scl)
 
 func set_point_shapes(v:int):
