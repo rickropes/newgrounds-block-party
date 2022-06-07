@@ -11,6 +11,9 @@ onready var og_sprite := get_node("Sprite")
 onready var og_col := get_node("Body")
 export(Enums.ShapeTypes) var shape
 
+func _ready() -> void:
+	og_sprite.frame = randi() % og_sprite.hframes
+
 func _on_NGNode_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	var mouse_cond = (event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed)
 	var touch_cond = (event is InputEventScreenTouch and event.pressed)
