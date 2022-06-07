@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mdgt_saus_octagon.png-af33bc01522084853d94e9a9bf69b272.stex"
+path="res://.import/star.png-82e3823a3d3a9f640b96ae9b9514d72f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/base_shapes/mdgt_saus_octagon.png"
-dest_files=[ "res://.import/mdgt_saus_octagon.png-af33bc01522084853d94e9a9bf69b272.stex" ]
+source_file="res://art/base_shapes/star.png"
+dest_files=[ "res://.import/star.png-82e3823a3d3a9f640b96ae9b9514d72f.stex" ]
 
 [params]
 

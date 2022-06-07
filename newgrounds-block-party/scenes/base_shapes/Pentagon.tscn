@@ -4,17 +4,21 @@
 [ext_resource path="res://scenes/NGNode.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 35.0571
+radius = 38.0132
 
 [node name="Pentagon" instance=ExtResource( 2 )]
 shape = 2
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )
+hframes = 42
+
+[node name="CollisionArea" parent="." index="1"]
+visible = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea" index="0"]
-position = Vector2( 1, 3 )
+position = Vector2( 2, 0 )
 shape = SubResource( 1 )
 
 [node name="Body" type="CollisionPolygon2D" parent="." index="2"]
-polygon = PoolVector2Array( 1, -28, -30, -6, -18, 28, 20, 29, 32, -6 )
+polygon = PoolVector2Array( -7, -30, -30, 0, -7, 30, 30, 19, 29, -18 )

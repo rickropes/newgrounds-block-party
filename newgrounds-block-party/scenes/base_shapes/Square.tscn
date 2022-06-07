@@ -1,24 +1,24 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/NGNode.tscn" type="PackedScene" id=1]
-[ext_resource path="res://art/base_shapes/mig_square.png" type="Texture" id=2]
+[ext_resource path="res://art/base_shapes/square.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 44, 44 )
+extents = Vector2( 25, 25 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+extents = Vector2( 18.5, 19 )
 
 [node name="Square" instance=ExtResource( 1 )]
 shape = 7
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 0.25, -0.249998 )
-scale = Vector2( 0.615, 0.615 )
 texture = ExtResource( 2 )
+hframes = 42
 
 [node name="CollisionArea" parent="." index="1"]
-visible = false
+visible = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea" index="0"]
 shape = SubResource( 2 )
