@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mig_triangle.png-b4090ee5076e4aaefe378cc5fc92724b.stex"
+path="res://.import/octagon.png-c18db4830c3744644466549527fbf93e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/base_shapes/mig_triangle.png"
-dest_files=[ "res://.import/mig_triangle.png-b4090ee5076e4aaefe378cc5fc92724b.stex" ]
+source_file="res://art/base_shapes/octagon.png"
+dest_files=[ "res://.import/octagon.png-c18db4830c3744644466549527fbf93e.stex" ]
 
 [params]
 

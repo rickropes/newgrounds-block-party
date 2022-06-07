@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://art/base_shapes/star_redd.png" type="Texture" id=1]
+[ext_resource path="res://art/base_shapes/star.png" type="Texture" id=1]
 [ext_resource path="res://scenes/entities/PointsShape.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -15,10 +15,11 @@ points = 20
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 1, -1 )
 texture = ExtResource( 1 )
+hframes = 42
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea" index="0"]
 position = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="Body" type="CollisionPolygon2D" parent="." index="2"]
-polygon = PoolVector2Array( 1, -30, 13, -14, 32, -8, 20, 8, 21, 28, 1, 22, -18, 29, -17, 8, -29, -7, -10, -14 )
+polygon = PoolVector2Array( 1, -28, 12, -13, 31, -6, 20, 8, 19, 28, 1, 22, -17, 28, -17, 8, -28, -6, -10, -12 )

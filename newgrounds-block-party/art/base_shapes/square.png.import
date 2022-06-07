@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tappy_hexagon.png-d11e0ee05b8732f7e43506611d4a84c0.stex"
+path="res://.import/square.png-d275b41106dd89e06ce2878a513ccb8d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/base_shapes/tappy_hexagon.png"
-dest_files=[ "res://.import/tappy_hexagon.png-d11e0ee05b8732f7e43506611d4a84c0.stex" ]
+source_file="res://art/base_shapes/square.png"
+dest_files=[ "res://.import/square.png-d275b41106dd89e06ce2878a513ccb8d.stex" ]
 
 [params]
 

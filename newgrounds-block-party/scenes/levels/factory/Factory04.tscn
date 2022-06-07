@@ -110,7 +110,6 @@ angle = 180.0
 inside = true
 
 [node name="Camera2D" parent="Tracker" index="0"]
-current = false
 zoom = Vector2( 1.375, 1.375 )
 limit_left = 64
 limit_right = 1408

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/heyopc_parallelogram.png-aac1d9c9ac5f9c2b3202676ea46730c8.stex"
+path="res://.import/heart.png-842ee1f77a5ae2f78b2f5606641301ea.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/base_shapes/heyopc_parallelogram.png"
-dest_files=[ "res://.import/heyopc_parallelogram.png-aac1d9c9ac5f9c2b3202676ea46730c8.stex" ]
+source_file="res://art/base_shapes/heart.png"
+dest_files=[ "res://.import/heart.png-842ee1f77a5ae2f78b2f5606641301ea.stex" ]
 
 [params]
 

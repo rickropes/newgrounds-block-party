@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/star_redd.png-e2470d7453f35677007080bab37d3f36.stex"
+path="res://.import/hexagon.png-37e39fb5acc0f7c5c25e14080963ca8d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/base_shapes/star_redd.png"
-dest_files=[ "res://.import/star_redd.png-e2470d7453f35677007080bab37d3f36.stex" ]
+source_file="res://art/base_shapes/hexagon.png"
+dest_files=[ "res://.import/hexagon.png-37e39fb5acc0f7c5c25e14080963ca8d.stex" ]
 
 [params]
 
