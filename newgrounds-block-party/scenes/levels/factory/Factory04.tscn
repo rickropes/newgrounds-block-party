@@ -32,7 +32,8 @@ material = SubResource( 1 )
 z_index = -100
 
 [node name="Invisible" parent="TileMap" index="3" instance=ExtResource( 2 )]
-z_index = -100
+z_index = 1357
+tile_data = PoolIntArray( 262150, 28, 0, 262159, 28, 0, 327686, 28, 0, 327695, 28, 0, 393222, 28, 0, 393231, 28, 0, 458758, 28, 0, 458767, 28, 0 )
 script = ExtResource( 5 )
 
 [node name="PointsArea" parent="." index="2"]
