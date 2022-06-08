@@ -31,15 +31,19 @@ position = Vector2( 1194, 275 )
 
 [node name="Triangle" parent="PreSpawnedContainer" index="4" instance=ExtResource( 5 )]
 position = Vector2( 1294, 169 )
+shape = 3
 
 [node name="Triangle2" parent="PreSpawnedContainer" index="5" instance=ExtResource( 5 )]
 position = Vector2( 1234, 105 )
+shape = 3
 
 [node name="Triangle3" parent="PreSpawnedContainer" index="6" instance=ExtResource( 5 )]
 position = Vector2( 1252, 154 )
+shape = 3
 
 [node name="Triangle4" parent="PreSpawnedContainer" index="7" instance=ExtResource( 5 )]
 position = Vector2( 1289, 248 )
+shape = 3
 
 [node name="Camera2D" parent="Tracker" index="0"]
 limit_left = 0
