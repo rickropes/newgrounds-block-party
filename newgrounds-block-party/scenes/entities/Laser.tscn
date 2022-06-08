@@ -69,6 +69,7 @@ position = Vector2( 0, 64 )
 frames = SubResource( 14 )
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 position = Vector2( -32, -32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

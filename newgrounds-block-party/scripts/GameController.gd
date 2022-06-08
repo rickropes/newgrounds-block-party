@@ -41,9 +41,9 @@ func _process(_delta):
 
 func drag(pfp:NGNode):
 	if pfp.shape != shape_type: return
-	
 	#var touches = (selected_nodes[len(selected_nodes)-1] as RigidBody2D).get_colliding_bodies()
 	var current_chosen = selected_nodes[len(selected_nodes)-1];
+	if(is_instance_valid(current_chosen)): return
 	var touches = (current_chosen.collisionArea as Area2D).get_overlapping_bodies();
 	
 	for j in touches:
@@ -106,6 +106,7 @@ func deselect() -> void:
 			# list of collision shape positions
 			var col_positions := []
 			for spike in get_shapes_in_circle(effect_radius, centroid, Enums.ShapeTypes.SPIKY_CIRCLE):
+				print(spike);
 				#FIXME: need a solution for if pentagon hits parent body
 				if spike.shape == Enums.ShapeTypes.SPIKY_CIRCLE: 
 					if spike.absorbed == 1:
@@ -137,6 +138,7 @@ func deselect() -> void:
 				pent.destroy()
 				
 			for i in col_positions:
+				print(i);
 				var spiky = Manager.get_shape_scene(Enums.ShapeTypes.PLAIN_CIRCLE).instance()
 				container.add_child(spiky)
 				spiky.global_position = i
