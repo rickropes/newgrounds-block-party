@@ -60,7 +60,7 @@ Manager="*res://scripts/Manager.gd"
 
 [display]
 
-window/dpi/allow_hidpi=true
+window/size/resizable=false
 
 [gui]
 
