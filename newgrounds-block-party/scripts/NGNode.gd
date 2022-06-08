@@ -67,3 +67,7 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == 'die':
 		queue_free()
+
+
+func _on_NGNode_body_entered(body: Node) -> void:
+	if body.is_in_group('moving lava'): destroy()

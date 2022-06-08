@@ -51,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="newgrounds-block-party"
-run/main_scene="res://scenes/levels/factory/Factory01.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://art/icon.png"
 
 [autoload]
@@ -60,7 +60,7 @@ Manager="*res://scripts/Manager.gd"
 
 [display]
 
-window/dpi/allow_hidpi=true
+window/size/resizable=false
 
 [gui]
 
