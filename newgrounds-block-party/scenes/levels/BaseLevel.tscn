@@ -20,7 +20,7 @@ __meta__ = {
 
 [node name="PointsArea" parent="." instance=ExtResource( 2 )]
 
-[node name="Spawners" type="Node" parent="."]
+[node name="Spawners" type="Node2D" parent="."]
 
 [node name="PreSpawnedContainer" parent="." instance=ExtResource( 3 )]
 
