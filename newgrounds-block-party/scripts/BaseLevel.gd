@@ -35,7 +35,6 @@ func _process(delta: float) -> void:
 func _on_points_all_gone():
 	#TODO: change scene here 
 	t.change_scene_to(next_scene)
-	print_debug("It's over")
 
 func _on_entity_spawned(field):
 	add_child(field)
