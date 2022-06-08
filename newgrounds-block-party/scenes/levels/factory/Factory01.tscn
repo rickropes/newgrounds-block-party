@@ -16,7 +16,7 @@ shader_param/amplitude_y = 50.0
 shader_param/amplitude_x = 25.0
 shader_param/inclination = 50.0
 
-[node name="Factory02" instance=ExtResource( 1 )]
+[node name="Factory03" instance=ExtResource( 1 )]
 next_scene = ExtResource( 6 )
 
 [node name="Factory" parent="TileMap" index="0" instance=ExtResource( 2 )]

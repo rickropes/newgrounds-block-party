@@ -3,9 +3,13 @@ extends NGNode
 
 var absorbed := 1 
 var already_contacted = false
+export var immovable = false;
+
 signal contact(reporter, other)
 func _ready() -> void:
 	shape = Enums.ShapeTypes.SPIKY_CIRCLE
+	if(immovable):
+		mode = RigidBody2D.MODE_STATIC
 
 func _on_SpikyCircle_body_entered(body):
 	if body.is_in_group('spiky circle'):

@@ -205,6 +205,12 @@ func spawned(obj:NGNode):
 
 func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void: 
 	# TODO sprites will have other collision shapes so I need to get all of them
+	
+	if(other.immovable):
+		var temp = reporter;
+		reporter = other;
+		other = temp;
+	
 	reporter.absorbed += other.absorbed
 	other.absorbed = 0
 	for i in other.get_children():
