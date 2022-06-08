@@ -122,7 +122,6 @@ position = Vector2( 1184, 670 )
 position = Vector2( 932, -75 )
 
 [node name="Camera2D" parent="Tracker" index="0"]
-current = false
 limit_left = -576
 limit_top = -192
 limit_right = 1280
