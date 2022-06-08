@@ -63,3 +63,5 @@ limit_right = 1464
 limit_bottom = 750
 drag_margin_h_enabled = true
 smoothing_enabled = true
+
+[editable path="Spawners/OneObjSpawner"]

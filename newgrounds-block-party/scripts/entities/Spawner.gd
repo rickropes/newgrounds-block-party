@@ -61,3 +61,9 @@ func spawn_shape() -> NGNode:
 	
 	currentShape = obj;
 	return obj
+
+
+func _on_Spawner_body_entered(body: Node) -> void:
+	if body.is_in_group('moving lava'): 
+		amount = 0
+		$SpawnTimer.disconnect("timeout", self, '_on_SpawnTimer_timeout')
