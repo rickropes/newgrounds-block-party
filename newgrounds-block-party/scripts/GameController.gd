@@ -234,14 +234,15 @@ func _draw():
 	# do the drawing here
 	
 	var sel_len = len(selected_nodes)
-	var current_chosen = selected_nodes[sel_len-1];
+#	var current_chosen = selected_nodes[sel_len-1];
 	
 	var centroid = get_centroid(selected_nodes)
 	var mouse_pos = get_global_mouse_position()
 	match shape_type:
 		Enums.ShapeTypes.TRIANGLE, Enums.ShapeTypes.PENTAGON:
 			var to_mouse = (mouse_pos - centroid).clamped(PENTAGON_RADIUS)
-			draw_line(centroid, centroid + to_mouse, Color(0.75, 0.13, 0.1, 0.6), 10);
+			if shape_type == Enums.ShapeTypes.TRIANGLE:
+				draw_line(centroid, centroid + to_mouse, Color(0.75, 0.13, 0.1, 0.6), 10);
 			
 			# draw explosion radius for triangles
 			for tri in selected_nodes:

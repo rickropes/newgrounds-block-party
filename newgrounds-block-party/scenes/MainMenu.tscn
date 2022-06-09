@@ -24,6 +24,7 @@ anchor_bottom = 1.0
 [node name="TextureRect" type="Sprite" parent="Holder/MainScreen"]
 modulate = Color( 0.184314, 0.254902, 0.270588, 1 )
 scale = Vector2( 0.5662, 0.56 )
+z_index = -100
 texture = ExtResource( 6 )
 centered = false
 
@@ -112,39 +113,39 @@ made with love by:"
 align = 1
 valign = 1
 
-[node name="ProfileLink" parent="Holder/Credits" instance=ExtResource( 7 )]
+[node name="MigMoog" parent="Holder/Credits" instance=ExtResource( 7 )]
 margin_left = 345.0
 margin_top = 423.0
 margin_right = 452.0
 margin_bottom = 461.0
 
-[node name="ProfileLink2" parent="Holder/Credits" instance=ExtResource( 7 )]
+[node name="Rick" parent="Holder/Credits" instance=ExtResource( 7 )]
 margin_left = 450.0
 margin_top = 423.0
 margin_right = 575.0
 margin_bottom = 461.0
 text = "rickropes"
 
-[node name="ProfileLink3" parent="Holder/Credits" instance=ExtResource( 7 )]
+[node name="Dry" parent="Holder/Credits" instance=ExtResource( 7 )]
 margin_left = 556.0
 margin_right = 681.0
 text = "dryest"
 
-[node name="ProfileLink4" parent="Holder/Credits" instance=ExtResource( 7 )]
+[node name="Tappy" parent="Holder/Credits" instance=ExtResource( 7 )]
 margin_left = 322.0
 margin_top = 460.0
 margin_right = 457.0
 margin_bottom = 498.0
 text = "tappywara"
 
-[node name="ProfileLink5" parent="Holder/Credits" instance=ExtResource( 7 )]
+[node name="Conundrym" parent="Holder/Credits" instance=ExtResource( 7 )]
 margin_left = 453.0
 margin_top = 461.0
 margin_right = 588.0
 margin_bottom = 499.0
 text = "conundrym"
 
-[node name="ProfileLink6" parent="Holder/Credits" instance=ExtResource( 7 )]
+[node name="Tiny" parent="Holder/Credits" instance=ExtResource( 7 )]
 margin_left = 559.0
 margin_top = 462.0
 margin_right = 694.0
