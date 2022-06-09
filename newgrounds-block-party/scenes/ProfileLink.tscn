@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://art/gui/dynamicFontMain.tres" type="DynamicFont" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+func _on_Button_pressed() -> void:
+	OS.shell_open(\"https://\" + self.text + \".newgrounds.com\")
+"
+
+[node name="ProfileLink" type="Button"]
+modulate = Color( 0.141176, 0.937255, 0.901961, 1 )
+margin_left = 320.0
+margin_top = 426.0
+margin_right = 427.0
+margin_bottom = 464.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "MigMoog"
+flat = true
+script = SubResource( 1 )
+
+[connection signal="pressed" from="." to="." method="_on_Button_pressed"]
