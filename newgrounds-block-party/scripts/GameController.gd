@@ -43,7 +43,7 @@ func drag(pfp:NGNode):
 	if pfp.shape != shape_type: return
 	#var touches = (selected_nodes[len(selected_nodes)-1] as RigidBody2D).get_colliding_bodies()
 	var current_chosen = selected_nodes[len(selected_nodes)-1];
-	if(is_instance_valid(current_chosen)): return
+	if(not is_instance_valid(current_chosen)): return
 	var touches = (current_chosen.collisionArea as Area2D).get_overlapping_bodies();
 	
 	for j in touches:
