@@ -239,7 +239,7 @@ func _draw():
 	var centroid = get_centroid(selected_nodes)
 	var mouse_pos = get_global_mouse_position()
 	match shape_type:
-		Enums.ShapeTypes.TRIANGLE:
+		Enums.ShapeTypes.TRIANGLE, Enums.ShapeTypes.PENTAGON:
 			var to_mouse = (mouse_pos - centroid).clamped(PENTAGON_RADIUS)
 			draw_line(centroid, centroid + to_mouse, Color(0.75, 0.13, 0.1, 0.6), 10);
 			
