@@ -226,6 +226,7 @@ func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void:
 	
 	reporter.already_contacted = false
 	other.queue_free()
+	$Sfx/Spiky.play()
 
 func _draw():
 	if shape_type == null: return
