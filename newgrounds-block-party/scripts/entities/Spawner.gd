@@ -39,6 +39,7 @@ func _on_SpawnTimer_timeout() -> void:
 	var _obj = spawn_shape()
 	amount -= 1
 	if amount == 0:
+		$Icon.visible = false
 		$SpawnTimer.stop()
 
 func spawn_shape() -> NGNode:
@@ -65,5 +66,6 @@ func spawn_shape() -> NGNode:
 
 func _on_Spawner_body_entered(body: Node) -> void:
 	if body.is_in_group('moving lava'): 
+		queue_free()
 		amount = 0
 		$SpawnTimer.disconnect("timeout", self, '_on_SpawnTimer_timeout')

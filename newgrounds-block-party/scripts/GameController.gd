@@ -43,7 +43,7 @@ func drag(pfp:NGNode):
 	if pfp.shape != shape_type: return
 	#var touches = (selected_nodes[len(selected_nodes)-1] as RigidBody2D).get_colliding_bodies()
 	var current_chosen = selected_nodes[len(selected_nodes)-1];
-	if(is_instance_valid(current_chosen)): return
+	if(not is_instance_valid(current_chosen)): return
 	var touches = (current_chosen.collisionArea as Area2D).get_overlapping_bodies();
 	
 	for j in touches:
@@ -226,6 +226,7 @@ func spiky_contact(reporter:SpikyCircle, other:SpikyCircle) -> void:
 	
 	reporter.already_contacted = false
 	other.queue_free()
+	$Sfx/Spiky.play()
 
 func _draw():
 	if shape_type == null: return
@@ -238,7 +239,7 @@ func _draw():
 	var centroid = get_centroid(selected_nodes)
 	var mouse_pos = get_global_mouse_position()
 	match shape_type:
-		Enums.ShapeTypes.TRIANGLE:
+		Enums.ShapeTypes.TRIANGLE, Enums.ShapeTypes.PENTAGON:
 			var to_mouse = (mouse_pos - centroid).clamped(PENTAGON_RADIUS)
 			draw_line(centroid, centroid + to_mouse, Color(0.75, 0.13, 0.1, 0.6), 10);
 			

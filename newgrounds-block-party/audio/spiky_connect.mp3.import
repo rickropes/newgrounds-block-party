@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/spiky_connect.mp3-27cdd1faa02efb7aa869cdfaf2c399eb.mp3str"
+
+[deps]
+
+source_file="res://audio/spiky_connect.mp3"
+dest_files=[ "res://.import/spiky_connect.mp3-27cdd1faa02efb7aa869cdfaf2c399eb.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
