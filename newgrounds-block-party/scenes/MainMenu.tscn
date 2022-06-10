@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/gui/MainMenuController.gd" type="Script" id=1]
 [ext_resource path="res://scripts/gui/LevelSelectButton.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://art/maxhog.png" type="Texture" id=5]
 [ext_resource path="res://art/wizardthumbnail.png" type="Texture" id=6]
 [ext_resource path="res://scenes/ProfileLink.tscn" type="PackedScene" id=7]
+[ext_resource path="res://audio/menu.mp3" type="AudioStream" id=8]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -225,6 +226,11 @@ flat = true
 script = ExtResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+bus = "Music"
 
 [connection signal="mouse_entered" from="Holder/MainScreen/Start" to="Holder/MainScreen/Start" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Holder/MainScreen/Start" to="Holder/MainScreen/Start" method="_on_mouse_exited"]
