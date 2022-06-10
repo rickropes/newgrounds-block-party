@@ -56,7 +56,6 @@ SceneChanger="*res://scenes/SceneChanger.tscn"
 [display]
 
 window/size/resizable=false
-window/dpi/allow_hidpi=true
 
 [gui]
 
