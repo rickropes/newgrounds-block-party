@@ -3,6 +3,7 @@ extends Node2D
 onready var controller = $GameController
 onready var pre_spawn_cont = $PreSpawnedContainer
 onready var tracker := $Tracker
+onready var cam_mover: Tween= $CamMover
 
 onready var t := get_tree()
 
@@ -34,6 +35,15 @@ func _process(delta: float) -> void:
 
 func _on_points_all_gone():
 	#TODO: change scene here 
+	cam_mover.interpolate_property(
+		tracker, 
+		"global_position", 
+		tracker.global_position,
+		$PointsArea.global_position,
+		1.5, Tween.TRANS_CUBIC, Tween.EASE_IN
+	)
+	cam_mover.start()
+	yield(cam_mover, "tween_all_completed")
 	t.change_scene_to(next_scene)
 
 func _on_entity_spawned(field):

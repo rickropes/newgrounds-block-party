@@ -125,82 +125,82 @@ position = Vector2( 1189, 190 )
 [node name="FirstPillar26" parent="PreSpawnedContainer" index="25" instance=ExtResource( 3 )]
 position = Vector2( 1188, 157 )
 
-[node name="FirstPillar27" parent="PreSpawnedContainer" index="26" instance=ExtResource( 3 )]
+[node name="SecondPillar27" parent="PreSpawnedContainer" index="26" instance=ExtResource( 3 )]
 position = Vector2( 1824, 1006 )
 
-[node name="FirstPillar28" parent="PreSpawnedContainer" index="27" instance=ExtResource( 3 )]
+[node name="SecondPillar28" parent="PreSpawnedContainer" index="27" instance=ExtResource( 3 )]
 position = Vector2( 1825, 970 )
 
-[node name="FirstPillar29" parent="PreSpawnedContainer" index="28" instance=ExtResource( 3 )]
+[node name="SecondPillar29" parent="PreSpawnedContainer" index="28" instance=ExtResource( 3 )]
 position = Vector2( 1824, 931 )
 
-[node name="FirstPillar30" parent="PreSpawnedContainer" index="29" instance=ExtResource( 3 )]
+[node name="SecondPillar30" parent="PreSpawnedContainer" index="29" instance=ExtResource( 3 )]
 position = Vector2( 1826, 896 )
 
-[node name="FirstPillar31" parent="PreSpawnedContainer" index="30" instance=ExtResource( 3 )]
+[node name="SecondPillar31" parent="PreSpawnedContainer" index="30" instance=ExtResource( 3 )]
 position = Vector2( 1827, 860 )
 
-[node name="FirstPillar32" parent="PreSpawnedContainer" index="31" instance=ExtResource( 3 )]
+[node name="SecondPillar32" parent="PreSpawnedContainer" index="31" instance=ExtResource( 3 )]
 position = Vector2( 1828, 818 )
 
-[node name="FirstPillar33" parent="PreSpawnedContainer" index="32" instance=ExtResource( 3 )]
+[node name="SecondPillar33" parent="PreSpawnedContainer" index="32" instance=ExtResource( 3 )]
 position = Vector2( 1828, 782 )
 
-[node name="FirstPillar34" parent="PreSpawnedContainer" index="33" instance=ExtResource( 3 )]
+[node name="SecondPillar34" parent="PreSpawnedContainer" index="33" instance=ExtResource( 3 )]
 position = Vector2( 1828, 743 )
 
-[node name="FirstPillar35" parent="PreSpawnedContainer" index="34" instance=ExtResource( 3 )]
+[node name="SecondPillar35" parent="PreSpawnedContainer" index="34" instance=ExtResource( 3 )]
 position = Vector2( 1827, 709 )
 
-[node name="FirstPillar36" parent="PreSpawnedContainer" index="35" instance=ExtResource( 3 )]
+[node name="SecondPillar36" parent="PreSpawnedContainer" index="35" instance=ExtResource( 3 )]
 position = Vector2( 1829, 675 )
 
-[node name="FirstPillar37" parent="PreSpawnedContainer" index="36" instance=ExtResource( 3 )]
+[node name="SecondPillar37" parent="PreSpawnedContainer" index="36" instance=ExtResource( 3 )]
 position = Vector2( 1830, 644 )
 
-[node name="FirstPillar38" parent="PreSpawnedContainer" index="37" instance=ExtResource( 3 )]
+[node name="SecondPillar38" parent="PreSpawnedContainer" index="37" instance=ExtResource( 3 )]
 position = Vector2( 1830, 613 )
 
-[node name="FirstPillar39" parent="PreSpawnedContainer" index="38" instance=ExtResource( 3 )]
+[node name="SecondPillar39" parent="PreSpawnedContainer" index="38" instance=ExtResource( 3 )]
 position = Vector2( 1831, 583 )
 
-[node name="FirstPillar40" parent="PreSpawnedContainer" index="39" instance=ExtResource( 3 )]
+[node name="SecondPillar40" parent="PreSpawnedContainer" index="39" instance=ExtResource( 3 )]
 position = Vector2( 1831, 553 )
 
-[node name="FirstPillar41" parent="PreSpawnedContainer" index="40" instance=ExtResource( 3 )]
+[node name="SecondPillar41" parent="PreSpawnedContainer" index="40" instance=ExtResource( 3 )]
 position = Vector2( 1832, 525 )
 
-[node name="FirstPillar42" parent="PreSpawnedContainer" index="41" instance=ExtResource( 3 )]
+[node name="SecondPillar42" parent="PreSpawnedContainer" index="41" instance=ExtResource( 3 )]
 position = Vector2( 1832, 496 )
 
-[node name="FirstPillar43" parent="PreSpawnedContainer" index="42" instance=ExtResource( 3 )]
+[node name="SecondPillar43" parent="PreSpawnedContainer" index="42" instance=ExtResource( 3 )]
 position = Vector2( 1830, 463 )
 
-[node name="FirstPillar44" parent="PreSpawnedContainer" index="43" instance=ExtResource( 3 )]
+[node name="SecondPillar44" parent="PreSpawnedContainer" index="43" instance=ExtResource( 3 )]
 position = Vector2( 1830, 430 )
 
-[node name="FirstPillar45" parent="PreSpawnedContainer" index="44" instance=ExtResource( 3 )]
+[node name="SecondPillar45" parent="PreSpawnedContainer" index="44" instance=ExtResource( 3 )]
 position = Vector2( 1830, 399 )
 
-[node name="FirstPillar46" parent="PreSpawnedContainer" index="45" instance=ExtResource( 3 )]
+[node name="SecondPillar46" parent="PreSpawnedContainer" index="45" instance=ExtResource( 3 )]
 position = Vector2( 1831, 364 )
 
-[node name="FirstPillar47" parent="PreSpawnedContainer" index="46" instance=ExtResource( 3 )]
+[node name="SecondPillar47" parent="PreSpawnedContainer" index="46" instance=ExtResource( 3 )]
 position = Vector2( 1832, 329 )
 
-[node name="FirstPillar48" parent="PreSpawnedContainer" index="47" instance=ExtResource( 3 )]
+[node name="SecondPillar48" parent="PreSpawnedContainer" index="47" instance=ExtResource( 3 )]
 position = Vector2( 1832, 295 )
 
-[node name="FirstPillar49" parent="PreSpawnedContainer" index="48" instance=ExtResource( 3 )]
+[node name="SecondPillar49" parent="PreSpawnedContainer" index="48" instance=ExtResource( 3 )]
 position = Vector2( 1832, 261 )
 
-[node name="FirstPillar50" parent="PreSpawnedContainer" index="49" instance=ExtResource( 3 )]
+[node name="SecondPillar50" parent="PreSpawnedContainer" index="49" instance=ExtResource( 3 )]
 position = Vector2( 1831, 226 )
 
-[node name="FirstPillar51" parent="PreSpawnedContainer" index="50" instance=ExtResource( 3 )]
+[node name="SecondPillar51" parent="PreSpawnedContainer" index="50" instance=ExtResource( 3 )]
 position = Vector2( 1831, 195 )
 
-[node name="FirstPillar52" parent="PreSpawnedContainer" index="51" instance=ExtResource( 3 )]
+[node name="SecondPillar52" parent="PreSpawnedContainer" index="51" instance=ExtResource( 3 )]
 position = Vector2( 1830, 162 )
 
 [node name="Tracker" parent="." index="7"]
@@ -210,3 +210,6 @@ position = Vector2( 1025, 616 )
 zoom = Vector2( 2, 2 )
 limit_left = 0
 limit_top = 0
+
+[node name="ColorRect" parent="Tracker/Camera2D" index="0"]
+color = Color( 1, 1, 1, 0 )
