@@ -30,6 +30,7 @@ tile_data = PoolIntArray( 786432, 14, 0, 786433, 14, 0, 786434, 14, 0, 786435, 1
 
 [node name="PointsArea" parent="." index="2"]
 position = Vector2( 1228, 279 )
+radius = 0
 point_shapes = 3
 
 [node name="Heart" parent="Spawners" index="0" instance=ExtResource( 3 )]
