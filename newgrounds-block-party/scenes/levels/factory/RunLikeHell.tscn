@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 		
 "
 
-[node name="Factory06" instance=ExtResource( 2 )]
+[node name="RunLikeHell" instance=ExtResource( 2 )]
 next_scene = ExtResource( 7 )
 
 [node name="Background" parent="TileMap" index="0" instance=ExtResource( 4 )]

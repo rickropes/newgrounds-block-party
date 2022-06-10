@@ -22,9 +22,9 @@ func set_point_shapes(v:int):
 #	if point_shapes != ogPointsShapes:
 #		var new_mod = Color.green
 #		new_mod.g /= point_shapes
-#		$AnimatedSprite.modulate = new_mod
 	point_shapes = v
 	
 	if point_shapes <= 0:
 		$GoalJingle.play()
+		$AnimatedSprite.modulate = Color.green
 		emit_signal("points_all_gone")
