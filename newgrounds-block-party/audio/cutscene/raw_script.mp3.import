@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/raw_script.mp3-031c2c0663502f5d4b5bdc8886544893.mp3str"
+
+[deps]
+
+source_file="res://audio/cutscene/raw_script.mp3"
+dest_files=[ "res://.import/raw_script.mp3-031c2c0663502f5d4b5bdc8886544893.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
