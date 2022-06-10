@@ -43,8 +43,9 @@ func _on_points_all_gone():
 		1.5, Tween.TRANS_CUBIC, Tween.EASE_IN
 	)
 	cam_mover.start()
-	yield(cam_mover, "tween_all_completed")
-	t.change_scene_to(next_scene)
+	t.call_group('spawner', 'set_block_signal', true)
+	t.call_group('objects', 'destroy')
+	SceneChanger.fade_scene(next_scene, cam_mover)
 
 func _on_entity_spawned(field):
 	add_child(field)

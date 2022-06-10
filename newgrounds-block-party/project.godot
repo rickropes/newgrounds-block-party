@@ -57,6 +57,7 @@ config/icon="res://art/icon.png"
 [autoload]
 
 Manager="*res://scripts/Manager.gd"
+SceneChanger="*res://scenes/SceneChanger.tscn"
 
 [display]
 

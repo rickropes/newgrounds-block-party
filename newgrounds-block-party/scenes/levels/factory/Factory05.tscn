@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/levels/BaseLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/tilemaps/Factory.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/base_shapes/Hexagon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/entities/OneObjSpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/levels/factory/Factory06.tscn" type="PackedScene" id=6]
+[ext_resource path="res://audio/music/think_it_through.mp3" type="AudioStream" id=7]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Area2D
@@ -117,6 +118,9 @@ position = Vector2( 1182, 615 )
 
 [node name="Hexagon11" parent="PreSpawnedContainer" index="12" instance=ExtResource( 4 )]
 position = Vector2( 1184, 670 )
+
+[node name="Music" parent="." index="6"]
+stream = ExtResource( 7 )
 
 [node name="Tracker" parent="." index="7"]
 position = Vector2( 932, -75 )

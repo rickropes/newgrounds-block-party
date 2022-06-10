@@ -134,14 +134,14 @@ func deselect() -> void:
 				if spike.absorbed <= 0:
 					spike.destroy()
 			
-			for pent in selected_nodes:
-				pent.destroy()
+			for pent in selected_nodes: pent.destroy()
 				
 			for i in col_positions:
 				print(i);
 				var spiky = Manager.get_shape_scene(Enums.ShapeTypes.PLAIN_CIRCLE).instance()
 				container.add_child(spiky)
 				spiky.global_position = i
+			$Sfx/Pentagon.play()
 
 		#SQUARES
 		Enums.ShapeTypes.SQUARE:
@@ -184,6 +184,7 @@ func deselect() -> void:
 					RigidBody2D.MODE_STATIC 
 					if shape_type == Enums.ShapeTypes.OCTAGON 
 					and obj.shape != Enums.ShapeTypes.PARALLELOGRAM
+					and obj.shape != Enums.ShapeTypes.STAR
 					else 
 					RigidBody2D.MODE_RIGID
 				)
@@ -271,7 +272,7 @@ func get_shapes_in_circle(radius:float, point:Vector2, type = null) -> Array:
 		if type != null and i.shape != type: continue
 		
 		if type == Enums.ShapeTypes.SPIKY_CIRCLE:
-			var cols = i.get_children_of_type("CollisionShape2D")
+			var cols = i.get_children()
 			for k in len(cols):
 				if (cols[k].global_position - point).length() <= radius:
 					out.append(i)

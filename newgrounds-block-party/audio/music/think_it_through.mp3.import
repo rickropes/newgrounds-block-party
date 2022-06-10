@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/think_it_through.mp3-141551e3966be04a3be577db95713e95.mp3str"
+
+[deps]
+
+source_file="res://audio/music/think_it_through.mp3"
+dest_files=[ "res://.import/think_it_through.mp3-141551e3966be04a3be577db95713e95.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

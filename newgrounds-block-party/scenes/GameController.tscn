@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://audio/triangle.mp3" type="AudioStream" id=1]
 [ext_resource path="res://scripts/GameController.gd" type="Script" id=2]
 [ext_resource path="res://audio/spiky_connect.mp3" type="AudioStream" id=3]
+[ext_resource path="res://audio/pentagon.mp3" type="AudioStream" id=4]
 
 [node name="GameController" type="Node2D" groups=["controller"]]
 script = ExtResource( 2 )
@@ -21,3 +22,6 @@ bus = "Shape Sfx"
 
 [node name="Spiky" type="AudioStreamPlayer" parent="Sfx"]
 stream = ExtResource( 3 )
+
+[node name="Pentagon" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 4 )

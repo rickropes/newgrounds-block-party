@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/levels/BaseLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/tilemaps/Factory.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://art/shaders/waveShader.tres" type="Shader" id=4]
 [ext_resource path="res://scripts/InvisibleObject.gd" type="Script" id=5]
 [ext_resource path="res://scenes/levels/factory/Factory04.tscn" type="PackedScene" id=6]
+[ext_resource path="res://audio/music/happy.mp3" type="AudioStream" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -83,6 +84,9 @@ position = Vector2( 1248, 608 )
 collision_mask = 0
 time = 0.1
 inside = true
+
+[node name="Music" parent="." index="6"]
+stream = ExtResource( 7 )
 
 [node name="Camera2D" parent="Tracker" index="0"]
 zoom = Vector2( 1.375, 1.375 )

@@ -68,4 +68,5 @@ func _on_Spawner_body_entered(body: Node) -> void:
 	if body.is_in_group('moving lava'): 
 		queue_free()
 		amount = 0
+		$SpawnTimer.stop()
 		$SpawnTimer.disconnect("timeout", self, '_on_SpawnTimer_timeout')

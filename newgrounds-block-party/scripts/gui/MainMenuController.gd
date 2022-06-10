@@ -21,8 +21,9 @@ func _ready():
 
 func _on_Start_pressed():
 	#$Holder.rect_position = $Holder.rect_position.linear_interpolate(Vector2(-1024, 0), 0.2);
-	$Tween.interpolate_property($Holder, "rect_position", Vector2(0,0), Vector2(-1024,0), 0.5, Tween.TRANS_CUBIC);
-	$Tween.start();
+#	$Tween.interpolate_property($Holder, "rect_position", Vector2(0,0), Vector2(-1024,0), 0.5, Tween.TRANS_CUBIC);
+#	$Tween.start();
+	get_tree().change_scene("res://scenes/levels/factory/Factory01.tscn")
 	pass # Replace with function body.
 
 
