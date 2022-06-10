@@ -24,4 +24,5 @@ func set_point_shapes(v:int):
 	point_shapes = v
 	
 	if point_shapes <= 0:
+		$AnimatedSprite.modulate = Color.green
 		emit_signal("points_all_gone")
