@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://art/intro/wizardcutscene4.png" type="Texture" id=1]
 [ext_resource path="res://art/intro/wizardcutscene2.png" type="Texture" id=2]
@@ -9,9 +9,13 @@
 [ext_resource path="res://art/intro/wizardcutscene6.png" type="Texture" id=7]
 [ext_resource path="res://audio/cutscene/wizardscript.mp3" type="AudioStream" id=8]
 [ext_resource path="res://art/gui/dynamicFontMain.tres" type="DynamicFont" id=9]
+[ext_resource path="res://audio/cutscene/cutscene_music.mp3" type="AudioStream" id=10]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
+
+onready var scn_changer = get_node(\"/root/SceneChanger\")
+onready var next_scene = preload(\"res://scenes/MainMenu.tscn\")
 
 func _ready() -> void:
 	$AnimationPlayer.play(\"cutscene\")
@@ -23,7 +27,8 @@ func _input(event: InputEvent) -> void:
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == 'cutscene':
-		get_tree().change_scene(\"res://scenes/MainMenu.tscn\")
+		scn_changer.fade_scene(next_scene)
+#		get_tree().change_scene(\"res://scenes/MainMenu.tscn\")
 "
 
 [sub_resource type="Animation" id=4]
@@ -77,7 +82,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2, 12.1, 20.1 ),
+"times": PoolRealArray( 0, 2, 12.1, 19.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false, true ]
@@ -89,7 +94,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 2, 7.1, 20.1, 21.4, 25.1 ),
+"times": PoolRealArray( 2, 7.1, 19.8, 21.4, 25.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 5 ]
@@ -129,6 +134,18 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Music:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 25.4, 28.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -5.463, -80.0 ]
 }
 
 [sub_resource type="SpriteFrames" id=3]
@@ -220,5 +237,11 @@ frame = 1
 
 [node name="Script" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -6.33
+autoplay = true
+bus = "Music"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
