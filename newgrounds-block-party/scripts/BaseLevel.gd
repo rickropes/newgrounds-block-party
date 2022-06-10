@@ -6,6 +6,7 @@ onready var tracker := $Tracker
 onready var cam_mover: Tween= $CamMover
 
 onready var t := get_tree()
+onready var scn_changer := get_node("/root/SceneChanger")
 
 export(PackedScene) var next_scene
 
@@ -43,9 +44,10 @@ func _on_points_all_gone():
 		1.5, Tween.TRANS_CUBIC, Tween.EASE_IN
 	)
 	cam_mover.start()
-	t.call_group('spawner', 'set_block_signal', true)
+	#DUNNO IF WORKS TEST LATER
+	t.call_group('spawner', 'queue_free')
 	t.call_group('objects', 'destroy')
-	SceneChanger.fade_scene(next_scene, cam_mover)
+	scn_changer.fade_scene(next_scene, cam_mover)
 
 func _on_entity_spawned(field):
 	add_child(field)

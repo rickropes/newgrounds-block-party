@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/entities/OneObjSpawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://art/shaders/waveShader.tres" type="Shader" id=4]
 [ext_resource path="res://audio/music/gameplay1.mp3" type="AudioStream" id=5]
-[ext_resource path="res://scenes/levels/factory/Factory02.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/levels/factory/ThePit.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -16,7 +16,7 @@ shader_param/amplitude_y = 50.0
 shader_param/amplitude_x = 25.0
 shader_param/inclination = 50.0
 
-[node name="Factory03" instance=ExtResource( 1 )]
+[node name="SkipStones" instance=ExtResource( 1 )]
 next_scene = ExtResource( 6 )
 
 [node name="Factory" parent="TileMap" index="0" instance=ExtResource( 2 )]

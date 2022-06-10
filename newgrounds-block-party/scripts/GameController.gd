@@ -272,7 +272,7 @@ func get_shapes_in_circle(radius:float, point:Vector2, type = null) -> Array:
 		if type != null and i.shape != type: continue
 		
 		if type == Enums.ShapeTypes.SPIKY_CIRCLE:
-			var cols = i.get_children()
+			var cols = i.get_children_of_type("CollisionShape2D")
 			for k in len(cols):
 				if (cols[k].global_position - point).length() <= radius:
 					out.append(i)
