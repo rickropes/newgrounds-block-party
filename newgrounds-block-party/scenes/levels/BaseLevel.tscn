@@ -26,10 +26,6 @@ __meta__ = {
 
 [node name="GUI" parent="." instance=ExtResource( 5 )]
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-autoplay = true
-bus = "Music"
-
 [node name="Tracker" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="Tracker"]

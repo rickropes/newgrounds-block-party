@@ -13,6 +13,9 @@ export(PackedScene) var next_scene
 func _ready() -> void:
 	randomize()
 	
+	if not Music.playing:
+		Music.play()
+	
 	t.call_group('points', 'connect', 'reached_goal', Manager, "add_points")
 	t.call_group('goal', 'connect', 'points_all_gone', self, '_on_points_all_gone')
 	

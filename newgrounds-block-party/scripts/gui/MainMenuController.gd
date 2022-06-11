@@ -11,7 +11,9 @@ func _ready():
 	if(Manager.currentLevelName != null):
 		$Holder.rect_position = Vector2(-1024, 0);
 	
-	pass # Replace with function body.
+	if not Music.playing:
+		Music.play()
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
