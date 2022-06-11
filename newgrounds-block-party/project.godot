@@ -52,10 +52,7 @@ config/icon="res://art/icon.png"
 
 Manager="*res://scripts/Manager.gd"
 SceneChanger="*res://scenes/SceneChanger.tscn"
-
-[display]
-
-window/size/resizable=false
+Music="*res://scenes/Music.tscn"
 
 [gui]
 
