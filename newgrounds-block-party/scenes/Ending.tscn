@@ -1,0 +1,116 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://art/gui/dynamicFontMain.tres" type="DynamicFont" id=1]
+[ext_resource path="res://audio/cutscene/ending_lol.mp3" type="AudioStream" id=2]
+[ext_resource path="res://scripts/gui/Cutscene.gd" type="Script" id=3]
+[ext_resource path="res://art/intro/wizardbeatup1.png" type="Texture" id=4]
+[ext_resource path="res://art/intro/wizardbeatuop2.png" type="Texture" id=5]
+[ext_resource path="res://audio/cutscene/cutscene_music.mp3" type="AudioStream" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "cutscene"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panels/AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 11.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panels/AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( -0.1, 0.1, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 0, 1 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Lines")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Ending" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Control" type="Control" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 513.0
+margin_top = 300.0
+margin_right = 513.0
+margin_bottom = 300.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -513.0
+margin_top = -300.0
+margin_right = 509.0
+margin_bottom = 300.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -118.0
+margin_top = -13.0
+margin_right = 118.0
+margin_bottom = 13.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Click to skip cutscene"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/cutscene = SubResource( 1 )
+
+[node name="Panels" type="Node2D" parent="."]
+position = Vector2( 511, 300 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Panels"]
+frames = SubResource( 2 )
+
+[node name="Lines" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -6.33
+autoplay = true
+bus = "Music"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

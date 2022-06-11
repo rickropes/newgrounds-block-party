@@ -10,26 +10,7 @@
 [ext_resource path="res://audio/cutscene/wizardscript.mp3" type="AudioStream" id=8]
 [ext_resource path="res://art/gui/dynamicFontMain.tres" type="DynamicFont" id=9]
 [ext_resource path="res://audio/cutscene/cutscene_music.mp3" type="AudioStream" id=10]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node2D
-
-onready var scn_changer = get_node(\"/root/SceneChanger\")
-onready var next_scene = preload(\"res://scenes/MainMenu.tscn\")
-
-func _ready() -> void:
-	$AnimationPlayer.play(\"cutscene\")
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		get_tree().change_scene(\"res://scenes/MainMenu.tscn\")
-		
-
-func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
-	if anim_name == 'cutscene':
-		scn_changer.fade_scene(next_scene)
-#		get_tree().change_scene(\"res://scenes/MainMenu.tscn\")
-"
+[ext_resource path="res://scripts/gui/Cutscene.gd" type="Script" id=11]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -157,7 +138,7 @@ animations = [ {
 } ]
 
 [node name="Cutscene" type="Node2D"]
-script = SubResource( 1 )
+script = ExtResource( 11 )
 
 [node name="Control" type="Control" parent="."]
 anchor_top = 0.5

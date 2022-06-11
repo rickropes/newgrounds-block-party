@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ending_lol.mp3-778f9f6a93a32f5c24cdbdfac66085fe.mp3str"
+
+[deps]
+
+source_file="res://audio/cutscene/ending_lol.mp3"
+dest_files=[ "res://.import/ending_lol.mp3-778f9f6a93a32f5c24cdbdfac66085fe.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -46,7 +46,7 @@ rect_pivot_offset = Vector2( 513, 31 )
 alignment = 2
 
 [node name="RestartButton" type="Button" parent="UI/TopPart/HBoxContainer"]
-margin_left = 792.0
+margin_left = 786.0
 margin_right = 864.0
 margin_bottom = 63.0
 rect_pivot_offset = Vector2( 35.9615, 31.9561 )
