@@ -46,7 +46,6 @@ collision_mask = 0
 shape = 9
 time = 0.5
 angle = 90.0
-changeWeigth = 50.0
 collisionDisabled = true
 
 [node name="OneObjSpawner" parent="Spawners" index="1" instance=ExtResource( 4 )]
@@ -54,28 +53,24 @@ position = Vector2( 480, 288 )
 collision_mask = 0
 impulse = 250.0
 time = 0.1
-inside = true
 
 [node name="OneObjSpawner9" parent="Spawners" index="2" instance=ExtResource( 4 )]
 position = Vector2( 480, 352 )
 collision_mask = 0
 impulse = 250.0
 time = 0.1
-inside = true
 
 [node name="OneObjSpawner10" parent="Spawners" index="3" instance=ExtResource( 4 )]
 position = Vector2( 480, 416 )
 collision_mask = 0
 impulse = 250.0
 time = 0.1
-inside = true
 
 [node name="OneObjSpawner11" parent="Spawners" index="4" instance=ExtResource( 4 )]
 position = Vector2( 480, 480 )
 collision_mask = 0
 impulse = 250.0
 time = 0.1
-inside = true
 
 [node name="OneObjSpawner3" parent="Spawners" index="5" instance=ExtResource( 4 )]
 position = Vector2( 928, 288 )
@@ -83,7 +78,6 @@ collision_mask = 0
 impulse = 250.0
 time = 0.1
 angle = 180.0
-inside = true
 
 [node name="OneObjSpawner6" parent="Spawners" index="6" instance=ExtResource( 4 )]
 position = Vector2( 928, 480 )
@@ -91,7 +85,6 @@ collision_mask = 0
 impulse = 250.0
 time = 0.1
 angle = 180.0
-inside = true
 
 [node name="OneObjSpawner7" parent="Spawners" index="7" instance=ExtResource( 4 )]
 position = Vector2( 928, 352 )
@@ -99,7 +92,6 @@ collision_mask = 0
 impulse = 250.0
 time = 0.1
 angle = 180.0
-inside = true
 
 [node name="OneObjSpawner8" parent="Spawners" index="8" instance=ExtResource( 4 )]
 position = Vector2( 928, 416 )
@@ -107,7 +99,6 @@ collision_mask = 0
 impulse = 250.0
 time = 0.1
 angle = 180.0
-inside = true
 
 [node name="Camera2D" parent="Tracker" index="0"]
 zoom = Vector2( 1.375, 1.375 )
