@@ -98,7 +98,11 @@ func deselect() -> void:
 					tri.destroy()
 			
 			for e in affectees:
-				(e as RigidBody2D).apply_central_impulse(force)
+				var e_rgd = e as RigidBody2D
+				e_rgd.applied_force = Vector2.ZERO
+				e_rgd.gravity_scale = 0
+				e_rgd.apply_central_impulse(force)
+				e_rgd.gravity_scale = 1
 		
 		#PENTAGONS
 		Enums.ShapeTypes.PENTAGON:

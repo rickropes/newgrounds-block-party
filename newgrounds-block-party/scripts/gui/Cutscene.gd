@@ -13,7 +13,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		get_tree().change_scene("res://scenes/" + path_to_next)
+		if event.button_mask == BUTTON_LEFT:
+			get_tree().change_scene("res://scenes/" + path_to_next)
 		
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
