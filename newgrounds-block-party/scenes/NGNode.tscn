@@ -38,7 +38,6 @@ tracks/0/keys = {
 collision_layer = 2
 collision_mask = 3
 input_pickable = true
-mass = 2.0
 contacts_reported = 3
 contact_monitor = true
 can_sleep = false

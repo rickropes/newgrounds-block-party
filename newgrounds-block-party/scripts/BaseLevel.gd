@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 	var centroid = controller.get_centroid(points_shapes)
 	
 	if len(points_shapes) > 0:
-		tracker.global_position = tracker.global_position.linear_interpolate(centroid, 0.05)
+		tracker.global_position = tracker.global_position.linear_interpolate(centroid, 0.1)
 
 func _on_points_all_gone():
 	#TODO: change scene here 
