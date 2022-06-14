@@ -13,4 +13,4 @@ func _on_Timer_timeout() -> void:
 	queue_free()
 
 func _draw() -> void:
-	draw_circle(global_position, col.shape.radius, Color(1,1,0,0.45))
+	draw_circle(Vector2.ZERO, col.shape.radius, Color(1,1,0,0.45))
